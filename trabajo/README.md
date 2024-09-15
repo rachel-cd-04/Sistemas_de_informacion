@@ -1,6 +1,6 @@
 # Teamfight Tactics Team Manager
 ## Video Demo: https://youtu.be/Y_9dR4FunNM
-## Description: 
+## Description:
 
 Our names are Mateo Peña Costa and Raquel Cámara Domene. We are two students from the University of Zaragoza (UNIZAR), Spain. We are currently attending computer engineering and wanted to do some extra learning this Summer so we decided to take the CS50 course.
 
