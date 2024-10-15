@@ -1,0 +1,71 @@
+<!--Authors: Mateo Peña Costa and Raquel Cámara Domene-->
+<!DOCTYPE html> 
+<html lang="en">
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+        <link href="../static/css/index-style.css" rel="stylesheet">
+        <link rel="icon" href="../static/images/T-logo.png" type="x-icon">
+        <title>TFT Manual</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+
+    <body>
+            <nav class="navbar justify-content-center">
+                <div class="container-fluid">
+                    <img src="../static/images/Teamfight_Tactics_logo.svg.png" alt="Logo" class="navbar-brand">
+                    <div class="d-flex">
+                        {% if session["mail"] %}
+                            <a class="nav-link" href="start_team" id="startTeamButton">Start Team</a>
+                            <a class="nav-link" href="my_teams" id="myTeamsButton">My Teams</a>
+                            <a class="nav-link" href="help.html" id="helpButton">?</a>
+                            <a class="nav-link" href="logout" id="logoutButton">Logout</a>
+                        {% else %}
+                            <a class="nav-link" href="help.html" id="helpButton">?</a>
+                            <a class="nav-link" href="login" id="loginButton">Login</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+            <div class="separation"></div>
+            <div class="pingu-container">
+                <img src="../static/images/pingu.webp" alt="pingu" class="pingu-image">  
+                <div class="text-container">
+                    <div class="text-container">
+                        <h1>WELCOME TO TFT MANUAL</h1>
+                        <p>An easy to use tool that will help you in your games<br>
+                            Keep track of your board and get recommended your next <br>
+                            champ to make the perfect comp in the new Set 12</p>
+                    </div>
+                    <a class="start-team-button" href="start_team" id="startTeamButton">START TEAM</a>
+                </div>
+            </div>
+
+            <div class="left-corner">
+                <p>©2024 by MPC&RCD</p>
+            </div>
+
+            <footer class="footer">
+                <div class="footer-container">
+                    <p>Contact: MPCandRCD@gmail.com</p>
+                    <a href="aboutUs.html">About us</a>
+                </div>
+            </footer>
+
+            <script>
+                $('#menuButton').on('click', function() {
+                    if ($('#navbarNav').hasClass('show')) {
+                        $('.navbar-brand, .nav-item').css('margin-bottom', '0');
+                    } else {
+                        $('.navbar-brand, .nav-item').css('margin-bottom', '15px');
+                    }
+                });
+
+            </script>
+    </body>
+
+
+</html>
