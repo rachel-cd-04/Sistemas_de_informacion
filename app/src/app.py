@@ -32,6 +32,10 @@ def index():
 @app.route('/start_team')
 def start_team():
     return render_template('start_team.html')
+
+@app.route('/help')
+def help():
+    return render_template('help.html')
 #----------------------------------------------------------------------
 @app.route("/login", methods=["GET", "POST"])
 def login():
