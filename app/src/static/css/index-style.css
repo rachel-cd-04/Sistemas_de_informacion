@@ -45,7 +45,7 @@ html {
 .footer-container p{
     margin: 0;
 } 
-.footer-container a {
+.footer-container a{
     margin: 0;
     color: #FFD700;
 } 
@@ -54,7 +54,7 @@ html {
 /* home page wallpaper and space for our registered trademark*/
 /*********************************************************************************************/
 body {
-    background-image: url('background.jpeg');
+    background-image: url("../images/misc/background.jpeg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -82,12 +82,17 @@ body {
     position: relative;
     z-index: 0;
 }
+
 /*********************************************************************************************/
 /*Navigation bar*/
 /*********************************************************************************************/
 .navbar {
     background-color: rgba(25, 105, 107, 0.7);
     justify-content: space-between;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 .navbar-brand {
@@ -99,11 +104,13 @@ body {
 
 /* separation bar between the navigation bar and the rest of the objects*/
 .separation {
+    position: fixed;
+    top: 95px;
     width: 100%;
     height: 6px;
     background-color: #f5b03e;
+    z-index: 999;
 }
-
 /*************************************************************************************************/
 /*home page content, such as the image, the text and the button that will lead to the next screen*/
 /*************************************************************************************************/
@@ -166,8 +173,64 @@ body {
 .pingu-image {
     width: 45vw;
     height: auto;
-    margin-top: 5vh;
+    margin-top: 15vh;
     filter: grayscale(30%);
     transition: transform 0.3s ease, filter 0.3s ease;
     z-index: -1;
+}
+/*********************************************************************************************/
+.extra-content {
+    margin-top: 200px;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente los elementos */
+    align-items: center; /* Centra verticalmente los elementos */
+    padding: 20px;
+    margin-bottom: -80px;
+   
+}
+
+.extra-content div {
+    text-align: center; /* Centra el contenido dentro de cada div */
+    margin: 0 20px; /* Espacio entre los divs */
+}
+
+.extra-content img {
+    max-width: 400px; /* Ajusta el tamaño de las imágenes según sea necesario */
+    margin-bottom: 0px;
+}
+
+.extra-content .button {
+    display: block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: white;
+    color: rgba(25, 105, 107, 0.7);
+    text-decoration: none;
+    border-radius: 5px;
+}
+/*********************************************************************************************/
+.custom-login-button {
+    background-color: blue;
+    border: 2px solid red;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.custom-login-button:hover {
+    background-color: darkblue;
+}
+
+.custom-help-button {
+    background-color: blue;
+    border: 2px solid red;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+}
+
+.custom-help-button:hover {
+    background-color: darkblue;
 }

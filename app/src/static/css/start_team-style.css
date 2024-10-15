@@ -734,3 +734,29 @@ body {
     border: 4px solid transparent; 
     border-image: linear-gradient(to right, #eebe30, #f09605) 1;
 }
+/*********************************************************************************************/
+.custom-login-button {
+    background-color: blue;
+    border: 2px solid red;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.custom-login-button:hover {
+    background-color: darkblue;
+}
+
+.custom-help-button {
+    background-color: blue;
+    border: 2px solid red;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.custom-help-button:hover {
+    background-color: darkblue;
+}

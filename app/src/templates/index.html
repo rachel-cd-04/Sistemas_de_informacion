@@ -19,24 +19,43 @@
                     Keep track of your board and get recommended your next <br>
                     champ to make the perfect comp in the new Set 12</p>
             </div>
-            <a class="start-team-button" href="start_team" id="startTeamButton">START TEAM</a>
         </div>
     </div>
 
 
+    <!-- Contenido adicional que aparece al hacer scroll -->
+    <div class="extra-content" id="extraContent">
+        <div>
+            <img src="../static/images/misc/starteam.jpg" alt="Start Team">
+            <a href="start_team" class="button">START TEAM</a>
+        </div>
+        <div>
+            <img src="../static/images/misc/my_teamcomps.png" alt="My Team Comps">
+            <a href="my_team_comps" class="button">MY TEAM COMPS</a>
+        </div>
+        <div>
+            <img src="../static/images/misc/comcomps.jpeg" alt="Community Comps">
+            <a href="community_comps" class="button">COMMUNITY COMPS</a>
+        </div>
+    </div>
+
+    <!-- Script para controlar el fondo y mostrar el contenido extra al hacer scroll -->
     <script>
-            window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function() {
             const scrollPosition = window.scrollY;
             const windowHeight = window.innerHeight;
             const body = document.body;
-            
+
+            // Cambiar fondo al hacer scroll
             if (scrollPosition > windowHeight / 2) {
-                body.style.background = 'linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, green 100%), url("background.jpeg") no-repeat center center fixed';
+                body.style.background = 'linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(25, 105, 107, 0.7)), url("../static/images/misc/background.jpeg") no-repeat center center fixed';
                 body.style.backgroundSize = 'cover';
             } else {
-                body.style.background = 'url("../static/css/background.jpeg") no-repeat center center fixed';
+                body.style.background = 'url("../static/images/misc/background.jpeg") no-repeat center center fixed';
                 body.style.backgroundSize = 'cover';
             }
+
+            
         });
     </script>
 {% endblock %}
