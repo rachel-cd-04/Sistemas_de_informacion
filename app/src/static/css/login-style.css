@@ -1,0 +1,56 @@
+/* Authors: Mateo Peña Costa and Raquel Cámara Domene */
+
+/*********************************************************************************************/
+/* home page wallpaper and space for our registered trademark*/
+/*********************************************************************************************/
+body {
+    background-color: #155354;
+}
+
+/*********************************************************************************************/
+/*container with information about us and contact links */
+/*********************************************************************************************/
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 15vw;
+    margin-top: 2vw;
+    width: 70vw;
+    border-radius: 1.5vw;
+}
+
+/*********************************************************************************************/
+
+form input::placeholder {
+    color: #007bff; /* Color azul */
+}
+
+form input {
+    color: #007bff; /* Color del texto ingresado */
+}
+/*********************************************************************************************/
+/* Estilos para los botones de Login y Register */
+.toggle-button {
+    margin: 10px;
+}
+
+/* Ocultar formularios por defecto */
+.form-container {
+    display: none;
+}
+
+/* Mostrar el formulario activo */
+.form-container.active {
+    display: block;
+}
+/*********************************************************************************************/
+
+/* Estilos para los mensajes de error de Parsley.js */
+.parsley-errors-list {
+    color: red;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}

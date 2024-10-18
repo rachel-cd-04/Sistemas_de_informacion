@@ -1,0 +1,136 @@
+/* Authors: Mateo Peña Costa and Raquel Cámara Domene */
+
+/*********************************************************************************************/
+/*styles for scrollbar*/  /* provided by AI */
+/*********************************************************************************************/
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #239ca4;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(234, 190, 46);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ffd700;
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(234, 190, 46) rgb(46, 147, 154);
+}
+
+/*********************************************************************************************/
+/*footer with contact and ‘about us’*/
+/*********************************************************************************************/
+.footer-container {
+    margin-top: 6.5vw;
+    bottom: 0;
+    width: 100%;
+    height: 3vw;
+    background-color: rgb(46, 147, 154);
+    font-family: "Helvetica Bold", sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1vw;
+}
+
+.footer-container p{
+    margin: 0;
+} 
+.footer-container a{
+    margin: 0;
+    color: #FFD700;
+} 
+
+/*********************************************************************************************/
+/* home page wallpaper and space for our registered trademark*/
+/*********************************************************************************************/
+
+.left-corner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    font-size: 14px;
+    margin: 0px;
+    margin-left: 15px;
+    color: white;
+}
+
+.second-section {
+    height: 100vh;
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 2em;
+    position: relative;
+    z-index: 0;
+}
+
+/*********************************************************************************************/
+/*Navigation bar*/
+/*********************************************************************************************/
+.navbar {
+    background-color: rgba(25, 105, 107, 0.7);
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    color: #333;
+    font-size: 24px;
+    height: 80px;
+    margin-right: 15px;
+}
+
+/* separation bar between the navigation bar and the rest of the objects*/
+.separation {
+    position: fixed;
+    top: 95px;
+    width: 100%;
+    height: 6px;
+    background-color: #f5b03e;
+    z-index: 999;
+}
+/*********************************************************************************************/
+.custom-login-button {
+    background-color: #FFD700;
+    border: 2px solid #FFD700;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+.custom-login-button:hover {
+    background-color: darkblue;
+    color: white;
+}
+
+.custom-help-button {
+    background-color: #FFD700;
+    border: 2px solid #FFD700;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+}
+
+.custom-help-button:hover {
+    background-color: darkblue;
+    color: white;
+}

@@ -1,0 +1,56 @@
+/* Authors: Mateo Peña Costa and Raquel Cámara Domene */
+
+/*********************************************************************************************/
+/* home page wallpaper and space for our registered trademark*/
+/*********************************************************************************************/
+body {
+    background-color: #155354;
+}
+
+.left-corner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    font-size: 14px;
+    margin: 0px;
+    margin-left: 15px;
+    color: white;
+}
+
+/*********************************************************************************************/
+/*container with information about us and contact links */
+/*********************************************************************************************/
+.info-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 15vw;
+    margin-top: 2vw;
+    width: 70vw;
+    border-radius: 1.5vw;
+}
+
+.moreinfo-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;;
+    background-color: rgba(25, 105, 107, 0.7);
+    width: 70vw;
+    border-radius: 1.5vw;
+}
+
+/*main container title */
+.info-container h1 {
+    color:#FFD700;
+}
+
+/*characteristics of the paragraphs inside the secondary container*/
+.moreinfo-container p {
+    color: white;
+    margin-top: 1vw;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    margin-bottom: 1vw;
+}

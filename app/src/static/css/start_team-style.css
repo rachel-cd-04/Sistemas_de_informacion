@@ -1,77 +1,6 @@
 /* Authors: Mateo Peña Costa and Raquel Cámara Domene */
 
 /*********************************************************************************************/
-/*styles for scrollbar*/  /* provided by AI */
-/*********************************************************************************************/
-::-webkit-scrollbar {
-    width: 12px;
-}
-
-::-webkit-scrollbar-track {
-    background: #239ca4;
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgb(234, 190, 46);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #ffd700;
-}
-
-html {
-    scrollbar-width: thin;
-    scrollbar-color: rgb(234, 190, 46) rgb(46, 147, 154);
-}
-
-/*********************************************************************************************/
-/*footer with contact and ‘about us’*/
-/*********************************************************************************************/
-.footer-container {
-    margin-top: 3.5vw;
-    bottom: 0;
-    width: 100%;
-    height: 5vw;
-    background-color: rgb(46, 147, 154);
-    font-family: "Helvetica Bold", sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 1vw;
-}
-
-.footer-container p{
-    margin: 0;
-} 
-.footer-container a {
-    margin: 0;
-    color: #FFD700;
-}  
-
-/*********************************************************************************************/
-/*Navigation bar*/
-/*********************************************************************************************/
-.navbar {
-    background-color: rgba(25, 105, 107, 0.7);
-    justify-content: space-between;
-}
-
-.navbar-brand {
-    color: #333;
-    font-size: 24px;
-    height: 80px;
-    margin-right: 15px;
-}
-
-.separation {
-    width: 100%;
-    height: 6px;
-    background-color: #f5b03e;
-}
-
-/*********************************************************************************************/
 /* home page wallpaper and space for our registered trademark*/
 /*********************************************************************************************/
 body {
@@ -735,28 +664,3 @@ body {
     border-image: linear-gradient(to right, #eebe30, #f09605) 1;
 }
 /*********************************************************************************************/
-.custom-login-button {
-    background-color: blue;
-    border: 2px solid red;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-}
-
-.custom-login-button:hover {
-    background-color: darkblue;
-}
-
-.custom-help-button {
-    background-color: blue;
-    border: 2px solid red;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-}
-
-.custom-help-button:hover {
-    background-color: darkblue;
-}

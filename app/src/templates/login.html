@@ -1,26 +1,61 @@
-<!--Authors: Mateo Peña Costa and Raquel Cámara Domene-->
-<!DOCTYPE html> 
-<html lang="en">
-    <head>
+{% extends "layout.html" %}
 
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-        <link href="../static/css/index-style.css" rel="stylesheet">
-        <link rel="icon" href="../static/images/T-logo.png" type="x-icon">
-        <title>TFT Manual</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    </head>
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login-style.css') }}">
+{% endblock %}
 
-    <body>
-        <form action="/login" method="post">
+{% block title %}
+    Log In / Register
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="button-container">
+        <button class="btn btn-primary toggle-button" onclick="showForm('login')">Log In</button>
+        <button class="btn btn-primary toggle-button" onclick="showForm('register')">Register</button>
+    </div>
+    <div id="login-form" class="form-container active">
+        <form id="loginForm" action="/login" method="post" data-parsley-validate>
             <div class="mb-3">
-                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text">
+                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text" required data-parsley-required-message="Please enter your username.">
             </div>
             <div class="mb-3">
-                <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password">
+                <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password" required data-parsley-required-message="Please enter your password.">
             </div>
             <button class="btn btn-primary" type="submit">Log In</button>
         </form>
-    
+    </div>
+    <div id="register-form" class="form-container">
+        <form id="registerForm" action="/register" method="post" data-parsley-validate>
+            <div class="mb-3">
+                <input autocomplete="off" class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text" required data-parsley-required-message="Please enter a username.">
+            </div>
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto" name="email" placeholder="Email" type="email" required data-parsley-type="email" data-parsley-required-message="Please enter a valid email address.">
+            </div>
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password" required data-parsley-required-message="Please enter a password.">
+            </div>
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto" name="confirm_password" placeholder="Confirm Password" type="password" required data-parsley-equalto="#registerForm input[name='password']" data-parsley-required-message="Please confirm your password." data-parsley-equalto-message="Passwords do not match.">
+            </div>
+            <button class="btn btn-primary" type="submit">Register</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function showForm(formType) {
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+
+        if (formType === 'login') {
+            loginForm.classList.add('active');
+            registerForm.classList.remove('active');
+        } else if (formType === 'register') {
+            registerForm.classList.add('active');
+            loginForm.classList.remove('active');
+        }
+    }
+</script>
+{% endblock %}

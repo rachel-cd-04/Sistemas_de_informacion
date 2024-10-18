@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, flash, redirect, render_template, request, session
 from classes.usuario import *
 from classes.campeon import *
 from classes.composicion import *
@@ -16,6 +16,7 @@ import os
 import csv
 
 app = Flask(__name__)
+app.secret_key = 'secretita'  # Necesario para usar sesiones
 
 DATABASE = '/app/src/db/database.db'
 SCHEMA = '/app/src/db/schema.sql'
@@ -40,7 +41,6 @@ def help():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     session.clear()
-
     if request.method == "POST":
         if not request.form.get("mail"):
             return redirect("/login")
