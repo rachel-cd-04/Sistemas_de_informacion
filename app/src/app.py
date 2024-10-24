@@ -1,14 +1,14 @@
-from flask import Flask, flash, redirect, render_template, request, session
-from classes.usuario import *
-from classes.campeon import *
-from classes.composicion import *
-from classes.avatar import *
-from classes.emblema import *
-from classes.sinergia import *
-from classes.posee import *
-from classes.formadoPor import *
-from classes.vota import *
-from classes.reporta import *
+from flask import Flask, redirect, render_template, request, session
+from classes.usuario import UsuarioDAO, UsuarioVO
+from classes.campeon import CampeonDAO, CampeonVO
+from classes.composicion import ComposicionDAO, ComposicionVO
+from classes.avatar import AvatarDAO, AvatarVO
+from classes.emblema import EmblemaDAO, EmblemaVO
+from classes.sinergia import SinergiaDAO, SinergiaVO
+from classes.posee import PoseeDAO, PoseeVO
+from classes.formadoPor import FormadoPorDAO, FormadoPorVO
+from classes.vota import VotaDAO, VotaVO
+from classes.reporta import ReportaDAO, ReportaVO
 
 import sqlite3
 import time
@@ -22,47 +22,67 @@ DATABASE = '/app/src/db/database.db'
 SCHEMA = '/app/src/db/schema.sql'
 DATA_FILE = '/app/src/db/data.csv'
 
+#-------------------------------------------------------------
 @app.route('/', methods=['GET'])
 def start():
     return render_template('index.html')
 
+#-------------------------------------------------------------
 @app.route('/index')
 def index():
     return render_template('index.html')
 
+#-------------------------------------------------------------
 @app.route('/start_team')
 def start_team():
     return render_template('start_team.html')
 
+#-------------------------------------------------------------
 @app.route('/help')
 def help():
     return render_template('help.html')
-#----------------------------------------------------------------------
+
+#------------------------------------------------------------- 
 @app.route("/login", methods=["GET", "POST"])
-def login():
+def login_user():
     session.clear()
     if request.method == "POST":
-        if not request.form.get("mail"):
-            return redirect("/login")
+        mail = request.form.get("mail")
+        if not mail or not request.form.get("password"):
+            return redirect("/start_team")
 
-        elif not request.form.get("contra"):
-            return redirect("/login")
+        usuario_dao = UsuarioDAO()
+        user = usuario_dao.find_usuario_by_id(mail)
+        if not user:
+            return redirect("/help")
 
-        user = find_usuario_by_id(request.form.get("mail"))
-
-        # Ensure username exists and password is correct
-        if len(rows) != 1 or not check_password_hash(
-            rows[0]["hash"], request.form.get("contra")
-        ):
-            return redirect("/login")
-
-        session["user_id"] = rows[0]["id"]
-
+        session["user_id"] = user.nombre
         return redirect("/")
-    else:
-        return render_template("login.html")
-#-----------------------------------------------------------------------------------------
 
+    return render_template("login.html")
+
+#-------------------------------------------------------------
+@app.route("/register", methods=["GET", "POST"])
+def register_user():
+    session.clear()
+    if request.method == "POST":
+        if not request.form.get("mail") or not request.form.get("contra") or not request.form.get("confirm"):
+            return redirect("/register")
+
+        if request.form.get("contra") != request.form.get("confirm"):
+            return redirect("/register")
+
+        user_id = UsuarioDAO().save_usuario(
+            UsuarioVO(request.form.get("mail"), request.form.get("mail"), request.form.get("contra"), 1))
+        if not user_id:
+            return redirect("/register")
+
+        session["user_id"] = user_id
+        return redirect("/")
+
+    return render_template("register.html")
+
+#-------------------------------------------------------------
 
 if __name__ == '__main__':
     print("Hello")

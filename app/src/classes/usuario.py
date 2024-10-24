@@ -40,11 +40,14 @@ class UsuarioDAO:
 
     # Encontrar un usuario por su mail
     def find_usuario_by_id(self, mail):
+        conn = None
         try:
-            conn = sqlite3.connect('db/database.db')
+            mail = mail.strip()
+            db_path = '/app/src/db/database.db'
+            conn = sqlite3.connect(db_path)
             cursor = conn.cursor()
-            cursor.execute('''SELECT mail, nombre, contra, avatar FROM Usuario_TAB WHERE mail = ?''', 
-                           (mail,))
+            sql_query = '''SELECT mail, nombre, contra, avatar FROM Usuario_TAB WHERE mail = ?'''
+            cursor.execute(sql_query, (mail,))
             row = cursor.fetchone()
             if row:
                 return UsuarioVO(row[0], row[1], row[2], row[3])
@@ -53,7 +56,8 @@ class UsuarioDAO:
             print(f"An error occurred: {e}")
             return None
         finally:
-            conn.close()
+            if conn:
+                conn.close()
 
     # Añadir un avatar a un usuario
     def add_avatar_to_usuario(self, mail, avatar_id):
@@ -80,3 +84,21 @@ class UsuarioDAO:
             print(f"An error occurred: {e}")
         finally:
             conn.close()
+
+    """
+    def check_password_hash(self, mail, contra):
+        try:
+            conn = sqlite3.connect('db/database.db')
+            cursor = conn.cursor()
+            cursor.execute('''SELECT contra FROM Usuario_TAB WHERE mail = ?''', 
+                           (mail,))
+            row = cursor.fetchone()
+            if row:
+                return row[0] == contra
+            return False
+        except sqlite3.Error as e:
+            print(f"An error occurred: {e}")
+            return False
+        finally:
+            conn.close()
+    """

@@ -2,7 +2,7 @@ import sqlite3
 
 # VO
 ####
-class FormadaPorVO:
+class FormadoPorVO:
     def __init__(self, usuario, composicion, campeon):
         self.usuario = usuario
         self.composicion = composicion
@@ -11,7 +11,7 @@ class FormadaPorVO:
 
 # DAO
 #####
-class FormadaPorDAO:
+class FormadoPorDAO:
     # Añadir un campeon a una composicion
     def add_campeon_to_composicion(self, usuario, composicion, campeon):
         try:

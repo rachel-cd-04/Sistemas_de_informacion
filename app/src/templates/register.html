@@ -14,18 +14,6 @@
         <button class="btn btn-primary toggle-button" onclick="showForm('login')">Log In</button>
         <button class="btn btn-primary toggle-button" onclick="showForm('register')">Register</button>
     </div>
-    <!-- Login -->
-    <div id="login-form" class="form-container active">
-        <form id="loginForm" action="/login" method="post" data-parsley-validate>
-            <div class="mb-3">
-                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="mail" placeholder="mail" type="text" required data-parsley-required-message="Please enter your mail.">
-            </div>
-            <div class="mb-3">
-                <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password" required data-parsley-required-message="Please enter your password.">
-            </div>
-            <button class="btn btn-primary" type="submit">Log In</button>
-        </form>
-    </div>
     <!-- Register -->
     <div id="register-form" class="form-container">
         <form id="registerForm" action="/register" method="post" data-parsley-validate>
@@ -50,14 +38,13 @@
     function showForm(formType) {
         const loginForm = document.getElementById('login-form');
         const registerForm = document.getElementById('register-form');
+
         if (formType === 'login') {
             loginForm.classList.add('active');
             registerForm.classList.remove('active');
-            window.history.pushState({}, '', '/login');
         } else if (formType === 'register') {
             registerForm.classList.add('active');
             loginForm.classList.remove('active');
-            window.history.pushState({}, '', '/register');
         }
     }
 </script>

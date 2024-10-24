@@ -49,8 +49,10 @@ body {
 .pingu-container:hover .text-container {
     transform: scale(1.03);
     filter:  drop-shadow(0 4px 8px rgba(62, 175, 240, 0.7));
+    flex: 1;
 
 }
+
 
 .pingu-container:hover .text-button-container {
     transform: scale(1.2);
@@ -67,6 +69,7 @@ body {
     font-size: 1.5vw;
     margin-right: -5%;
     transition: transform 0.3s ease, filter 0.3s ease;
+    flex: 1;
 }
 
 .pingu-image {
@@ -76,6 +79,31 @@ body {
     filter: grayscale(30%);
     transition: transform 0.3s ease, filter 0.3s ease;
     z-index: -1;
+    
+}
+/* Media queries para ajustar el tamaño del texto en diferentes tamaños de pantalla */
+@media (max-width: 1200px) {
+    .text-container {
+        font-size: 1.8vw;
+    }
+}
+
+@media (max-width: 992px) {
+    .text-container {
+        font-size: 1.6vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .text-container {
+        font-size: 1.4vw;
+    }
+}
+
+@media (max-width: 576px) {
+    .text-container {
+        font-size: 1.2vw;
+    }
 }
 /*********************************************************************************************/
 .extra-content {
@@ -95,7 +123,7 @@ body {
 
 .extra-content img {
     width: auto;
-    height: 450px;
+    height: 30vw;
     margin-bottom: 10px;
     border-radius: 20px;
 }
