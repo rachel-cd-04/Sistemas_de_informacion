@@ -104,6 +104,16 @@ html {
     background-color: #f5b03e;
     z-index: 999;
 }
+
+.vertical-separator {
+    position: fixed;
+    top: 0px;
+    width: 4px;
+    height: 12.5%;
+    background-color: #f5b03e;
+    margin: 0 120px;
+    z-index: 999;
+}
 /*********************************************************************************************/
 .custom-login-button {
     font-weight: bold;
@@ -141,12 +151,31 @@ html {
     font-size: 1.5em;
     color: white;
     margin-left: 20px;
+    margin-top: 6px;
 }
 
 .custom-avatar {
-    width: 80px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     margin-left: 50px;
     margin-right: 5px;
+}
+
+.invisible-dropdown {
+    background: none;
+    border: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.invisible-dropdown:hover {
+    background: none;
+    border: none;
+}
+
+.dropdown-menu-right {
+    right: 0;
+    left: auto;
 }
