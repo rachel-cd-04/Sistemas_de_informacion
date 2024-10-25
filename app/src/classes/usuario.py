@@ -1,5 +1,7 @@
 import sqlite3
 
+DB_PATH = '/app/src/db/database.db'
+
 # VO
 ####
 class UsuarioVO:
@@ -15,20 +17,22 @@ class UsuarioDAO:
     # Registrar un nuevo usuario en la base de datos
     def save_usuario(self, usuario):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
-            cursor.execute('''INSERT INTO Usuario_TAB (mail, nombre, contra, avatar) VALUES (?, ?, ?, ?)''', 
-                           (usuario.mail, usuario.nombre, usuario.contra, usuario.avatar))
+            sql_query = '''INSERT INTO Usuario_TAB (mail, nombre, contra, avatar) VALUES (?, ?, ?, ?)'''
+            cursor.execute(sql_query, (usuario.mail, usuario.nombre, usuario.contra, usuario.avatar))
             conn.commit()
+            return usuario
         except sqlite3.Error as e:
             print(f"An error occurred: {e}")
+            return None
         finally:
             conn.close()
 
     # Eliminar un usuario de la base de datos
     def delete_usuario(self, mail):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''DELETE FROM Usuario_TAB WHERE mail = ?''', 
                             (mail,))
@@ -39,15 +43,14 @@ class UsuarioDAO:
             conn.close()
 
     # Encontrar un usuario por su mail
-    def find_usuario_by_id(self, mail):
+    def find_usuario_by_id_pssw(self, mail, password):
         conn = None
         try:
             mail = mail.strip()
-            db_path = '/app/src/db/database.db'
-            conn = sqlite3.connect(db_path)
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
-            sql_query = '''SELECT mail, nombre, contra, avatar FROM Usuario_TAB WHERE mail = ?'''
-            cursor.execute(sql_query, (mail,))
+            sql_query = '''SELECT mail, nombre, contra, avatar FROM Usuario_TAB WHERE mail = ? AND contra = ?'''
+            cursor.execute(sql_query, (mail, password))
             row = cursor.fetchone()
             if row:
                 return UsuarioVO(row[0], row[1], row[2], row[3])
@@ -62,7 +65,7 @@ class UsuarioDAO:
     # Añadir un avatar a un usuario
     def add_avatar_to_usuario(self, mail, avatar_id):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''UPDATE Usuario_TAB SET avatar = ? WHERE mail = ?''', 
                            (avatar_id, mail))
@@ -75,7 +78,7 @@ class UsuarioDAO:
     # Quitar un avatar de un usuario
     def remove_avatar_from_usuario(self, mail):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''UPDATE Usuario_TAB SET avatar = NULL WHERE mail = ?''', 
                            (mail,))
@@ -88,7 +91,7 @@ class UsuarioDAO:
     """
     def check_password_hash(self, mail, contra):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''SELECT contra FROM Usuario_TAB WHERE mail = ?''', 
                            (mail,))

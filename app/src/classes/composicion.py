@@ -1,5 +1,7 @@
 import sqlite3
 
+DB_PATH = '/app/src/db/database.db'
+
 # VO
 ####
 class ComposicionVO:
@@ -16,7 +18,7 @@ class ComposicionDAO:
     # Guardar una nueva composicion en la base de datos
     def save_composicion(self, composicion):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''INSERT INTO Composicion_TAB (usuario, nombre, dificultad, publicado, descr) VALUES (?, ?, ?, ?, ?)''', 
                            (composicion.usuario, composicion.nombre, composicion.dificultad, composicion.publicado, composicion.descr))
@@ -29,7 +31,7 @@ class ComposicionDAO:
     # Eliminar una composicion de la base de datos
     def delete_composicion(self, usuario, nombre):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''DELETE FROM Composicion_TAB WHERE usuario = ? AND nombre = ?''', 
                            (usuario, nombre))
@@ -42,7 +44,7 @@ class ComposicionDAO:
     # Encontrar una composicion por su id
     def find_composicion_by_id(self, usuario, nombre):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''SELECT usuario, nombre, dificultad, publicado, descr FROM Composicion_TAB WHERE usuario = ? AND nombre = ?''', 
                            (usuario, nombre))
@@ -59,7 +61,7 @@ class ComposicionDAO:
     # Modificar una composicion existente en la base de datos
     def update_composicion(self, composicion):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''UPDATE Composicion_TAB SET dificultad = ?, publicado = ?, descr = ? WHERE usuario = ? AND nombre = ?''', 
                            (composicion.dificultad, composicion.publicado, composicion.descr, composicion.usuario, composicion.nombre))
@@ -72,7 +74,7 @@ class ComposicionDAO:
     # Publicar o despublicar una composicion
     def set_publicado(self, usuario, nombre, publicado):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''
                 UPDATE Composicion_TAB 

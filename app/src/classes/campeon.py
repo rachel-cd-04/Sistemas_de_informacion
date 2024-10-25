@@ -1,5 +1,7 @@
 import sqlite3
 
+DB_PATH = '/app/src/db/database.db'
+
 # VO
 ####
 class CampeonVO:
@@ -14,7 +16,7 @@ class CampeonVO:
 class CampeonDAO:
     def save_campeon(self, campeon):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''
                 INSERT INTO Campeon_TAB (nombre, url_, coste) 
@@ -28,7 +30,7 @@ class CampeonDAO:
 
     def delete_campeon(self, nombre):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''
                 DELETE FROM Campeon_TAB WHERE nombre = ?
@@ -41,7 +43,7 @@ class CampeonDAO:
 
     def find_campeon_by_id(self, nombre):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''
                 SELECT nombre, url_, coste FROM Campeon_TAB WHERE nombre = ?

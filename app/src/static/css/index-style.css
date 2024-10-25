@@ -47,7 +47,7 @@ body {
 }
 
 .pingu-container:hover .text-container {
-    transform: scale(1.03);
+    transform: scale(1.01);
     filter:  drop-shadow(0 4px 8px rgba(62, 175, 240, 0.7));
     flex: 1;
 

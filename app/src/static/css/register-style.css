@@ -5,10 +5,6 @@
 /*********************************************************************************************/
 body {
     background-color: #155354;
-    display: flex; /* Añadir Flexbox a body */
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: center; /* Centrar verticalmente */
-    min-height: 100vh;
 }
 
 /*********************************************************************************************/

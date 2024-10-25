@@ -1,5 +1,7 @@
 import sqlite3
 
+DB_PATH = '/app/src/db/database.db'
+
 # VO
 ####
 class EmblemaVO:
@@ -14,7 +16,7 @@ class EmblemaDAO:
     #Encontrar emblema por su nombre
     def find_emblema_by_id(self, nombre):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''SELECT nombre, url_, sinergia FROM Emblema_TAB WHERE nombre = ?''', 
                             (nombre,))

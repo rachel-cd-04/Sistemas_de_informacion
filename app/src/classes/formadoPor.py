@@ -1,5 +1,7 @@
 import sqlite3
 
+DB_PATH = '/app/src/db/database.db'
+
 # VO
 ####
 class FormadoPorVO:
@@ -15,7 +17,7 @@ class FormadoPorDAO:
     # Añadir un campeon a una composicion
     def add_campeon_to_composicion(self, usuario, composicion, campeon):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''INSERT INTO Formada_por_TAB (usuario, composicion, campeon) VALUES (?, ?, ?)''', 
                            (usuario, composicion, campeon))
@@ -28,7 +30,7 @@ class FormadoPorDAO:
     # Quitar un campeon de una composicion
     def remove_campeon_from_composicion(self, usuario, composicion, campeon):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''DELETE FROM Formada_por_TAB WHERE usuario = ? AND composicion = ? AND campeon = ?''', 
                            (usuario, composicion, campeon))
@@ -41,7 +43,7 @@ class FormadoPorDAO:
     # Encontrar la realcion entre campeon y cmposicion por su id
     def find_formada_por_by_id(self, usuario, composicion, campeon):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''SELECT usuario, composicion, campeon FROM Formada_por_TAB WHERE usuario = ? AND composicion = ? AND campeon = ?''', 
                            (usuario, composicion, campeon))

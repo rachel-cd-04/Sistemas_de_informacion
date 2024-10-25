@@ -1,5 +1,7 @@
 import sqlite3
 
+DB_PATH = '/app/src/db/database.db'
+
 # VO
 ####
 class AvatarVO:
@@ -14,7 +16,7 @@ class AvatarDAO:
     # Encontrar avatar por su id
     def find_avatar_by_id(self, id):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''SELECT id, URL_ FROM Avatar_TAB WHERE id = ?''', 
                             (id,))

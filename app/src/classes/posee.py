@@ -1,5 +1,7 @@
 import sqlite3
 
+DB_PATH = '/app/src/db/database.db'
+
 # VO
 ####
 class PoseeVO:
@@ -14,7 +16,7 @@ class PoseeDAO:
     # Encontrar la relacion entre campeon y sinergia por su id
     def find_posee_by_id(self, campeon, sinergia):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''SELECT campeon, sinergia FROM Posee_TAB WHERE campeon = ? AND sinergia = ?''', 
                            (campeon, sinergia))

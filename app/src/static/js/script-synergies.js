@@ -8,120 +8,120 @@
 //DATABASE OF CHAMPS, EMBLEMS AND SYNERGIES//
 //#########################################//
 const personajes = {
-    1: { name: 'Ahri', sinergias: ['Scholar', 'Arcana'], coste: 2 },
-    5: { name: 'Akali', sinergias: ['Pyro', 'Multistriker', 'Warrior'], coste: 2 },
-    10: { name: 'Ashe', sinergias: ['Eldritch', 'Multistriker'], coste: 1  },
-    14: { name: 'Bard', sinergias: ['Sugarcraft', 'Preserver', 'Scholar'], coste: 3 },
-    19: { name: 'Blitzcrank', sinergias: ['Honeymancy', 'Vanguard'], coste: 1 },
-    23: { name: 'Briar', sinergias: ['Eldritch', 'Ravenous', 'Shapeshifter'], coste: 5 },
-    28: { name: 'Camille', sinergias: ['Chrono', 'Multistriker'], coste: 5 },
-    32: { name: 'Cassiopeia', sinergias: ['Witchcraft', 'Incantor'], coste: 2 },
-    36: { name: 'Diana', sinergias: ['Frost', 'Bastion'], coste: 5 },
-    40: { name: 'Elise', sinergias: ['Eldritch', 'Shapeshifter'], coste: 1 },
-    44: { name: 'Ezreal', sinergias: ['Portal', 'Blaster'], coste: 3 },
-    48: { name: 'Fiora', sinergias: ['Witchcraft', 'Warrior'], coste: 4 },
-    52: { name: 'Galio', sinergias: ['Portal', 'Mage', 'Vanguard'], coste: 2 },
-    57: { name: 'Gwen', sinergias: ['Sugarcraft', 'Warrior'], coste: 4 },
-    61: { name: 'Hecarim', sinergias: ['Arcana', 'Bastion', 'Multistriker'], coste: 3 },
-    66: { name: 'Hwei', sinergias: ['Frost', 'Blaster'], coste: 3 },
-    70: { name: 'Jax', sinergias: ['Chrono', 'Multistriker'], coste: 1 },
-    74: { name: 'Jayce', sinergias: ['Portal', 'Shapeshifter'], coste: 1 },
-    78: { name: 'Jinx', sinergias: ['Sugarcraft', 'Hunter'], coste: 3 },
-    82: { name: 'Kalista', sinergias: ['Faerie', 'Multistriker'], coste: 4 },
-    86: { name: 'Karma', sinergias: ['Chrono', 'Incantor'], coste: 4 },
-    90: { name: 'Kassadin', sinergias: ['Portal', 'Multistriker'], coste: 2 },
-    94: { name: 'Katarina', sinergias: ['Faerie', 'Warrior'], coste: 3 },
-    98: { name: 'KogMaw', sinergias: ['Honeymancy', 'Hunter'], coste: 2 },
-    102: { name: 'Lillia', sinergias: ['Faerie', 'Bastion'], coste: 1 },
-    106: { name: 'Milio', sinergias: ['Faerie', 'Scholar'], coste: 5 },
-    110: { name: 'Mordekaiser', sinergias: ['Eldritch', 'Vanguard'], coste: 3 },
-    114: { name: 'Morgana', sinergias: ['Witchcraft', 'BatQueen', 'Preserver'], coste: 5 },
-    119: { name: 'Nami', sinergias: ['Eldritch', 'Mage'], coste: 4 },
-    123: { name: 'Nasus', sinergias: ['Pyro', 'Shapeshifter'], coste: 4 },
-    127: { name: 'Neeko', sinergias: ['Witchcraft', 'Shapeshifter'], coste: 3 },
-    131: { name: 'Nilah', sinergias: ['Eldritch', 'Warrior'], coste: 2 },
-    135: { name: 'Nomsy', sinergias: ['Dragon', 'Hunter'], coste: 1 },
-    139: { name: 'Norra', sinergias: ['Portal', 'BestFriends', 'Mage'], coste: 5 },
-    144: { name: 'Nunu&Willump', sinergias: ['Honeymancy', 'Bastion'], coste: 2 },
-    148: { name: 'Olaf', sinergias: ['Frost', 'Hunter'], coste: 4 },
-    152: { name: 'Poppy', sinergias: ['Witchcraft', 'Bastion'], coste: 1 },
-    156: { name: 'Rakan', sinergias: ['Faerie', 'Preserver'], coste: 4 },
-    160: { name: 'Rumble', sinergias: ['Sugarcraft', 'Blaster', 'Vanguard'], coste: 2 },
-    165: { name: 'Ryze', sinergias: ['Portal', 'Scholar'], coste: 5 },
-    169: { name: 'Seraphine', sinergias: ['Faerie', 'Mage'], coste: 1 },
-    173: { name: 'Shen', sinergias: ['Pyro', 'Bastion'], coste: 3 },
-    177: { name: 'Shyvana', sinergias: ['Dragon', 'Shapeshifter'], coste: 2 },
-    181: { name: 'Smolder', sinergias: ['Dragon', 'Blaster'], coste: 5 },
-    185: { name: 'Soraka', sinergias: ['Sugarcraft', 'Mage'], coste: 1 },
-    189: { name: 'Swain', sinergias: ['Frost', 'Shapeshifter'], coste: 3 },
-    193: { name: 'Syndra', sinergias: ['Eldritch', 'Incantor'], coste: 2 },
-    197: { name: 'TahmKench', sinergias: ['Arcana', 'Vanguard'], coste: 4 },
-    201: { name: 'Taric', sinergias: ['Portal', 'Bastion'], coste: 4 },
-    205: { name: 'Tristana', sinergias: ['Faerie', 'Blaster'], coste: 2 },
-    209: { name: 'Twitch', sinergias: ['Frost', 'Hunter'], coste: 1 },
-    213: { name: 'Varus', sinergias: ['Pyro', 'Blaster'], coste: 4 },
-    217: { name: 'Veigar', sinergias: ['Honeymancy', 'Mage'], coste: 3 },
-    221: { name: 'Vex', sinergias: ['Chrono', 'Mage'], coste: 3 },
-    225: { name: 'Warwick', sinergias: ['Frost', 'Vanguard'], coste: 1 },
-    229: { name: 'Wukong', sinergias: ['Druid'], coste: 3 },
-    232: { name: 'Xerath', sinergias: ['Arcana', 'Ascendant'], coste: 5 },
-    236: { name: 'Ziggs', sinergias: ['Honeymancy', 'Incantor'], coste: 1 },
-    240: { name: 'Zilean', sinergias: ['Chrono', 'Frost', 'Preserver'], coste: 2 },
-    245: { name: 'Zoe', sinergias: ['Portal', 'Witchcraft', 'Scholar'], coste: 1 },
+    1;name: 'Ahri', sinergias: ['Scholar', 'Arcana'], coste: 2 },
+    5;name: 'Akali', sinergias: ['Pyro', 'Multistriker', 'Warrior'], coste: 2 },
+    10;name: 'Ashe', sinergias: ['Eldritch', 'Multistriker'], coste: 1  },
+    14;name: 'Bard', sinergias: ['Sugarcraft', 'Preserver', 'Scholar'], coste: 3 },
+    19;name: 'Blitzcrank', sinergias: ['Honeymancy', 'Vanguard'], coste: 1 },
+    23;name: 'Briar', sinergias: ['Eldritch', 'Ravenous', 'Shapeshifter'], coste: 5 },
+    28;name: 'Camille', sinergias: ['Chrono', 'Multistriker'], coste: 5 },
+    32;name: 'Cassiopeia', sinergias: ['Witchcraft', 'Incantor'], coste: 2 },
+    36;name: 'Diana', sinergias: ['Frost', 'Bastion'], coste: 5 },
+    40;name: 'Elise', sinergias: ['Eldritch', 'Shapeshifter'], coste: 1 },
+    44;name: 'Ezreal', sinergias: ['Portal', 'Blaster'], coste: 3 },
+    48;name: 'Fiora', sinergias: ['Witchcraft', 'Warrior'], coste: 4 },
+    52;name: 'Galio', sinergias: ['Portal', 'Mage', 'Vanguard'], coste: 2 },
+    57;name: 'Gwen', sinergias: ['Sugarcraft', 'Warrior'], coste: 4 },
+    61;name: 'Hecarim', sinergias: ['Arcana', 'Bastion', 'Multistriker'], coste: 3 },
+    66;name: 'Hwei', sinergias: ['Frost', 'Blaster'], coste: 3 },
+    70;name: 'Jax', sinergias: ['Chrono', 'Multistriker'], coste: 1 },
+    74;name: 'Jayce', sinergias: ['Portal', 'Shapeshifter'], coste: 1 },
+    78;name: 'Jinx', sinergias: ['Sugarcraft', 'Hunter'], coste: 3 },
+    82;name: 'Kalista', sinergias: ['Faerie', 'Multistriker'], coste: 4 },
+    86;name: 'Karma', sinergias: ['Chrono', 'Incantor'], coste: 4 },
+    90;name: 'Kassadin', sinergias: ['Portal', 'Multistriker'], coste: 2 },
+    94;name: 'Katarina', sinergias: ['Faerie', 'Warrior'], coste: 3 },
+    98;name: 'KogMaw', sinergias: ['Honeymancy', 'Hunter'], coste: 2 },
+    102;name: 'Lillia', sinergias: ['Faerie', 'Bastion'], coste: 1 },
+    106;name: 'Milio', sinergias: ['Faerie', 'Scholar'], coste: 5 },
+    110;name: 'Mordekaiser', sinergias: ['Eldritch', 'Vanguard'], coste: 3 },
+    114;name: 'Morgana', sinergias: ['Witchcraft', 'BatQueen', 'Preserver'], coste: 5 },
+    119;name: 'Nami', sinergias: ['Eldritch', 'Mage'], coste: 4 },
+    123;name: 'Nasus', sinergias: ['Pyro', 'Shapeshifter'], coste: 4 },
+    127;name: 'Neeko', sinergias: ['Witchcraft', 'Shapeshifter'], coste: 3 },
+    131;name: 'Nilah', sinergias: ['Eldritch', 'Warrior'], coste: 2 },
+    135;name: 'Nomsy', sinergias: ['Dragon', 'Hunter'], coste: 1 },
+    139;name: 'Norra', sinergias: ['Portal', 'BestFriends', 'Mage'], coste: 5 },
+    144;name: 'Nunu&Willump', sinergias: ['Honeymancy', 'Bastion'], coste: 2 },
+    148;name: 'Olaf', sinergias: ['Frost', 'Hunter'], coste: 4 },
+    152;name: 'Poppy', sinergias: ['Witchcraft', 'Bastion'], coste: 1 },
+    156;name: 'Rakan', sinergias: ['Faerie', 'Preserver'], coste: 4 },
+    160;name: 'Rumble', sinergias: ['Sugarcraft', 'Blaster', 'Vanguard'], coste: 2 },
+    165;name: 'Ryze', sinergias: ['Portal', 'Scholar'], coste: 5 },
+    169;name: 'Seraphine', sinergias: ['Faerie', 'Mage'], coste: 1 },
+    173;name: 'Shen', sinergias: ['Pyro', 'Bastion'], coste: 3 },
+    177;name: 'Shyvana', sinergias: ['Dragon', 'Shapeshifter'], coste: 2 },
+    181;name: 'Smolder', sinergias: ['Dragon', 'Blaster'], coste: 5 },
+    185;name: 'Soraka', sinergias: ['Sugarcraft', 'Mage'], coste: 1 },
+    189;name: 'Swain', sinergias: ['Frost', 'Shapeshifter'], coste: 3 },
+    193;name: 'Syndra', sinergias: ['Eldritch', 'Incantor'], coste: 2 },
+    197;name: 'TahmKench', sinergias: ['Arcana', 'Vanguard'], coste: 4 },
+    201;name: 'Taric', sinergias: ['Portal', 'Bastion'], coste: 4 },
+    205;name: 'Tristana', sinergias: ['Faerie', 'Blaster'], coste: 2 },
+    209;name: 'Twitch', sinergias: ['Frost', 'Hunter'], coste: 1 },
+    213;name: 'Varus', sinergias: ['Pyro', 'Blaster'], coste: 4 },
+    217;name: 'Veigar', sinergias: ['Honeymancy', 'Mage'], coste: 3 },
+    221;name: 'Vex', sinergias: ['Chrono', 'Mage'], coste: 3 },
+    225;name: 'Warwick', sinergias: ['Frost', 'Vanguard'], coste: 1 },
+    229;name: 'Wukong', sinergias: ['Druid'], coste: 3 },
+    232;name: 'Xerath', sinergias: ['Arcana', 'Ascendant'], coste: 5 },
+    236;name: 'Ziggs', sinergias: ['Honeymancy', 'Incantor'], coste: 1 },
+    240;name: 'Zilean', sinergias: ['Chrono', 'Frost', 'Preserver'], coste: 2 },
+    245;name: 'Zoe', sinergias: ['Portal', 'Witchcraft', 'Scholar'], coste: 1 },
 };
 
 const emblemas = {
-    1: { name: 'Eldritch', sinergias: ['Eldritch'] },
-    2: { name: 'Faerie', sinergias: ['Faerie'] },
-    3: { name: 'Frost', sinergias: ['Frost'] },
-    4: { name: 'Honeymancy', sinergias: ['Honeymancy'] },
-    5: { name: 'Portal', sinergias: ['Portal'] },
-    6: { name: 'Pyro', sinergias: ['Pyro'] },
-    7: { name: 'Sugarcraft', sinergias: ['Sugarcraft'] },
-    8: { name: 'Witchcraft', sinergias: ['Witchcraft'] },
-    9: { name: 'Arcana', sinergias: ['Arcana'] },
-    10: { name: 'Bastion', sinergias: ['Bastion'] },
-    11: { name: 'Blaster', sinergias: ['Blaster'] },
-    12: { name: 'Chrono', sinergias: ['Chrono'] },
-    13: { name: 'Hunter', sinergias: ['Hunter'] },
-    14: { name: 'Incantor', sinergias: ['Incantor'] },
-    15: { name: 'Mage', sinergias: ['Mage'] },
-    16: { name: 'Multistriker', sinergias: ['Multistriker'] },
-    17: { name: 'Preserver', sinergias: ['Preserver'] },
-    18: { name: 'Scholar', sinergias: ['Scholar'] },
-    19: { name: 'Shapeshifter', sinergias: ['Shapeshifter'] },
-    20: { name: 'Vanguard', sinergias: ['Vanguard'] },
-    21: { name: 'Warrior', sinergias: ['Warrior'] }
+    1;name: 'Eldritch', sinergias: ['Eldritch
+    2;name: 'Faerie', sinergias: ['Faerie
+    3;name: 'Frost', sinergias: ['Frost
+    4;name: 'Honeymancy', sinergias: ['Honeymancy
+    5;name: 'Portal', sinergias: ['Portal
+    6;name: 'Pyro', sinergias: ['Pyro
+    7;name: 'Sugarcraft', sinergias: ['Sugarcraft
+    8;name: 'Witchcraft', sinergias: ['Witchcraft
+    9;name: 'Arcana', sinergias: ['Arcana
+    10;name: 'Bastion', sinergias: ['Bastion
+    11;name: 'Blaster', sinergias: ['Blaster
+    12;name: 'Chrono', sinergias: ['Chrono
+    13;name: 'Hunter', sinergias: ['Hunter
+    14;name: 'Incantor', sinergias: ['Incantor
+    15;name: 'Mage', sinergias: ['Mage
+    16;name: 'Multistriker', sinergias: ['Multistriker
+    17;name: 'Preserver', sinergias: ['Preserver
+    18;name: 'Scholar', sinergias: ['Scholar
+    19;name: 'Shapeshifter', sinergias: ['Shapeshifter
+    20;name: 'Vanguard', sinergias: ['Vanguard
+    21;name: 'Warrior', sinergias: ['Warrior'] }
 };
 
 const sinergias = {
-    Scholar: { cantidadPosible: ['2 / 4 / 6'] },
-    Arcana: { cantidadPosible: ['2 / 3 / 4 / 5'] },
-    Pyro: { cantidadPosible: ['2 / 3 / 4 / 5'] },
-    Multistriker: { cantidadPosible: ['3 / 5 / 7 / 9'] },
-    Warrior: { cantidadPosible: ['2 / 4 / 6'] },
-    Eldritch: { cantidadPosible: ['3 / 5 / 7 / 10'] },
-    Ravenous: { cantidadPosible: ['1'] },
-    Shapeshifter: { cantidadPosible: ['2 / 4 / 6 / 8'] },
-    Chrono: { cantidadPosible: ['2 / 4 / 6'] },
-    Witchcraft: { cantidadPosible: ['2 / 4 / 6 / 8'] },
-    Incantor: { cantidadPosible: ['2 / 4'] },
-    Frost: { cantidadPosible: ['3 / 5 / 7 / 9'] },
-    Bastion: { cantidadPosible: ['2 / 4 / 6 / 8'] },
-    Portal: { cantidadPosible: ['3 / 6 / 8 / 10'] },
-    Blaster: { cantidadPosible: ['2 / 4 / 6'] },
-    Hunter: { cantidadPosible: ['2 / 4 / 6'] },
-    Mage: { cantidadPosible: ['3 / 5 / 7 / 9'] },
-    Vanguard: { cantidadPosible: ['2 / 4 / 6'] },
-    Sugarcraft: { cantidadPosible: ['2 / 4 / 6'] },
-    Preserver: { cantidadPosible: ['2 / 3 / 4 / 5'] },
-    Honeymancy: { cantidadPosible: ['3 / 5 / 7'] },
-    Dragon: { cantidadPosible: ['2 / 3'] },
-    Faerie: { cantidadPosible: ['2 / 4 / 6 / 8'] },
-    BatQueen: { cantidadPosible: ['1'] },
-    Ascendant: { cantidadPosible: ['1'] },
-    BestFriends: { cantidadPosible: ['1'] },
-    Druid: { cantidadPosible: ['1'] }
+    Scholar;;2 / 4 / 6
+    Arcana;;2 / 3 / 4 / 5
+    Pyro;;2 / 3 / 4 / 5
+    Multistriker;;3 / 5 / 7 / 9
+    Warrior;;2 / 4 / 6
+    Eldritch;;3 / 5 / 7 / 10
+    Ravenous;;1
+    Shapeshifter;;2 / 4 / 6 / 8
+    Chrono;;2 / 4 / 6
+    Witchcraft;;2 / 4 / 6 / 8
+    Incantor;;2 / 4
+    Frost;;3 / 5 / 7 / 9
+    Bastion;;2 / 4 / 6 / 8
+    Portal;;3 / 6 / 8 / 10
+    Blaster;;2 / 4 / 6
+    Hunter;;2 / 4 / 6
+    Mage;;3 / 5 / 7 / 9
+    Vanguard;;2 / 4 / 6
+    Sugarcraft;;2 / 4 / 6
+    Preserver;;2 / 3 / 4 / 5
+    Honeymancy;;3 / 5 / 7
+    Dragon;;2 / 3
+    Faerie;;2 / 4 / 6 / 8
+    BatQueen;;1
+    Ascendant;;1
+    BestFriends;;1
+    Druid;;1'] }
 };
 //#################//
 
@@ -401,17 +401,17 @@ function findBestChamps(nivel) {
 
     //Probabilities of appearance for each level and cost
     const probabilidades = {
-        1: { 1: 1, 2: 0, 3: 0, 4: 0, 5: 0 },
-        2: { 1: 1, 2: 0, 3: 0, 4: 0, 5: 0 },
-        3: { 1: 0.75, 2: 0.25, 3: 0, 4: 0, 5: 0 },
-        4: { 1: 0.55, 2: 0.30, 3: 0.15, 4: 0, 5: 0 },
-        5: { 1: 0.45, 2: 0.33, 3: 0.20, 4: 0.02, 5: 0 },
-        6: { 1: 0.30, 2: 0.40, 3: 0.25, 4: 0.05, 5: 0 },
-        7: { 1: 0.19, 2: 0.30, 3: 0.35, 4: 0.10, 5: 0.01 },
-        8: { 1: 0.18, 2: 0.25, 3: 0.36, 4: 0.18, 5: 0.03 },
-        9: { 1: 0.10, 2: 0.20, 3: 0.25, 4: 0.35, 5: 0.10 },
-        10: { 1: 0.05, 2: 0.10, 3: 0.20, 4: 0.40, 5: 0.25 },
-        11: { 1: 0.01, 2: 0.02, 3: 0.12, 4: 0.50, 5: 0.35 }
+        1;1: 1, 2: 0, 3: 0, 4: 0, 5: 0 },
+        2;1: 1, 2: 0, 3: 0, 4: 0, 5: 0 },
+        3;1: 0.75, 2: 0.25, 3: 0, 4: 0, 5: 0 },
+        4;1: 0.55, 2: 0.30, 3: 0.15, 4: 0, 5: 0 },
+        5;1: 0.45, 2: 0.33, 3: 0.20, 4: 0.02, 5: 0 },
+        6;1: 0.30, 2: 0.40, 3: 0.25, 4: 0.05, 5: 0 },
+        7;1: 0.19, 2: 0.30, 3: 0.35, 4: 0.10, 5: 0.01 },
+        8;1: 0.18, 2: 0.25, 3: 0.36, 4: 0.18, 5: 0.03 },
+        9;1: 0.10, 2: 0.20, 3: 0.25, 4: 0.35, 5: 0.10 },
+        10;1: 0.05, 2: 0.10, 3: 0.20, 4: 0.40, 5: 0.25 },
+        11;1: 0.01, 2: 0.02, 3: 0.12, 4: 0.50, 5: 0.35 }
     };
 
     //Iterate over the characters

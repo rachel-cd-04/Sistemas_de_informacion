@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, session
+from flask import Flask, flash, redirect, render_template, request, session
 from classes.usuario import UsuarioDAO, UsuarioVO
 from classes.campeon import CampeonDAO, CampeonVO
 from classes.composicion import ComposicionDAO, ComposicionVO
@@ -48,15 +48,17 @@ def login_user():
     session.clear()
     if request.method == "POST":
         mail = request.form.get("mail")
-        if not mail or not request.form.get("password"):
-            return redirect("/start_team")
+        password = request.form.get("password")
+        if not mail or not password:
+            return redirect("/login")
 
-        usuario_dao = UsuarioDAO()
-        user = usuario_dao.find_usuario_by_id(mail)
+        user = UsuarioDAO().find_usuario_by_id_pssw(mail, password)
         if not user:
-            return redirect("/help")
+            return redirect("/login")
 
-        session["user_id"] = user.nombre
+        session["mail"] = user.mail
+        session["username"] = user.nombre
+        session["avatar"] = user.avatar
         return redirect("/")
 
     return render_template("login.html")
@@ -66,21 +68,34 @@ def login_user():
 def register_user():
     session.clear()
     if request.method == "POST":
-        if not request.form.get("mail") or not request.form.get("contra") or not request.form.get("confirm"):
+        username = request.form.get("username")
+        mail = request.form.get("mail")
+        password = request.form.get("password")
+        confirmpssw = request.form.get("confirm_password")
+
+        if not username or not mail or not password or not confirmpssw:
             return redirect("/register")
 
-        if request.form.get("contra") != request.form.get("confirm"):
+        if password != confirmpssw:
             return redirect("/register")
 
-        user_id = UsuarioDAO().save_usuario(
-            UsuarioVO(request.form.get("mail"), request.form.get("mail"), request.form.get("contra"), 1))
-        if not user_id:
-            return redirect("/register")
+        user = UsuarioDAO().save_usuario(UsuarioVO(mail, username, password, '../static/images/avatars/avatar1.png'))
+        if not user:
+            return redirect("/help")
 
-        session["user_id"] = user_id
+        session["mail"] = user.mail
+        session["username"] = user.nombre
+        session["avatar"] = user.avatar
         return redirect("/")
 
     return render_template("register.html")
+
+#-------------------------------------------------------------
+@app.route('/logout', methods=['POST'])
+def logout():
+    # Clear the session
+    session.clear()
+    return redirect("/")
 
 #-------------------------------------------------------------
 

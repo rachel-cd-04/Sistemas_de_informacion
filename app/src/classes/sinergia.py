@@ -1,5 +1,7 @@
 import sqlite3
 
+DB_PATH = '/app/src/db/database.db'
+
 # VO
 ####
 class SinergiaVO:
@@ -13,7 +15,7 @@ class SinergiaDAO:
     # Encontrar sinergia por su nombre
     def find_sinergia_by_id(self, nombre):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''SELECT nombre, unidades_mejora FROM Sinergia_TAB WHERE nombre = ?''', 
                            (nombre,))

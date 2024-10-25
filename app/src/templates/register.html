@@ -1,18 +1,20 @@
 {% extends "layout.html" %}
 
 {% block css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/login-style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/register-style.css') }}">
+<!-- Incluir Parsley CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.css">
 {% endblock %}
 
 {% block title %}
-    Log In / Register
+    Register
 {% endblock %}
 
 {% block main %}
 <div class="container">
     <div class="button-container">
-        <button class="btn btn-primary toggle-button" onclick="showForm('login')">Log In</button>
-        <button class="btn btn-primary toggle-button" onclick="showForm('register')">Register</button>
+        <button class="btn btn-primary toggle-button" onclick="window.location.href='login'">Log In</button>
+        <button class="btn btn-primary toggle-button" onclick="window.location.href='register'">Register</button>
     </div>
     <!-- Register -->
     <div id="register-form" class="form-container">
@@ -21,7 +23,7 @@
                 <input autocomplete="off" class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text" required data-parsley-required-message="Please enter a username.">
             </div>
             <div class="mb-3">
-                <input class="form-control mx-auto w-auto" name="email" placeholder="Email" type="email" required data-parsley-type="email" data-parsley-required-message="Please enter a valid email address.">
+                <input class="form-control mx-auto w-auto" name="mail" placeholder="Email" type="email" required data-parsley-type="email" data-parsley-required-message="Please enter a valid email address.">
             </div>
             <div class="mb-3">
                 <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password" required data-parsley-required-message="Please enter a password.">
@@ -33,19 +35,9 @@
         </form>
     </div>
 </div>
+{% endblock %}
 
-<script>
-    function showForm(formType) {
-        const loginForm = document.getElementById('login-form');
-        const registerForm = document.getElementById('register-form');
-
-        if (formType === 'login') {
-            loginForm.classList.add('active');
-            registerForm.classList.remove('active');
-        } else if (formType === 'register') {
-            registerForm.classList.add('active');
-            loginForm.classList.remove('active');
-        }
-    }
-</script>
+{% block scripts %}
+<!-- Incluir Parsley JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js"></script>
 {% endblock %}

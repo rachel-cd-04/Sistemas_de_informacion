@@ -1,5 +1,7 @@
 import sqlite3
 
+DB_PATH = '/app/src/db/database.db'
+
 # VO
 ####
 class ReportaVO:
@@ -13,7 +15,7 @@ class ReportaDAO:
     # Crear un nuevo reporte en la base de datos
     def save_reporta(self, reporta):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''INSERT INTO Reporta_TAB (usuarioReportador, usuarioReportado) VALUES (?, ?)''', 
                            (reporta.usuarioReportador, reporta.usuarioReportado))
@@ -26,7 +28,7 @@ class ReportaDAO:
     # Eliminar un reporte de la base de datos
     def delete_reporta(self, usuarioReportador, usuarioReportado):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''DELETE FROM Reporta_TAB WHERE usuarioReportador = ? AND usuarioReportado = ?''', 
                            (usuarioReportador, usuarioReportado))
@@ -39,7 +41,7 @@ class ReportaDAO:
     # Encontrar un reporte por su id
     def find_reporta_by_id(self, usuarioReportador, usuarioReportado):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''SELECT usuarioReportador, usuarioReportado FROM Reporta_TAB WHERE usuarioReportador = ? AND usuarioReportado = ?''', 
                            (usuarioReportador, usuarioReportado))

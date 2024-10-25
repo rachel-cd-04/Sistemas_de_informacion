@@ -1,5 +1,7 @@
 import sqlite3
 
+DB_PATH = '/app/src/db/database.db'
+
 # VO
 ####
 class VotaVO:
@@ -14,7 +16,7 @@ class VotaDAO:
     # Crear un nuevo voto en la base de datos
     def save_vota(self, vota):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''INSERT INTO Vota_TAB (usuarioVotante, usuarioVotado, composicion) VALUES (?, ?, ?)''', 
                            (vota.usuarioVotante, vota.usuarioVotado, vota.composicion))
@@ -27,7 +29,7 @@ class VotaDAO:
     # Eliminar un voto de la base de datos
     def delete_vota(self, usuarioVotante, usuarioVotado, composicion):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''DELETE FROM Vota_TAB WHERE usuarioVotante = ? AND usuarioVotado = ? AND composicion = ?''', 
                            (usuarioVotante, usuarioVotado, composicion))
@@ -40,7 +42,7 @@ class VotaDAO:
     # Encontrar un voto por su id
     def find_vota_by_id(self, usuarioVotante, usuarioVotado, composicion):
         try:
-            conn = sqlite3.connect('db/database.db')
+            conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''SELECT usuarioVotante, usuarioVotado, composicion FROM Vota_TAB WHERE usuarioVotante = ? AND usuarioVotado = ? AND composicion = ?''', 
                            (usuarioVotante, usuarioVotado, composicion))
