@@ -1,0 +1,31 @@
+<!--Authors: Mateo Peña Costa and Raquel Cámara Domene-->
+{% extends "layout.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/my_TC-style.css') }}">
+{% endblock %}
+
+{% block title %}
+    My Team Comps
+{% endblock %}
+
+{% block main %}
+<div class="main-container">
+    <h1>MY TEAM COMPS</h1>
+    <div class="team-comps-container">
+        {% for team_comp in team_comps %}
+            <div class="team-comp">
+                <h2>{{ team_comp.name }}</h2>
+                <div class="team-comp-champions">
+                    {% for champion in team_comp.champions %}
+                        <div class="team-comp-champion">
+                            <img src="{{ champion.image }}" alt="{{ champion.name }}">
+                            <p>{{ champion.name }}</p>
+                        </div>
+                    {% endfor %}
+                    </div>
+            </div>
+        {% endfor %}
+
+ 
+{% endblock %}

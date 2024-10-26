@@ -20,37 +20,97 @@ body {
 /*********************************************************************************************/
 /*container with information about us and contact links */
 /*********************************************************************************************/
-.info-container{
+.main-container{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     margin-left: 15vw;
     margin-top: 2vw;
     width: 70vw;
     border-radius: 1.5vw;
-}
-
-.moreinfo-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;;
-    background-color: rgba(25, 105, 107, 0.7);
-    width: 70vw;
-    border-radius: 1.5vw;
+    background-color: #155354;
 }
 
 /*main container title */
-.info-container h1 {
-    color:#FFD700;
+.main-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/*characteristics of the paragraphs inside the secondary container*/
-.moreinfo-container p {
-    color: white;
-    margin-top: 1vw;
-    margin-left: 2vw;
-    margin-right: 2vw;
-    margin-bottom: 1vw;
+.main-container h1 {
+    text-align: center;
+    color: #FFD700;
+    font-size: 2.5em;
+    margin-bottom: 20px;
 }
+
+.team-comps-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.team-comp {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    width: calc(33.333% - 20px);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.team-comp h2 {
+    font-size: 1.5em;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.team-comp-champions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.team-comp-champion {
+    text-align: center;
+    width: 80px;
+}
+
+.team-comp-champion img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.team-comp-champion p {
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.team-comp-buttons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.team-comp-buttons a {
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 0.9em;
+}
+
+.edit-button {
+    background-color: #4CAF50;
+}
+
+.delete-button {
+    background-color: #f44336;
+}
+

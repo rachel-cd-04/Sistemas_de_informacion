@@ -28,14 +28,14 @@ html {
 /*footer with contact and ‘about us’*/
 /*********************************************************************************************/
 .footer-container {
-    margin-top: 6.5vw;
+    margin-top: 70px;
     bottom: 0;
     width: 100%;
     height: 3vw;
     background-color: rgb(46, 147, 154);
     font-family: "Helvetica Bold", sans-serif;
     display: flex;
-    flex-direction: column;
+    
     justify-content: center;
     align-items: center;
     color: white;

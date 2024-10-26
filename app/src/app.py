@@ -1,4 +1,5 @@
-from flask import Flask, flash, redirect, render_template, request, session
+from flask import Flask, redirect, render_template, request, session
+#from django.contrib.auth.decorators import login_required
 from classes.usuario import UsuarioDAO, UsuarioVO
 from classes.campeon import CampeonDAO, CampeonVO
 from classes.composicion import ComposicionDAO, ComposicionVO
@@ -41,6 +42,30 @@ def start_team():
 @app.route('/help')
 def help():
     return render_template('help.html')
+
+#-------------------------------------------------------------
+@app.route('/my_team_comps')
+#@login_required(login_url="/login")
+def my_TC():
+    team_comps = [
+    {
+        'id': 1,
+        'name': 'Team A',
+        'champions': [
+            {'name': 'Champion 1', 'image': 'champion1.jpg'},
+            {'name': 'Champion 2', 'image': 'champion2.jpg'}
+        ]
+    },
+    {
+        'id': 2,
+        'name': 'Team B',
+        'champions': [
+            {'name': 'Champion 3', 'image': 'champion3.jpg'},
+            {'name': 'Champion 4', 'image': 'champion4.jpg'}
+        ]
+    }
+    ]   
+    return render_template('my_team_comps.html', team_comps=team_comps)
 
 #------------------------------------------------------------- 
 @app.route("/login", methods=["GET", "POST"])
