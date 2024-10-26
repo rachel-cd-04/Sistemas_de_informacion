@@ -16,6 +16,9 @@
         {% for team_comp in team_comps %}
             <div class="team-comp">
                 <h2>{{ team_comp.name }}</h2>
+                <div class="team-comp-difficulty">
+                    <span>Dificultad: {{ team_comp.difficulty }}</span>
+                </div>
                 <div class="team-comp-champions">
                     {% for champion in team_comp.champions %}
                         <div class="team-comp-champion">
@@ -23,7 +26,7 @@
                             <p>{{ champion.name }}</p>
                         </div>
                     {% endfor %}
-                    </div>
+                </div>
             </div>
         {% endfor %}
 

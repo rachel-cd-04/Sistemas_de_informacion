@@ -5,27 +5,17 @@
 /*********************************************************************************************/
 body {
     background-color: #155354;
-    display: flex; /* Añadir Flexbox a body */
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: center; /* Centrar verticalmente */
-    height: 100vh; /* Asegurar que el body ocupe toda la altura de la ventana */
-    /*width: 30vw; /* Ajustar el ancho del formulario */
-    /*margin-left: 30 auto; /* Centrar horizontalmente */
-    /*margin-right: 30 auto; /* Centrar horizontalmente */
+    
 }
 
 /*********************************************************************************************/
 /*container with information about us and contact links */
 /*********************************************************************************************/
-.container {
-    /*margin-left: 30vw;*/
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 1.5vw;
+.containerlog {
+    
     background-color: white; /* Añadir un fondo blanco para visibilidad */
-    padding: 2vw; /* Añadir padding para espacio interno */
+    border-radius: 10px; /* Añadir bordes redondeados */
+    
 }
 
 /*********************************************************************************************/

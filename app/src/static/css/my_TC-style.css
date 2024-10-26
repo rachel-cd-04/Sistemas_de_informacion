@@ -20,30 +20,17 @@ body {
 /*********************************************************************************************/
 /*container with information about us and contact links */
 /*********************************************************************************************/
-.main-container{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-left: 15vw;
-    margin-top: 2vw;
-    width: 70vw;
-    border-radius: 1.5vw;
-    background-color: #155354;
-}
-
 /*main container title */
 .main-container {
     width: 80%;
     margin: 0 auto;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #155354;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .main-container h1 {
-    text-align: center;
+    text-align: right;
     color: #FFD700;
     font-size: 2.5em;
     margin-bottom: 20px;
@@ -51,22 +38,22 @@ body {
 
 .team-comps-container {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 20px;
 }
 
 .team-comp {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
+    background-color: rgba(25, 105, 107, 0.7);
+    border-radius: 3px;
     padding: 15px;
-    width: calc(33.333% - 20px);
+    width: 100%;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .team-comp h2 {
+    text-align: right;
     font-size: 1.5em;
-    color: #444;
+    color: #FFD700;
     margin-bottom: 10px;
 }
 
@@ -113,4 +100,3 @@ body {
 .delete-button {
     background-color: #f44336;
 }
-
