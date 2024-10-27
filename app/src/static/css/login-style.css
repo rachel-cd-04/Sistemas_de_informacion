@@ -78,6 +78,7 @@ form input {
 .imagen-izquierda {
     margin-right: 20px; /* Espacio entre la imagen y el formulario */
     width: 30%; /* Adjust the width as needed */
+    border: 5px solid #9013a0;
 }
 
 .text-title {
