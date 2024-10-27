@@ -44,6 +44,11 @@ def help():
     return render_template('help.html')
 
 #-------------------------------------------------------------
+@app.route('/settings')
+def settings():
+    return render_template('settings.html')
+
+#-------------------------------------------------------------
 @app.route('/my_team_comps')
 #@login_required(login_url="/login")
 def my_TC():
@@ -64,6 +69,7 @@ def set_publicado():
     usuario = data.get('usuario')
     nombre = data.get('nombre')
     publicado = data.get('publicado')
+    print(f"usuario: {usuario}, nombre: {nombre}, publicado: {publicado}")
 
     try:
         ComposicionDAO().set_publicado(usuario, nombre, publicado)

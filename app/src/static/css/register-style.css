@@ -50,12 +50,15 @@ form input {
 }
 
 .separador {
+    display: flex;
     margin-top: 2vw;
     width: 58vw;
     height: 6px;
     background-color: #f5b03e;
-    z-index: 999;
+    justify-content: center;
+    align-items: center;
 }
+
 .separador-fin {
     margin-top: 3vw;
     margin-bottom: 5vw;

@@ -75,6 +75,7 @@
                             if (data.success) {
                                 button.setAttribute("data-publicado", newPublicado);
                                 button.textContent = newPublicado === "Y" ? "Published" : "Publish";
+                                alert("Todo fue correctamente");
                             } else {
                                 alert("Error updating publication status");
                             }

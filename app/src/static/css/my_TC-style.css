@@ -115,14 +115,20 @@ h1 {
     justify-content: center;
 }
 
-.publish-btn[published="Y"] {
-    background-color: #8aeb77;
-    color: #f5b03e;
+.publish-btn[data-publicado="Y"] {
+    background-color: #7bcf6b;
+    color: #FFFFFF;
 }
 
 .publish-btn:hover, .edit-btn:hover, .delete-btn:hover {
     background-color: #FFA500;
 }
+
+.publish-btn[data-publicado="Y"]:hover {
+    background-color: #4d8b40;
+    color: #FFFFFF;
+}
+
 
 .team-comp-champions {
     display: flex;
