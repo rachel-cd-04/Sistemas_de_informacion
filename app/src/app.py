@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, session
+from flask import Flask, redirect, render_template, request, session, jsonify
 #from django.contrib.auth.decorators import login_required
 from classes.usuario import UsuarioDAO, UsuarioVO
 from classes.campeon import CampeonDAO, CampeonVO
@@ -47,25 +47,30 @@ def help():
 @app.route('/my_team_comps')
 #@login_required(login_url="/login")
 def my_TC():
-    team_comps = [
-    {
-        'id': 1,
-        'name': 'Team A',
-        'champions': [
-            {'name': 'Champion 1', 'image': 'champion1.jpg'},
-            {'name': 'Champion 2', 'image': 'champion2.jpg'}
-        ]
-    },
-    {
-        'id': 2,
-        'name': 'Team B',
-        'champions': [
-            {'name': 'Champion 3', 'image': 'champion3.jpg'},
-            {'name': 'Champion 4', 'image': 'champion4.jpg'}
-        ]
-    }
-    ]   
+    mail = session['mail']
+    team_comps = ComposicionDAO().get_composiciones_by_usuario_id(mail)
+    if team_comps:
+        for comp in team_comps:
+            compName = comp.nombre
+            personajes = FormadoPorDAO().get_champions_by_composicion_id(mail, compName)
+            comp.champions = personajes
+
     return render_template('my_team_comps.html', team_comps=team_comps)
+
+
+@app.route('/set_publicado', methods=['POST'])
+def set_publicado():
+    data = request.get_json()
+    usuario = data.get('usuario')
+    nombre = data.get('nombre')
+    publicado = data.get('publicado')
+
+    try:
+        ComposicionDAO().set_publicado(usuario, nombre, publicado)
+        return jsonify({"success": True})
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return jsonify({"success": False}), 500
 
 #------------------------------------------------------------- 
 @app.route("/login", methods=["GET", "POST"])

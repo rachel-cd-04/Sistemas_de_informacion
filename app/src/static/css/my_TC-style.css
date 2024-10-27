@@ -22,81 +22,131 @@ body {
 /*********************************************************************************************/
 /*main container title */
 .main-container {
-    width: 80%;
-    margin: 0 auto;
+    margin-top: 70px;
     padding: 20px;
-    background-color: #155354;
-    border-radius: 10px;
 }
 
-.main-container h1 {
-    text-align: right;
-    color: #FFD700;
-    font-size: 2.5em;
-    margin-bottom: 20px;
+h1 {
+    text-align: left;
+    color: #FFA500;
 }
 
 .team-comps-container {
+    margin-top: 40px;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
+.team-comp-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+
 .team-comp {
-    background-color: rgba(25, 105, 107, 0.7);
-    border-radius: 3px;
-    padding: 15px;
-    width: 100%;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    background-color: #19696b;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-items: center;
+    cursor: pointer;
+    transition: max-height 0.3s ease;
+    overflow: hidden;
+    max-height: 300px;
 }
 
 .team-comp h2 {
-    text-align: right;
-    font-size: 1.5em;
-    color: #FFD700;
-    margin-bottom: 10px;
+    text-align: left;
+    color: #FFFFFF;
+}
+
+.team-comp.expanded {
+    max-height: 600px;
+}
+
+.team-comp-difficulty {
+    display: flex;
+    gap: 10px;
+    margin-top: 3px;
+    text-align: left;
+}
+
+.team-comp-difficulty span {
+    text-align: left;
+    color: #FFA500;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* Estilos para diferentes niveles de dificultad */
+.team-comp-difficulty span[data-difficulty="Hard"] {
+    color: #FF0000;
+}
+
+.team-comp-difficulty span[data-difficulty="Medium"] {
+    color: #FFA500;
+}
+
+.team-comp-difficulty span[data-difficulty="Easy"] {
+    color: #00FF00;
+}
+
+.team-comp-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.publish-btn, .edit-btn, .delete-btn {
+    background-color: #f5b03e;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    width: 65px;
+    height: 65px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.publish-btn[published="Y"] {
+    background-color: #8aeb77;
+    color: #f5b03e;
+}
+
+.publish-btn:hover, .edit-btn:hover, .delete-btn:hover {
+    background-color: #FFA500;
 }
 
 .team-comp-champions {
     display: flex;
-    flex-wrap: wrap;
     gap: 10px;
-}
-
-.team-comp-champion {
-    text-align: center;
-    width: 80px;
+    height: 13px;
+    width: 6px;
+    margin-top: 20px;
+    justify-content: flex-end;
+    background-color: #239ca4;
+    border-radius: 5px;
 }
 
 .team-comp-champion img {
-    width: 100%;
+    width: 50px;
+    height: 50px;
     border-radius: 5px;
 }
 
-.team-comp-champion p {
-    margin-top: 5px;
-    font-size: 0.9em;
-    color: #666;
+.team-comp-description {
+    display: none;
+    margin-top: 10px;
+    color: #FFFFFF;
 }
 
-.team-comp-buttons {
-    margin-top: 15px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.team-comp-buttons a {
-    text-decoration: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 0.9em;
-}
-
-.edit-button {
-    background-color: #4CAF50;
-}
-
-.delete-button {
-    background-color: #f44336;
+.team-comp.expanded .team-comp-description {
+    display: block;
 }

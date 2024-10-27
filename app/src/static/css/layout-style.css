@@ -117,8 +117,8 @@ html {
 /*********************************************************************************************/
 .custom-login-button {
     font-weight: bold;
-    background-color: #FFD700;
-    border: 2px solid #FFD700;
+    background-color: #f5b03e;
+    border: 2px solid #f5b03e;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
@@ -134,8 +134,8 @@ html {
 
 .custom-help-button {
     font-weight: bold;
-    background-color: #FFD700;
-    border: 2px solid #FFD700;
+    background-color: #f5b03e;
+    border: 2px solid #f5b03e;
     color: white;
     padding: 10px 20px;
     border-radius: 50px;

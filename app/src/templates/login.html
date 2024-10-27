@@ -10,24 +10,38 @@
 {% endblock %}
 
 {% block main %}
-<div class="containerlog">
-    <div class="button-container">
-        <button class="btn btn-primary toggle-button" onclick="window.location.href='login'">Log In</button>
-        <button class="btn btn-primary toggle-button" onclick="window.location.href='register'">Register</button>
-    </div>
-    <!-- Login -->
-    <div id="login-form" class="form-container active">
-        <form id="loginForm" action="/login" method="post" data-parsley-validate>
-            <div class="mb-3">
-                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="mail" placeholder="mail" type="mail" required data-parsley-required-message="Please enter your mail.">
+<h1 class="text-title">Join our community</h1>
+<div class="separador"></div>
+<div class="info-container">
+    <img src="../static/images/misc/login.png" alt="Imagen a la izquierda" class="imagen-izquierda">
+    <div class="containerlog">
+        <div class="container2log">
+            <div class="button-container">
+                <button class="btn btn-primary toggle-button1" disabled>Log In</button>
+                <span class="barra_sep_logreg">/</span>
+                <button class="btn btn-primary toggle-button2" onclick="window.location.href='register'">Register</button>
             </div>
-            <div class="mb-3">
-                <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password" required data-parsley-required-message="Please enter your password.">
+            <!-- Login -->
+            <div id="login-form" class="form-container active">
+                <form id="loginForm" action="/login" method="post" data-parsley-validate>
+                    <div class="mb-3">
+                        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="mail" placeholder="mail" type="mail" required data-parsley-required-message="Please enter your mail.">
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password" required data-parsley-required-message="Please enter your password.">
+                    </div>
+                    <button class="btn btn-primary loginent" type="submit">LOG IN</button>
+                </form>
             </div>
-            <button class="btn btn-primary" type="submit">Log In</button>
-        </form>
+        </div>
+        
+        
     </div>
+    
 </div>
+<div class="separador-fin"></div>
+
+
 
 <script>
     function showForm(formType) {

@@ -14,21 +14,78 @@
     <h1>MY TEAM COMPS</h1>
     <div class="team-comps-container">
         {% for team_comp in team_comps %}
-            <div class="team-comp">
-                <h2>{{ team_comp.name }}</h2>
-                <div class="team-comp-difficulty">
-                    <span>Dificultad: {{ team_comp.difficulty }}</span>
+            <div class="team-comp" onclick="toggleDescription(this)">
+                <div class="team-comp-content">
+                    <h2>{{ team_comp.nombre }}</h2>
+                    <div class="team-comp-difficulty">
+                        <span data-difficulty="{{ team_comp.dificultad }}">{{ team_comp.dificultad }}</span>
+                    </div>
+                    <div class="team-comp-buttons">
+                        <button class="publish-btn" data-publicado="{{ team_comp.publicado }}" data-usuario="{{ team_comp.usuario }}" data-nombre="{{ team_comp.nombre }}">Publish</button>
+                        <button class="edit-btn">Edit</button>
+                        <button class="delete-btn">Delete</button>
+                    </div>
+                    <div class="team-comp-description">
+                        <p>{{ team_comp.descr }}</p>
+                    </div>
                 </div>
                 <div class="team-comp-champions">
                     {% for champion in team_comp.champions %}
                         <div class="team-comp-champion">
-                            <img src="{{ champion.image }}" alt="{{ champion.name }}">
-                            <p>{{ champion.name }}</p>
+                            <img src="{{ champion.url_ }}" alt="{{ champion.nombre }}">
+                            <p>{{ champion.nombre }}</p>
                         </div>
                     {% endfor %}
                 </div>
             </div>
         {% endfor %}
 
- 
+        <script>
+            function toggleDescription(element) {
+                element.classList.toggle('expanded');
+            }
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const publishButtons = document.querySelectorAll(".publish-btn");
+            
+                publishButtons.forEach(button => {
+                    const isPublished = button.getAttribute("data-publicado") === "Y";
+                    button.textContent = isPublished ? "Published" : "Publish";
+            
+                    button.addEventListener("click", function() {
+                        const usuario = button.getAttribute("data-usuario");
+                        const nombre = button.getAttribute("data-nombre");
+                        const newPublicado = isPublished ? "N" : "Y";
+            
+                        fetch("/set_publicado", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                usuario: usuario,
+                                nombre: nombre,
+                                publicado: newPublicado
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                button.setAttribute("data-publicado", newPublicado);
+                                button.textContent = newPublicado === "Y" ? "Published" : "Publish";
+                            } else {
+                                alert("Error updating publication status");
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error:", error);
+                            alert("Error updating publication status");
+                        });
+                    });
+                });
+            });
+        </script>
+
 {% endblock %}

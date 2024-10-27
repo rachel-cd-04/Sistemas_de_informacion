@@ -11,33 +11,46 @@
 {% endblock %}
 
 {% block main %}
-<div class="container">
-    <div class="button-container">
-        <button class="btn btn-primary toggle-button" onclick="window.location.href='login'">Log In</button>
-        <button class="btn btn-primary toggle-button" onclick="window.location.href='register'">Register</button>
+<h1 class="text-title">Join our community</h1>
+<div class="separador"></div>
+<div class="info-container">
+    <img src="../static/images/misc/register.webp" alt="Imagen a la izquierda" class="imagen-izquierda">
+    <div class="containerlog">
+        <div class="container2log">
+            <div class="button-container">
+                <button class="btn btn-primary toggle-button2" onclick="window.location.href='login'">Log In</button>
+                <span class="barra_sep_logreg">/</span>
+                <button class="btn btn-primary toggle-button1" disabled>Register</button>
+            </div>
+            <!-- Register -->
+            <div id="register-form" class="form-container">
+                <form id="registerForm" action="/register" method="post" data-parsley-validate>
+                    <div class="mb-3">
+                        <input autocomplete="off" class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text" required data-parsley-required-message="Please enter a username.">
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control mx-auto w-auto" name="mail" placeholder="Email" type="email" required data-parsley-type="email" data-parsley-required-message="Please enter a valid email address.">
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password" required data-parsley-required-message="Please enter a password.">
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control mx-auto w-auto" name="confirm_password" placeholder="Confirm Password" type="password" required data-parsley-equalto="#registerForm input[name='password']" data-parsley-required-message="Please confirm your password." data-parsley-equalto-message="Passwords do not match.">
+                    </div>
+                    <button class="btn btn-primary regent" type="submit">Register</button>
+                </form>
+            </div>
+        </div>
+        
+        
     </div>
-    <!-- Register -->
-    <div id="register-form" class="form-container">
-        <form id="registerForm" action="/register" method="post" data-parsley-validate>
-            <div class="mb-3">
-                <input autocomplete="off" class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text" required data-parsley-required-message="Please enter a username.">
-            </div>
-            <div class="mb-3">
-                <input class="form-control mx-auto w-auto" name="mail" placeholder="Email" type="email" required data-parsley-type="email" data-parsley-required-message="Please enter a valid email address.">
-            </div>
-            <div class="mb-3">
-                <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password" required data-parsley-required-message="Please enter a password.">
-            </div>
-            <div class="mb-3">
-                <input class="form-control mx-auto w-auto" name="confirm_password" placeholder="Confirm Password" type="password" required data-parsley-equalto="#registerForm input[name='password']" data-parsley-required-message="Please confirm your password." data-parsley-equalto-message="Passwords do not match.">
-            </div>
-            <button class="btn btn-primary" type="submit">Register</button>
-        </form>
-    </div>
+    
 </div>
+<div class="separador-fin"></div>
 {% endblock %}
 
 {% block scripts %}
 <!-- Incluir Parsley JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js"></script>
 {% endblock %}
+

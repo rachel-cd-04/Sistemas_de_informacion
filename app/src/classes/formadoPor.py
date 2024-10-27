@@ -49,10 +49,26 @@ class FormadoPorDAO:
                            (usuario, composicion, campeon))
             row = cursor.fetchone()
             if row:
-                return FormadaPorVO(row[0], row[1], row[2])
+                return FormadoPorVO(row[0], row[1], row[2])
             return None
         except sqlite3.Error as e:
             print(f"An error occurred: {e}")
             return None
+        finally:
+            conn.close()
+
+
+    # Devuelve todos los campeones de una composicion
+    def get_champions_by_composicion_id(self, usuario, composicion):
+        try:
+            conn = sqlite3.connect(DB_PATH)
+            cursor = conn.cursor()
+            cursor.execute('''SELECT usuario, composicion, campeon FROM Formada_por_TAB WHERE usuario = ? AND composicion = ?''', 
+                           (usuario, composicion))
+            rows = cursor.fetchall()
+            return [FormadoPorVO(row[0], row[1], row[2]) for row in rows]
+        except sqlite3.Error as e:
+            print(f"An error occurred: {e}")
+            return []
         finally:
             conn.close()
