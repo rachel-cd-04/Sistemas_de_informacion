@@ -5,8 +5,9 @@ DB_PATH = '/app/src/db/database.db'
 # VO
 ####
 class SinergiaVO:
-    def __init__(self, nombre, unidades_mejora):
+    def __init__(self, nombre, url_, unidades_mejora):
         self.nombre = nombre
+        self.url_ = url_
         self.unidades_mejora = unidades_mejora
 
 # DAO
@@ -17,11 +18,11 @@ class SinergiaDAO:
         try:
             conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
-            cursor.execute('''SELECT nombre, unidades_mejora FROM Sinergia_TAB WHERE nombre = ?''', 
+            cursor.execute('''SELECT * FROM Sinergia_TAB WHERE nombre = ?''', 
                            (nombre,))
             row = cursor.fetchone()
             if row:
-                return SinergiaVO(row[0], row[1])
+                return SinergiaVO(row[0], row[1], row[2])
             return None
         except sqlite3.Error as e:
             print(f"An error occurred: {e}")

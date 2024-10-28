@@ -29,3 +29,16 @@ class PoseeDAO:
             return None
         finally:
             conn.close()
+
+    def get_sinergias_by_champion_id(self, campeon):
+        try:
+            conn = sqlite3.connect(DB_PATH)
+            cursor = conn.cursor()
+            cursor.execute('''SELECT sinergia FROM Posee_TAB WHERE campeon = ?''', (campeon,))
+            rows = cursor.fetchall()
+            return [row[0] for row in rows]
+        except sqlite3.Error as e:
+            print(f"An error occurred: {e}")
+            return None
+        finally:
+            conn.close()

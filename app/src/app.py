@@ -34,11 +34,6 @@ def index():
     return render_template('index.html', show_login_button=True)
 
 #-------------------------------------------------------------
-@app.route('/start_team')
-def start_team():
-    return render_template('start_team.html', show_login_button=True)
-
-#-------------------------------------------------------------
 @app.route('/help')
 def help():
     return render_template('help.html', show_login_button=True)
@@ -49,6 +44,18 @@ def settings():
     return render_template('settings.html', show_login_button=True)
 
 #-------------------------------------------------------------
+@app.route('/start_team')
+#@login_required(login_url="/login")
+def start_team():
+    champs = CampeonDAO().get_all_champions()
+    if champs:
+        for champ in champs:
+            synergies = PoseeDAO().get_sinergias_by_champion_id(champ.nombre)
+            champ.synergies = synergies
+
+    return render_template('start_team.html', champs=champs, show_login_button=True)
+
+#-------------------------------------------------------------
 @app.route('/my_team_comps')
 #@login_required(login_url="/login")
 def my_TC():
@@ -56,8 +63,7 @@ def my_TC():
     team_comps = ComposicionDAO().get_composiciones_by_usuario_id(mail)
     if team_comps:
         for comp in team_comps:
-            compName = comp.nombre
-            personajes = FormadoPorDAO().get_champions_by_composicion_id(mail, compName)
+            personajes = FormadoPorDAO().get_champions_by_composicion_id(mail, comp.nombre)
             comp.champions = personajes
 
     return render_template('my_team_comps.html', team_comps=team_comps, show_login_button=True)
@@ -85,8 +91,7 @@ def comComps():
     team_comps = ComposicionDAO().get_all_public_composiciones()
     if team_comps:
         for comp in team_comps:
-            compName = comp.nombre
-            personajes = FormadoPorDAO().get_champions_by_composicion_id(comp.usuario, compName)
+            personajes = FormadoPorDAO().get_champions_by_composicion_id(comp.usuario, comp.nombre)
             comp.champions = personajes
 
     return render_template('community_comps.html', team_comps=team_comps, show_login_button=True)

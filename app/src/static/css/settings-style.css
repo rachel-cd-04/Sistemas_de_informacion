@@ -33,7 +33,7 @@ body {
 
 .moreinfo-container {
     display: flex;
-    flex-direction: column;
+    
     justify-content: center;
     align-items: center;;
     background-color: rgba(25, 105, 107, 0.7);

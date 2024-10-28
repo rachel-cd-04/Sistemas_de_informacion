@@ -486,6 +486,26 @@ body {
     filter: grayscale(10%);
 }
 
+.browser .champions .champ-2[cost="1"] {
+    background: linear-gradient(to right, #818181, #646464);
+}
+
+.browser .champions .champ-2[cost="2"] {
+    background: linear-gradient(to right, #31b63c, #09881a);
+}
+
+.browser .champions .champ-2[cost="3"] {
+    background: linear-gradient(to right, #379ee8, #2883cd);
+}
+
+.browser .champions .champ-2[cost="4"] {
+    background: linear-gradient(to right, rgb(180, 76, 214), #b215dd);
+}
+
+.browser .champions .champ-2[cost="5"] {
+    background: linear-gradient(to right, #eebe30, #f09605);
+}
+
 .browser .champions .img-champ {
     width: 3vw;
     height: 3vw;
