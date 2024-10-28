@@ -22,13 +22,16 @@ CREATE TABLE Composicion_TAB (
 );
 
 CREATE TABLE Campeon_TAB (
-    nombre VARCHAR(200) NOT NULL PRIMARY KEY,
-    url_ VARCHAR(200) NOT NULL,
+	nombre VARCHAR(200) NOT NULL PRIMARY KEY,
+    url_buscador VARCHAR(200) NOT NULL,
+    url_campo VARCHAR(200) NOT NULL,
+    url_recom VARCHAR(200) NOT NULL,
     coste INTEGER
 );
 
 CREATE TABLE Sinergia_TAB (
-    nombre VARCHAR(200) NOT NULL PRIMARY KEY,
+	nombre VARCHAR(200) NOT NULL PRIMARY KEY,
+    url_ VARCHAR(200) NOT NULL,
     unidades_mejora VARCHAR(200) NOT NULL
 );
 
