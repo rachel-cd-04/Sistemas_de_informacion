@@ -1,17 +1,45 @@
+<!--Authors: Mateo Peña Costa and Raquel Cámara Domene-->
+{% extends "layout.html" %}
+
 {% block css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/CC-style.css') }}">
 {% endblock %}
 
 {% block title %}
-    Help
+    Community Comps
 {% endblock %}
 
 {% block main %}
-<div class="info-container">
-    <h1>Help and support</h1>
-    <div class="moreinfo-container">
-        <p>Texto de ejemplo</p>
-    </div>
-</div>
- 
+<div class="main-container">
+    <h1>COMMUNITY COMPS</h1>
+    <div class="team-comps-container">
+        {% for team_comp in team_comps %}
+            <div class="team-comp" onclick="toggleDescription(this)">
+                <div class="team-comp-content">
+                    <h2>{{ team_comp.nombre }}</h2>
+                    <div class="team-comp-difficulty">
+                        <span data-difficulty="{{ team_comp.dificultad }}">{{ team_comp.dificultad }}</span>
+                    </div>
+                    <div class="team-comp-buttons">
+                        <button class="publish-btn" data-publicado="{{ team_comp.publicado }}" data-usuario="{{ team_comp.usuario }}" data-nombre="{{ team_comp.nombre }}">Publish</button>
+                        <button class="edit-btn">Edit</button>
+                        <button class="delete-btn">Delete</button>
+                    </div>
+                    <div class="team-comp-description">
+                        <p>{{ team_comp.descr }}</p>
+                    </div>
+                </div>
+                <div class="team-comp-champions">
+                    {% for champion in team_comp.champions %}
+                        <div class="team-comp-champion">
+                            <img src="{{ champion.url_ }}" alt="{{ champion.nombre }}">
+                            <p>{{ champion.nombre }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+
+
+
 {% endblock %}

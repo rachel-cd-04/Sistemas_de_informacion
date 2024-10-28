@@ -176,6 +176,8 @@ html {
 }
 
 .dropdown-menu-right {
-    right: 0;
+    right: 0vw;
     left: auto;
 }
+
+

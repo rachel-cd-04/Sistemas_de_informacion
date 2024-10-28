@@ -101,3 +101,17 @@ class ComposicionDAO:
             return []
         finally:
             conn.close()
+
+    # Obtener todas las composiciones publicadas
+    def get_all_public_composiciones(self):
+        try:
+            conn = sqlite3.connect(DB_PATH)
+            cursor = conn.cursor()
+            cursor.execute('''SELECT * FROM Composicion_TAB WHERE publicado = "Y"''')
+            rows = cursor.fetchall()
+            return [ComposicionVO(row[0], row[1], row[2], row[3], row[4]) for row in rows]
+        except sqlite3.Error as e:
+            print(f"An error occurred: {e}")
+            return []
+        finally:
+            conn.close()

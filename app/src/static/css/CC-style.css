@@ -20,37 +20,139 @@ body {
 /*********************************************************************************************/
 /*container with information about us and contact links */
 /*********************************************************************************************/
-.info-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-left: 15vw;
-    margin-top: 2vw;
-    width: 70vw;
-    border-radius: 1.5vw;
-}
-
-.moreinfo-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;;
-    background-color: rgba(25, 105, 107, 0.7);
-    width: 70vw;
-    border-radius: 1.5vw;
-}
-
 /*main container title */
-.info-container h1 {
-    color:#FFD700;
+.main-container {
+    margin-top: 70px;
+    padding: 20px;
 }
 
-/*characteristics of the paragraphs inside the secondary container*/
-.moreinfo-container p {
-    color: white;
-    margin-top: 1vw;
-    margin-left: 2vw;
-    margin-right: 2vw;
-    margin-bottom: 1vw;
+h1 {
+    text-align: left;
+    color: #FFA500;
+}
+
+.team-comps-container {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.team-comp-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+
+.team-comp {
+    background-color: #19696b;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-items: center;
+    cursor: pointer;
+    transition: max-height 0.3s ease;
+    overflow: hidden;
+    max-height: 300px;
+}
+
+.team-comp h2 {
+    text-align: left;
+    color: #FFFFFF;
+}
+
+.team-comp.expanded {
+    max-height: 600px;
+}
+
+.team-comp-difficulty {
+    display: flex;
+    gap: 10px;
+    margin-top: 3px;
+    text-align: left;
+}
+
+.team-comp-difficulty span {
+    text-align: left;
+    color: #FFA500;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* Estilos para diferentes niveles de dificultad */
+.team-comp-difficulty span[data-difficulty="Hard"] {
+    color: #FF0000;
+}
+
+.team-comp-difficulty span[data-difficulty="Medium"] {
+    color: #FFA500;
+}
+
+.team-comp-difficulty span[data-difficulty="Easy"] {
+    color: #00FF00;
+}
+
+.team-comp-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.publish-btn, .edit-btn, .delete-btn {
+    background-color: #f5b03e;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    width: 65px;
+    height: 65px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.publish-btn[data-publicado="Y"] {
+    background-color: #7bcf6b;
+    color: #FFFFFF;
+}
+
+.publish-btn:hover, .edit-btn:hover, .delete-btn:hover {
+    background-color: #FFA500;
+}
+
+.publish-btn[data-publicado="Y"]:hover {
+    background-color: #4d8b40;
+    color: #FFFFFF;
+}
+
+
+.team-comp-champions {
+    display: flex;
+    gap: 10px;
+    height: 13px;
+    width: 6px;
+    margin-top: 20px;
+    justify-content: flex-end;
+    background-color: #239ca4;
+    border-radius: 5px;
+}
+
+.team-comp-champion img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+}
+
+.team-comp-description {
+    display: none;
+    margin-top: 10px;
+    color: #FFFFFF;
+}
+
+.team-comp.expanded .team-comp-description {
+    display: block;
 }

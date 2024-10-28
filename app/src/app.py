@@ -26,27 +26,27 @@ DATA_FILE = '/app/src/db/data.csv'
 #-------------------------------------------------------------
 @app.route('/', methods=['GET'])
 def start():
-    return render_template('index.html')
+    return render_template('index.html', show_login_button=True)
 
 #-------------------------------------------------------------
 @app.route('/index')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', show_login_button=True)
 
 #-------------------------------------------------------------
 @app.route('/start_team')
 def start_team():
-    return render_template('start_team.html')
+    return render_template('start_team.html', show_login_button=True)
 
 #-------------------------------------------------------------
 @app.route('/help')
 def help():
-    return render_template('help.html')
+    return render_template('help.html', show_login_button=True)
 
 #-------------------------------------------------------------
 @app.route('/settings')
 def settings():
-    return render_template('settings.html')
+    return render_template('settings.html', show_login_button=True)
 
 #-------------------------------------------------------------
 @app.route('/my_team_comps')
@@ -60,7 +60,7 @@ def my_TC():
             personajes = FormadoPorDAO().get_champions_by_composicion_id(mail, compName)
             comp.champions = personajes
 
-    return render_template('my_team_comps.html', team_comps=team_comps)
+    return render_template('my_team_comps.html', team_comps=team_comps, show_login_button=True)
 
 
 @app.route('/set_publicado', methods=['POST'])
@@ -77,6 +77,19 @@ def set_publicado():
     except Exception as e:
         print(f"An error occurred: {e}")
         return jsonify({"success": False}), 500
+
+#------------------------------------------------------------- 
+@app.route('/community_comps')
+#@login_required(login_url="/login")
+def comComps():
+    team_comps = ComposicionDAO().get_all_public_composiciones()
+    if team_comps:
+        for comp in team_comps:
+            compName = comp.nombre
+            personajes = FormadoPorDAO().get_champions_by_composicion_id(comp.usuario, compName)
+            comp.champions = personajes
+
+    return render_template('community_comps.html', team_comps=team_comps, show_login_button=True)
 
 #------------------------------------------------------------- 
 @app.route("/login", methods=["GET", "POST"])
@@ -97,7 +110,7 @@ def login_user():
         session["avatar"] = user.avatar
         return redirect("/")
 
-    return render_template("login.html")
+    return render_template("login.html", show_login_button=False)
 
 #-------------------------------------------------------------
 @app.route("/register", methods=["GET", "POST"])
@@ -124,7 +137,7 @@ def register_user():
         session["avatar"] = user.avatar
         return redirect("/")
 
-    return render_template("register.html")
+    return render_template("register.html", show_login_button=False)
 
 #-------------------------------------------------------------
 @app.route('/logout', methods=['POST'])
