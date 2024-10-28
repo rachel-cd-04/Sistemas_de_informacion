@@ -16,14 +16,14 @@ body {
 .containerlog {
     background-color: #19696b; /* Añadir un fondo blanco para visibilidad */
     border-radius: 10px; /* Añadir bordes redondeados */
-    margin-top: 14vw; /* Centrar horizontalmente */
-    margin-bottom: 14.40vw; /* Centrar verticalmente */
-    padding: 20px; /* Añadir un padding de 20px */
     width: 30%; /* Ajustar el ancho del contenedor */
     margin-left: 5vw;
-    height: 17.5vw;
+    margin-top: 3vw;
+    height: 21.5vw;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3vw;
 }
-
 
 /*********************************************************************************************/
 
@@ -80,8 +80,9 @@ form input {
 
 .imagen-izquierda {
     margin-right: 20px; /* Espacio entre la imagen y el formulario */
-    width: 30%; /* Adjust the width as needed */
+    width: 18vw; /* Adjust the width as needed */
     border: 5px solid #9013a0;
+    box-shadow: 0 15px 20px rgba(206, 81, 238, 0.5);
 }
 
 .text-title {
@@ -91,14 +92,18 @@ form input {
 }
 
 .barra_sep_logreg {
-    font-size: 2em;
-    margin-top: 0.5vw;
+    
+    font-size: 2vw;
+    margin-top: -0.5vw;
+    margin-bottom: 0.5vw;
 }
 
 .container2log {
     width: 90%;
-    margin-top: -0.5vw;
+    margin-top: 2vw;
     margin-left: 0.8vw;
+    justify-content: center;
+    align-items: center;
 }
 
 .toggle-button1 {
@@ -148,3 +153,57 @@ form input {
     background-color: #341ab3; /* Cambiar el color de fondo al pasar el ratón por encima */
 }
 
+/* Estilos para el contenedor de botones */
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0vw; /* Margen inferior relativo al ancho de la pantalla */
+    
+}
+
+/* Estilos para los botones de registro, log in y register */
+.container2log .btn {
+    width: 40%; /* Ancho del botón relativo al contenedor */
+    padding: 1vw; /* Padding relativo al ancho de la pantalla */
+    display: flex; /* Usar flexbox para centrar el contenido */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    height: 2vw;
+    font-size: 0.8vw; /* Tamaño de la fuente relativo al ancho de la pantalla */
+}
+
+/* Estilos para los inputs del formulario */
+.container2log .form-control {
+    width: 100%; /* Ancho del input relativo al contenedor */
+    height: 1vw;
+    padding: 1vw; /* Padding relativo al ancho de la pantalla */
+    margin-bottom: vw; /* Margen inferior relativo al ancho de la pantalla */
+}
+
+/* Estilos para el formulario */
+.form-container {
+    width: 100%; /* Ancho del formulario relativo al contenedor */
+    display: flex; /* Usar flexbox para centrar el contenido */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; 
+    
+}
+
+.form-container .btn {
+    display: flex; /* Usar flexbox para centrar el contenido */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; 
+    margin-left: 4vw;
+    
+}
+
+.form-container2 {
+    margin-bottom: 3vw;
+}
+
+.mb-3 .form-control{
+    font-size: 1vw; /* Cambiar el tamaño de la fuente */
+}
+.mb-3 {
+    margin-bottom: 0.5vw; /* Ajusta este valor según sea necesario */
+}

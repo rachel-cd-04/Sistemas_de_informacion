@@ -1,9 +1,10 @@
 FROM python:3.8-alpine
 
-RUN apk add --no-cache python3-dev  \
-    && pip3 install --upgrade pip \
-    && apk --no-cache add sqlite \
-    && apk --no-cache add nano
+RUN apk add --no-cache \
+    python3-dev \
+    sqlite \
+    nano \
+    && pip3 install --upgrade pip
 
 WORKDIR /app
 
