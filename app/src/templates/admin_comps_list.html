@@ -1,0 +1,137 @@
+<!--Authors: Mateo Peña Costa and Raquel Cámara Domene-->
+{% extends "layout.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/CC-style.css') }}">
+{% endblock %}
+
+{% block title %}
+    Community Comps
+{% endblock %}
+
+{% block main %}
+<div class="main-container">
+    <div class="tabs">
+        <a href="users_list">
+            <button class="tab">USERS</button>
+        </a>
+        <button class="tab selected">COMPS</button>
+    </div>
+    
+     <!-- Barra de búsqueda -->
+     <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search...">
+        <button id="search-btn" class="search-btn">
+            <img src="{{ url_for('static', filename='images/misc/lupa.png') }}" alt="Search">
+        </button>
+    </div>
+    
+    <div id="comps-container" class="comps-container">
+        {% for team_comp in team_comps %}
+            <div class="comp">
+                <div class="comp-content">
+                    <h2>{{ team_comp.nombre }}</h2>
+                    <p>By {{ team_comp.usuario }}</p>
+                </div>
+                
+                <!-- Botón de prohibición -->
+                <button class="ban-btn" data-usuario="{{ team_comp.usuario }}" data-nombre="{{ team_comp.nombre }}">
+                    <img src="{{ url_for('static', filename='images/misc/ban.png') }}" alt="Ban">
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+<!-- Script de la barra de búsqueda -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('search-input');
+        const searchButton = document.getElementById('search-btn');
+        const compsContainer = document.getElementById('comps-container');
+
+        // Filtrar la búsqueda
+        const filterComps = () => {
+            const query = searchInput.value.toLowerCase();
+            const comps = compsContainer.getElementsByClassName('comp');
+
+            Array.from(comps).forEach(comp => {
+                const title = comp.querySelector('h2').textContent.toLowerCase();
+                const user = comp.querySelector('p').textContent.toLowerCase();
+                
+                // Comprobar si el título comienza con la búsqueda
+                if (title.startsWith(query) || user.startsWith(query)) {
+                    comp.style.display = ''; // Mostrar el elemento
+                } else {
+                    comp.style.display = 'none'; // Ocultar el elemento
+                }
+            });
+        };
+
+        // También puedes activar la búsqueda al hacer clic en el botón
+        searchButton.addEventListener('click', filterComps);
+
+        // Activar la búsqueda al presionar Enter
+        searchInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                filterComps(); // Ejecutar la búsqueda
+                event.preventDefault(); // Evitar el comportamiento por defecto de Enter (si es necesario)
+            }
+        });
+    });
+
+
+</script>
+
+
+<!-- Script del botón de baneo -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const compsContainer = document.getElementById('comps-container');
+
+    // Manejar el clic en el botón de ban
+    compsContainer.addEventListener('click', function(event) {
+        const button = event.target.closest('.ban-btn');
+
+        if (button) {
+            const usuario = button.getAttribute('data-usuario');
+            const nombre = button.getAttribute('data-nombre');
+
+            // Confirmar la eliminación
+            if (confirm(`¿Estás seguro de que quieres eliminar la composición '${nombre}' de '${usuario}'?`)) {
+                // Hacer la solicitud AJAX para eliminar la composición
+                fetch('/delete_composicion', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ usuario: usuario, nombre: nombre }),
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Recargar la lista de composiciones después de la eliminación
+                        loadComposiciones();
+                    } else {
+                        // Imprimir la respuesta del servidor para depuración
+                        return response.json().then(err => {
+                            console.error('Error al eliminar:', err);
+                            alert(`Error: ${err.message}`);
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error en la solicitud:', error);
+                    alert('Hubo un problema al intentar eliminar la composición. Intenta de nuevo más tarde.');
+                });
+            }
+        }
+    });
+
+    // Cargar composiciones al inicio
+    loadComposiciones();
+});
+
+</script>
+
+
+{% endblock %}
