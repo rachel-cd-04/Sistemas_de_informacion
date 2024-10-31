@@ -1,0 +1,182 @@
+/* Authors: Mateo Peña Costa and Raquel Cámara Domene */
+
+/*********************************************************************************************/
+/* home page wallpaper and space for our registered trademark*/
+/*********************************************************************************************/
+body {
+    background-color: #155354;
+}
+
+.left-corner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    font-size: 14px;
+    margin: 0px;
+    margin-left: 15px;
+    color: white;
+}
+
+/*********************************************************************************************/
+/*container with information about us and contact links */
+/*********************************************************************************************/
+/*main container title */
+.main-container {
+    margin-top: 70px;
+    padding: 20px;
+}
+
+h1 {
+    text-align: left;
+    color: #FFA500;
+}
+
+.comps-container {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.comp-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+
+.comp {
+    background-color: #19696b;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-items: center;
+    cursor: pointer;
+    transition: max-height 0.3s ease;
+    overflow: hidden;
+    max-height: 300px;
+}
+
+.comp h2 {
+    text-align: left;
+    color: #FFFFFF;
+}
+
+.comp-champions {
+    display: flex;
+    gap: 10px;
+    height: 13px;
+    width: 6px;
+    margin-top: 20px;
+    justify-content: flex-end;
+    background-color: #239ca4;
+    border-radius: 5px;
+}
+
+
+/* Pestañas USERS y COMPS */
+.barra_sep_logreg {
+    font-size: 2em;
+    color: #f5b03e;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab {
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 26px;
+    background-color: #006666;
+    color: #FFA500;
+    border: none;
+    cursor: pointer;
+}
+
+.tab.selected {
+    background-color: #33cccc;
+    color: #FFFFFF;
+}
+
+/* Barra de búsqueda */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #239ca4; /* Color de fondo de la barra de búsqueda, más oscuro */
+    border-radius: 10px;
+    padding: 8px;
+    margin-bottom: 20px;
+}
+
+.search-bar input[type="text"] {
+    width: 90%;
+    padding: 8px;
+    border: none;
+    background-color: #239ca4; /* Mismo color que la barra para que se vea uniforme */
+    color: #FFFFFF; /* Texto blanco para contraste */
+    border-radius: 5px;
+    outline: none;
+    font-size: 14px;
+}
+
+/* Ajuste del botón de búsqueda */
+.search-bar .search-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: auto; /* Mueve el botón al borde derecho */
+    padding: 0; /* Elimina el espacio adicional */
+}
+
+.search-bar .search-btn img {
+    width: 50px;
+}
+
+/* Contenedor de los comps */
+.comps-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.comp {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #006666;
+}
+
+.comp-content h2 {
+    font-size: 18px;
+    color: #FFFFFF;
+}
+
+.comp-content p {
+    color: #A9A9A9; /* Gris claro */
+    margin: 2px 0;
+}
+
+/* Botón de prohibición */
+.ban-btn {
+    background-color: #f5b03e; /* Fondo amarillo */
+    border: none;
+    border-radius: 100%; /* Hace que el botón sea circular */
+    width: 40px; /* Ajusta según el tamaño deseado */
+    height: 40px; /* Igual que width para asegurar un círculo perfecto */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.ban-btn img {
+    width: 35px;
+
+}
