@@ -23,6 +23,7 @@ DATABASE = '/app/src/db/database.db'
 SCHEMA = '/app/src/db/schema.sql'
 DATA_FILE = '/app/src/db/data.csv'
 
+
 #-------------------------------------------------------------
 @app.route('/', methods=['GET'])
 def start():
@@ -32,6 +33,24 @@ def start():
 @app.route('/index')
 def index():
     return render_template('index.html', show_login_button=True)
+
+#-------------------------------------------------------------
+@app.route('/admin_comps_list')
+def admin_comps_list():
+    team_comps = ComposicionDAO().get_all_public_composiciones()
+    if team_comps:
+        for comp in team_comps:
+            personajes = FormadoPorDAO().get_champions_by_composicion_id(comp.usuario, comp.nombre)
+            comp.champions = personajes
+
+    return render_template('admin_comps_list.html', team_comps=team_comps, show_login_button=True)
+
+#-------------------------------------------------------------
+@app.route('/admin_users_list')
+def admin_users_list():
+    users_list = UsuarioDAO().get_all_users()
+
+    return render_template('admin_users_list.html', users_list=users_list, show_login_button=True)
 
 #-------------------------------------------------------------
 @app.route('/help')
@@ -99,12 +118,17 @@ def comComps():
 #------------------------------------------------------------- 
 @app.route("/login", methods=["GET", "POST"])
 def login_user():
+    CORREO_ADMIN = "admin@gmail.com"
+    CONTRASENA_ADMIN = "admin"
     session.clear()
     if request.method == "POST":
         mail = request.form.get("mail")
         password = request.form.get("password")
         if not mail or not password:
             return redirect("/login")
+        
+        if mail == CORREO_ADMIN and password == CONTRASENA_ADMIN:
+            return redirect("admin_comps_list")
 
         user = UsuarioDAO().find_usuario_by_id_pssw(mail, password)
         if not user:
