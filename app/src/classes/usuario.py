@@ -88,6 +88,21 @@ class UsuarioDAO:
         finally:
             conn.close()
 
+
+    # Obtener todos los usuarios
+    def get_all_users(self):
+        try:
+            conn = sqlite3.connect(DB_PATH)
+            cursor = conn.cursor()
+            cursor.execute('''SELECT * FROM Usuario_TAB ''')
+            rows = cursor.fetchall()
+            return [UsuarioVO(row[0], row[1], row[2], row[3]) for row in rows]
+        except sqlite3.Error as e:
+            print(f"An error occurred: {e}")
+            return []
+        finally:
+            conn.close()
+
     """
     def check_password_hash(self, mail, contra):
         try:
