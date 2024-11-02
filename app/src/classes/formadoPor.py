@@ -1,4 +1,5 @@
 import sqlite3
+from classes.campeon import CampeonDAO, CampeonVO
 
 DB_PATH = '/app/src/db/database.db'
 
@@ -66,7 +67,15 @@ class FormadoPorDAO:
             cursor.execute('''SELECT usuario, composicion, campeon FROM Formada_por_TAB WHERE usuario = ? AND composicion = ?''', 
                            (usuario, composicion))
             rows = cursor.fetchall()
-            return [FormadoPorVO(row[0], row[1], row[2]) for row in rows]
+
+            campeones = []
+            for row in rows:
+                campeon_nombre = row[2]
+                campeon = CampeonDAO().find_campeon_by_id(campeon_nombre)
+                if campeon:
+                    campeones.append(campeon)
+            
+            return campeones
         except sqlite3.Error as e:
             print(f"An error occurred: {e}")
             return []

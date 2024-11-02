@@ -94,7 +94,6 @@ def set_publicado():
     usuario = data.get('usuario')
     nombre = data.get('nombre')
     publicado = data.get('publicado')
-    print(f"usuario: {usuario}, nombre: {nombre}, publicado: {publicado}")
 
     try:
         ComposicionDAO().set_publicado(usuario, nombre, publicado)
@@ -114,6 +113,20 @@ def comComps():
             comp.champions = personajes
 
     return render_template('community_comps.html', team_comps=team_comps, show_login_button=True)
+
+@app.route('/save_composition', methods=['POST'])
+def save_composition():
+    data = request.get_json()
+    try:
+        ComposicionDAO.save_composicion(ComposicionVO(session['mail'], data.get('nombre'), data.get('dificultad'), "N", data.get('descr')))
+        for champ in data.get('champions'):
+            FormadoPorDAO.add_campeon_to_composicion(FormadoPorVO(session['mail'], data.get('nombre'), champ.nombre))
+
+        return jsonify({"success": True})
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return jsonify({"success": False}), 500
+
 
 #------------------------------------------------------------- 
 @app.route("/login", methods=["GET", "POST"])

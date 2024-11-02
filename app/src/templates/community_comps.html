@@ -21,9 +21,7 @@
                         <span data-difficulty="{{ team_comp.dificultad }}">{{ team_comp.dificultad }}</span>
                     </div>
                     <div class="team-comp-buttons">
-                        <button class="publish-btn" data-publicado="{{ team_comp.publicado }}" data-usuario="{{ team_comp.usuario }}" data-nombre="{{ team_comp.nombre }}">Publish</button>
-                        <button class="edit-btn">Edit</button>
-                        <button class="delete-btn">Delete</button>
+                        <button class="save-btn" data-nombre="{{ team_comp.nombre }}" data-dificultad="{{ team_comp.dificultad }}" data-descr="{{ team_comp.descr }}" data-champ="{{ team_comp.champions }}" onclick="saveComposition(this)">Save</button>
                     </div>
                     <div class="team-comp-description">
                         <p>{{ team_comp.descr }}</p>
@@ -39,7 +37,39 @@
                 </div>
             </div>
         {% endfor %}
+        <script>
+            function saveComposition(button) {
+                const nombre = button.getAttribute('data-nombre');
+                const dificultad = button.getAttribute('data-dificultad');
+                const descr = button.getAttribute('data-descr');
+                const champions = button.getAttribute('data-champ');
+                const championNames = champions.map(champion => champion.nombre);
+                alert(`Nombre: ${nombre}, Dificultad: ${dificultad}, Descripción: ${descr}, Campeones: ${championNames}`);
 
-
-
+                fetch('/save_composition', {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        nombre: nombre,
+                        dificultad: dificultad,
+                        descr: descr,
+                        champions: championNames
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Composición guardada exitosamente.');
+                    } else {
+                        alert('Error al guardar la composición.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al guardar la composición.');
+                });
+            }
+        </script>
 {% endblock %}
