@@ -150,9 +150,10 @@ def login_user():
         session["mail"] = user.mail
         session["username"] = user.nombre
         session["avatar"] = user.avatar
+        session["contra"] = user.contra
         return redirect("/")
 
-    return render_template("login.html", show_login_button=False)
+    return render_template("login.html", session=session, show_login_button=False)
 
 #-------------------------------------------------------------
 @app.route("/register", methods=["GET", "POST"])

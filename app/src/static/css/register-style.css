@@ -98,6 +98,19 @@ form input {
     margin-bottom: 0.5vw;
 }
 
+.barra_sep_arriba {
+    font-size: 7em;
+    margin-top: -5vw;
+    color: #f5b03e;
+}
+
+.barra_sep_abajo {
+    font-size: 7em;
+    margin-top: -3vw;
+    margin-bottom: 4vw;
+    color: #f5b03e;
+}
+
 .container2log {
     width: 90%;
     margin-top: 2vw;

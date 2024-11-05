@@ -16,7 +16,7 @@ body {
 .containerlog {
     background-color: #19696b; /* Añadir un fondo blanco para visibilidad */
     border-radius: 10px; /* Añadir bordes redondeados */
-    margin-top: 14vw; /* Centrar horizontalmente */
+    margin-top: 12vw; /* Centrar horizontalmente */
     margin-bottom: 14.40vw; /* Centrar verticalmente */
     padding: 20px; /* Añadir un padding de 20px */
     width: 30%; /* Ajustar el ancho del contenedor */
@@ -50,6 +50,7 @@ form input {
 }
 
 .separador {
+    margin-left: 0vw;
     margin-top: 2vw;
     width: 58vw;
     height: 6px;
@@ -80,6 +81,7 @@ form input {
     width: 30%; /* Adjust the width as needed */
     border: 5px solid #9013a0;
     box-shadow: 0 15px 20px rgba(206, 81, 238, 0.5);
+    margin-bottom: 2.5vw;
 }
 
 .text-title {
@@ -99,6 +101,19 @@ form input {
     padding-bottom: 10px;
     margin-top: 2vw;
     margin-left: 0.8vw;
+}
+
+.barra_sep_arriba {
+    font-size: 7em;
+    margin-top: -6vw;
+    color: #f5b03e;
+}
+
+.barra_sep_abajo {
+    font-size: 7em;
+    margin-top: -6vw;
+    margin-bottom: 4vw;
+    color: #f5b03e;
 }
 
 .toggle-button1 {
