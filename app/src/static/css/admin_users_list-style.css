@@ -40,8 +40,17 @@ h1 {
 
 .user-content {
     display: flex;
-    flex-direction: column;
-    gap: 3px;
+    align-items: center; 
+    justify-content: space-between;
+    gap: 10px; 
+}
+
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: auto; 
 }
 
 
@@ -56,12 +65,13 @@ h1 {
     cursor: pointer;
     transition: max-height 0.3s ease;
     overflow: hidden;
-    max-height: 300px;
+    max-height: 300px; 
 }
 
 .user h2 {
     text-align: left;
     color: #FFFFFF;
+    font-size: 30px;
 }
 
 .user-champions {
@@ -139,38 +149,43 @@ h1 {
 }
 
 /* Contenedor de los users */
-.users-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
 .user {
+    background-color: #19696b;
+    padding: 20px;
+    border-radius: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    border-radius: 8px;
-    background-color: #006666;
+    cursor: pointer;
+    transition: max-height 0.3s ease;
+    overflow: hidden;
 }
 
-.user-content h2 {
-    font-size: 18px;
+.user-content {
+    display: flex;
+    align-items: center; /* Alinea el nombre y el avatar en el centro vertical */
+    gap: 10px; /* Espacio entre el nombre y el avatar */
+}
+
+.user h2 {
     color: #FFFFFF;
+    margin: 0; /* Elimina el margen para una alineación más ajustada */
 }
 
-.user-content p {
-    color: #A9A9A9; /* Gris claro */
-    margin: 2px 0;
+/* Estilos para el avatar */
+.user-avatar {
+    width: 40px; /* Ajusta el tamaño del avatar */
+    height: 40px;
+    border-radius: 50%; /* Hace que el avatar sea circular */
 }
 
-/* Botón de prohibición */
+/* Ajustes del botón de prohibición */
 .ban-btn {
-    background-color: #f5b03e; /* Fondo amarillo */
+    background-color: #f5b03e;
     border: none;
-    border-radius: 100%; /* Hace que el botón sea circular */
-    width: 40px; /* Ajusta según el tamaño deseado */
-    height: 40px; /* Igual que width para asegurar un círculo perfecto */
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -179,5 +194,5 @@ h1 {
 
 .ban-btn img {
     width: 35px;
-
 }
+

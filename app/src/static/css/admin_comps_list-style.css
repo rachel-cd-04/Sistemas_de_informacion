@@ -14,7 +14,7 @@ body {
     font-size: 14px;
     margin: 0px;
     margin-left: 15px;
-    color: white;
+    color: white; 
 }
 
 /*********************************************************************************************/
@@ -154,21 +154,21 @@ h1 {
 }
 
 .comp-content h2 {
-    font-size: 18px;
+    font-size: 24px;
     color: #FFFFFF;
 }
 
 .comp-content p {
-    color: #A9A9A9; /* Gris claro */
+    color: #A9A9A9; 
     margin: 2px 0;
 }
 
 /* Botón de prohibición */
 .ban-btn {
-    background-color: #f5b03e; /* Fondo amarillo */
+    background-color: #f5b03e; 
     border: none;
-    border-radius: 100%; /* Hace que el botón sea circular */
-    width: 40px; /* Ajusta según el tamaño deseado */
+    border-radius: 100%;
+    width: 40px;
     height: 40px; /* Igual que width para asegurar un círculo perfecto */
     display: flex;
     align-items: center;
