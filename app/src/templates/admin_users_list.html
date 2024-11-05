@@ -29,18 +29,23 @@
     </div>
     
     <div id="users-container" class="users-container">
-        {% for list_of_users in users_list %}
+        {% for user in users_list %}
             <div class="user">
                 <div class="user-content">
-                    <h2>{{ list_of_users.nombre }}</h2>
+                    <img src="{{ user.avatar }}" alt="Avatar" class="user-avatar">
+                    <h2>{{ user.nombre }}</h2>
                 </div>
-                
+    
                 <!-- Botón de prohibición -->
-                <button class="ban-btn" data-nombre="{{ list_of_users.nombre }}">
+                <button class="ban-btn" data-nombre="{{ user.nombre }}">
                     <img src="{{ url_for('static', filename='images/misc/ban.png') }}" alt="Ban">
+                </button>
             </div>
         {% endfor %}
     </div>
+    
+    
+    
 </div>
 
 
