@@ -59,22 +59,21 @@ class FormadoPorDAO:
             conn.close()
 
 
+
     # Devuelve todos los campeones de una composicion
     def get_champions_by_composicion_id(self, usuario, composicion):
         try:
             conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
-            cursor.execute('''SELECT usuario, composicion, campeon FROM Formada_por_TAB WHERE usuario = ? AND composicion = ?''', 
+            cursor.execute('''SELECT campeon FROM Formada_por_TAB WHERE usuario = ? AND composicion = ?''', 
                            (usuario, composicion))
-            rows = cursor.fetchall()
-
             campeones = []
-            for row in rows:
-                campeon_nombre = row[2]
+            for row in cursor:
+                campeon_nombre = row[0]  # Asegúrate de que el índice es correcto
                 campeon = CampeonDAO().find_campeon_by_id(campeon_nombre)
                 if campeon:
                     campeones.append(campeon)
-            
+        
             return campeones
         except sqlite3.Error as e:
             print(f"An error occurred: {e}")

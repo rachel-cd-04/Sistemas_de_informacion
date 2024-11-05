@@ -60,7 +60,7 @@
                 const title = user.querySelector('h2').textContent.toLowerCase();
                 
                 // userrobar si el título comienza con la búsqueda
-                if (title.startsWith(query) || user.startsWith(query)) {
+                if (title.startsWith(query)) {
                     user.style.display = ''; // Mostrar el elemento
                 } else {
                     user.style.display = 'none'; // Ocultar el elemento

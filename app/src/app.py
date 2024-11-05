@@ -82,7 +82,7 @@ def my_TC():
     team_comps = ComposicionDAO().get_composiciones_by_usuario_id(mail)
     if team_comps:
         for comp in team_comps:
-            personajes = FormadoPorDAO().get_champions_by_composicion_id(mail, comp.nombre)
+            personajes = FormadoPorDAO().get_champions_by_composicion_id(comp.usuario, comp.nombre)
             comp.champions = personajes
 
     return render_template('my_team_comps.html', team_comps=team_comps, show_login_button=True)

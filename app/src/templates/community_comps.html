@@ -30,7 +30,7 @@
                 <div class="team-comp-champions">
                     {% for champion in team_comp.champions %}
                         <div class="team-comp-champion">
-                            <img src="{{ champion.url_ }}" alt="{{ champion.nombre }}">
+                            <img src="{{ champion.url_buscador }}" alt="{{ champion.nombre }}">
                             <p>{{ champion.nombre }}</p>
                         </div>
                     {% endfor %}
@@ -43,8 +43,8 @@
                 const dificultad = button.getAttribute('data-dificultad');
                 const descr = button.getAttribute('data-descr');
                 const champions = button.getAttribute('data-champ');
-                const championNames = champions.map(champion => champion.nombre);
-                alert(`Nombre: ${nombre}, Dificultad: ${dificultad}, Descripción: ${descr}, Campeones: ${championNames}`);
+                //const championNames = champions.map(champion => champion.nombre);
+                alert(`Nombre: ${nombre}, Dificultad: ${dificultad}, Descripción: ${descr}, Campeones: ${champions}`);
 
                 fetch('/save_composition', {
                     method: 'POST',
