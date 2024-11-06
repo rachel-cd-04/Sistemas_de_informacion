@@ -60,7 +60,9 @@ def help():
 #-------------------------------------------------------------
 @app.route('/settings')
 def settings():
-    return render_template('settings.html', show_login_button=True)
+    avatar_dao = AvatarDAO()
+    avatars = avatar_dao.get_all_avatars()
+    return render_template('settings.html', avatars=avatars, show_login_button=True)
 
 #-------------------------------------------------------------
 @app.route('/start_team')
