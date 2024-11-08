@@ -21,7 +21,7 @@ class CampeonDAO:
             conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''
-                INSERT INTO Campeon_TAB (nombre, url_buscar, url_campo, url_recom, coste) 
+                INSERT INTO Campeon_TAB (nombre, url_buscador, url_campo, url_recom, coste) 
                 VALUES (?, ?, ?)
             ''', (campeon.nombre, campeon.url_buscador, campeon.url_campo, campeon.url_recom, campeon.coste))
             conn.commit()
@@ -48,7 +48,7 @@ class CampeonDAO:
             conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''
-                SELECT nombre, url_buscar, url_campo, url_recom, coste FROM Campeon_TAB WHERE nombre = ?
+                SELECT nombre, url_buscador, url_campo, url_recom, coste FROM Campeon_TAB WHERE nombre = ?
             ''', (nombre,))
             row = cursor.fetchone()
             if row:
