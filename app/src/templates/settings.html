@@ -15,6 +15,11 @@
         <div class="profile-picture">
             <img src="../static/images/avatars/contacto.png" alt="Profile Picture">
             <button class="edit-photo-button">EDITAR FOTO</button>
+            <div class="avatar-menu" id="avatar-menu">
+                {% for avatar in avatars %}
+                    <img src="{{ url_for('static', filename='images/avatars/' + avatar.URL_) }}" class="avatar-option" alt="Avatar">
+                {% endfor %}
+            </div>
         </div>
         <div class="profile-fields">
             <div class="field">

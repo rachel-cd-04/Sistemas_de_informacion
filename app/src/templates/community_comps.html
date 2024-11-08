@@ -43,7 +43,7 @@
                 const dificultad = button.getAttribute('data-dificultad');
                 const descr = button.getAttribute('data-descr');
                 const champions = button.getAttribute('data-champ');
-                const championNames = champions.map(champion => champion.nombre);
+                //const championNames = champions.map(champion => champion.nombre);
                 alert(`Nombre: ${nombre}, Dificultad: ${dificultad}, Descripción: ${descr}, Campeones: ${champions}`);
 
                 fetch('/save_composition', {
