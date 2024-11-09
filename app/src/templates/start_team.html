@@ -55,10 +55,10 @@
                             <div class="embl-2-container">
                                 {% for emblem in emblems %}
                                     <div class="embl-2">
-                                        <img src="{{ emblem.image }}" alt="{{ emblem.name }}-em" class="img-embl">
-                                        <div class="name">{{ emblem.name }}</div>
+                                        <img src="{{ emblem.url_ }}" alt="{{ emblem.nombre }}-em" class="img-embl">
+                                        <div class="name">{{ emblem.nombre }}</div>
                                         <div class="panel">
-                                            <span class="panel-title">{{ emblem.name }} Emblem</span></br>{{ emblem.description }}
+                                            <span class="panel-title">{{ emblem.nombre }} Emblem</span></br>{{ emblem.description }}
                                         </div>
                                     </div>
                                 {% endfor %}
@@ -80,8 +80,8 @@
                                         <div class="panel">
                                             <span class="panel-title">{{ champ.nombre }}</span><br>
                                             <img src="static/images/misc/TFT_Gold_Icon.webp" alt="Cost" class="panel-icon"></img>Cost: {{ champ.coste }}<br>
-                                            {% for synergy in champ.synergies %}
-                                                <img src="{{ synergy.url_ }}" alt="{{ synergy.nombre }}" class="panel-icon"></img>{{ synergy.nombre }}<br>
+                                            {% for sinergia in champ.sinergias %}
+                                                <img src="{{ sinergia.url_ }}" alt="{{ sinergia.nombre }}" class="panel-icon"></img>{{ sinergia.nombre }}<br>
                                             {% endfor %}
                                         </div>
                                     </div>
@@ -96,5 +96,12 @@
                     </div>
                 </div>
             </div>
+
+            <script id="champ-data" type="application/json"> {{ champs | tojson | safe }} </script>
+            <script id="emblem-data" type="application/json"> {{ emblems|tojson }} </script>
+
+            <script src="../static/js/script-synergies.js"></script>
+            <script src="../static/js/script-champions.js"></script>
+            <script src="../static/js/script-emblems.js"></script>
 
             {% endblock %}

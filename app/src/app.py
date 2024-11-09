@@ -69,12 +69,17 @@ def settings():
 #@login_required(login_url="/login")
 def start_team():
     champs = CampeonDAO().get_all_champions()
-    if champs:
-        for champ in champs:
-            synergies = PoseeDAO().get_sinergias_by_champion_id(champ.nombre)
-            champ.synergies = synergies
+    emblems = EmblemaDAO().get_all_emblems()
 
-    return render_template('start_team.html', champs=champs, show_login_button=True)
+    if emblems:
+        for emblem in emblems:
+            synergies = PoseeDAO().get_sinergias_by_champion_id(emblem.nombre)
+            emblem.synergies = synergies
+
+    champs_dict = [champ.to_dict() for champ in champs]
+    emblems_dict = [emblem.to_dict() for emblem in emblems]
+
+    return render_template('start_team.html', champs=champs_dict, emblems=emblems_dict, show_login_button=True)
 
 #-------------------------------------------------------------
 @app.route('/my_team_comps')

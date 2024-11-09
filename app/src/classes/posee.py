@@ -1,5 +1,7 @@
 import sqlite3
 
+from classes.sinergia import SinergiaDAO
+
 DB_PATH = '/app/src/db/database.db'
 
 # VO
@@ -13,7 +15,7 @@ class PoseeVO:
 # DAO
 #####
 class PoseeDAO:
-    # Encontrar la relacion entre campeon y sinergia por su id
+    # Encontrar la relación entre campeón y sinergia por su id
     def find_posee_by_id(self, campeon, sinergia):
         try:
             conn = sqlite3.connect(DB_PATH)
@@ -36,9 +38,18 @@ class PoseeDAO:
             cursor = conn.cursor()
             cursor.execute('''SELECT sinergia FROM Posee_TAB WHERE campeon = ?''', (campeon,))
             rows = cursor.fetchall()
-            return [row[0] for row in rows]
+
+            sinergias = []
+            for row in rows:
+                sinergia_nombre = row[0]
+                sinergia = SinergiaDAO().find_sinergia_by_id(sinergia_nombre)
+                if sinergia:
+                    sinergias.append(sinergia.to_dict())
+
+            return sinergias
         except sqlite3.Error as e:
             print(f"An error occurred: {e}")
-            return None
+            return []
         finally:
             conn.close()
+

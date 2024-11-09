@@ -1,4 +1,5 @@
 import sqlite3
+from classes.posee import PoseeDAO
 
 DB_PATH = '/app/src/db/database.db'
 
@@ -11,6 +12,16 @@ class CampeonVO:
         self.url_campo = url_campo
         self.url_recom = url_recom
         self.coste = coste
+
+    def to_dict(self): 
+        return { 
+            'nombre': self.nombre, 
+            'url_buscador': self.url_buscador, 
+            'url_campo': self.url_campo, 
+            'url_recom': self.url_recom, 
+            'coste': self.coste,
+            'sinergias' : PoseeDAO().get_sinergias_by_champion_id(self.nombre)
+        }
 
 
 # DAO

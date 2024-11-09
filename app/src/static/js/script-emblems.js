@@ -10,12 +10,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     emblems.forEach(emblem => {
         emblem.addEventListener('click', function() {
-            //Find the first empty container
-            const emptyEmbl1 = Array.from(embl1Containers).find(container => container.innerHTML.trim() === ''); /* provided by AI */
+            // Find the first empty container
+            const emptyEmbl1 = Array.from(embl1Containers).find(container => container.innerHTML.trim() === '');
 
             if (emptyEmbl1) {
-                //Clone the emblem and add it to the container
-                const newEmblem = emblem.cloneNode(true);  /* provided by AI */
+                // Clone the emblem and add it to the container
+                const newEmblem = emblem.cloneNode(true);
                 newEmblem.addEventListener('click', function() {
                     newEmblem.remove();
                 });
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    //Remove emblem from container
+    // Remove emblem from container
     embl1Containers.forEach(container => {
         container.addEventListener('click', function() {
             if (container.firstChild) {
