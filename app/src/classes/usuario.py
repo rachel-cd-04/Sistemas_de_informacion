@@ -31,6 +31,19 @@ class UsuarioDAO:
         finally:
             conn.close()
 
+    # Eliminar un usuario de la base de datos
+    def delete_usuario(self, mail):
+        try:
+            conn = sqlite3.connect(DB_PATH)
+            cursor = conn.cursor()
+            cursor.execute('''DELETE FROM Usuario_TAB WHERE mail = ?''', 
+                            (mail,))
+            conn.commit()
+        except sqlite3.Error as e:
+            print(f"An error occurred: {e}")
+        finally:
+            conn.close()
+
     # Encontrar un usuario por su mail y verificar la contraseña
     def find_usuario_by_id_pssw(self, mail, password):
         conn = None
@@ -38,10 +51,10 @@ class UsuarioDAO:
             mail = mail.strip()
             conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
-            sql_query = '''SELECT mail, nombre, contra, avatar FROM Usuario_TAB WHERE mail = ?'''
-            cursor.execute(sql_query, (mail,))
+            sql_query = '''SELECT mail, nombre, contra, avatar FROM Usuario_TAB WHERE mail = ? AND contra = ?'''
+            cursor.execute(sql_query, (mail, password))
             row = cursor.fetchone()
-            if row and bcrypt.checkpw(password.encode('utf-8'), row[2]):
+            if row:
                 return UsuarioVO(row[0], row[1], row[2], row[3])
             return None
         except sqlite3.Error as e:
@@ -63,7 +76,6 @@ class UsuarioDAO:
             print(f"An error occurred: {e}")
         finally:
             conn.close()
-
     # Añadir un avatar a un usuario
     def add_avatar_to_usuario(self, mail, avatar_id):
         try:
@@ -103,3 +115,20 @@ class UsuarioDAO:
             return []
         finally:
             conn.close()
+    """
+    def check_password_hash(self, mail, contra):
+        try:
+            conn = sqlite3.connect(DB_PATH)
+            cursor = conn.cursor()
+            cursor.execute('''SELECT contra FROM Usuario_TAB WHERE mail = ?''', 
+                           (mail,))
+            row = cursor.fetchone()
+            if row:
+                return row[0] == contra
+            return False
+        except sqlite3.Error as e:
+            print(f"An error occurred: {e}")
+            return False
+        finally:
+            conn.close()
+    """
