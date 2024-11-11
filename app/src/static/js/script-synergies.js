@@ -7,9 +7,11 @@
 //################//
 //GLOBAL VARIABLES//
 //################//
-let personajes = ;
-let emblemas = ;
-let sinergias = ;
+
+let personajes = JSON.parse(champDataScript.textContent);
+let emblemas = JSON.parse(champDataScript.textContent);
+let sinergias = JSON.parse(champDataScript.textContent);
+
 let sinergiasContainer = {}; //Container for active synergies
 
 let personajesSeleccionadosID = new Array(12).fill(0); //Arrays to store the id of selected characters on theirs positions
@@ -180,7 +182,7 @@ function updateSynergiesContainer() {
     }
 
     //Sort the divs by the number of times the sinergie is active
-    emblDivs.sort((a, b) => b.count - a.count);  /* provided by AI */
+    emblDivs.sort((a, b) => b.count - a.count);
 
     //Add the divs to the container
     emblDivs.forEach(item => container.appendChild(item.element));
@@ -190,6 +192,7 @@ function updateSynergiesContainer() {
 //Add the event listeners to the characters and emblems
 document.querySelectorAll('.champ-2 img').forEach((img, index) => {
     img.addEventListener('click', () => {
+        alert("hallo");
         let posicion = obtainPositionInContainerChamp();
         handleClickChamp(index + 1, posicion);
     });
@@ -281,19 +284,18 @@ function findBestChamps(nivel) {
 
     //Probabilities of appearance for each level and cost
     const probabilidades = {
-        1;1: 1, 2: 0, 3: 0, 4: 0, 5: 0 },
-        2;1: 1, 2: 0, 3: 0, 4: 0, 5: 0 },
-        3;1: 0.75, 2: 0.25, 3: 0, 4: 0, 5: 0 },
-        4;1: 0.55, 2: 0.30, 3: 0.15, 4: 0, 5: 0 },
-        5;1: 0.45, 2: 0.33, 3: 0.20, 4: 0.02, 5: 0 },
-        6;1: 0.30, 2: 0.40, 3: 0.25, 4: 0.05, 5: 0 },
-        7;1: 0.19, 2: 0.30, 3: 0.35, 4: 0.10, 5: 0.01 },
-        8;1: 0.18, 2: 0.25, 3: 0.36, 4: 0.18, 5: 0.03 },
-        9;1: 0.10, 2: 0.20, 3: 0.25, 4: 0.35, 5: 0.10 },
-        10;1: 0.05, 2: 0.10, 3: 0.20, 4: 0.40, 5: 0.25 },
-        11;1: 0.01, 2: 0.02, 3: 0.12, 4: 0.50, 5: 0.35 }
+        1: { 1: 1, 2: 0, 3: 0, 4: 0, 5: 0 },
+        2: { 1: 1, 2: 0, 3: 0, 4: 0, 5: 0 },
+        3: { 1: 0.75, 2: 0.25, 3: 0, 4: 0, 5: 0 },
+        4: { 1: 0.55, 2: 0.30, 3: 0.15, 4: 0, 5: 0 },
+        5: { 1: 0.45, 2: 0.33, 3: 0.20, 4: 0.02, 5: 0 },
+        6: { 1: 0.30, 2: 0.40, 3: 0.25, 4: 0.05, 5: 0 },
+        7: { 1: 0.19, 2: 0.30, 3: 0.35, 4: 0.10, 5: 0.01 },
+        8: { 1: 0.18, 2: 0.25, 3: 0.36, 4: 0.18, 5: 0.03 },
+        9: { 1: 0.10, 2: 0.20, 3: 0.25, 4: 0.35, 5: 0.10 },
+        10: { 1: 0.05, 2: 0.10, 3: 0.20, 4: 0.40, 5: 0.25 },
+        11: { 1: 0.01, 2: 0.02, 3: 0.12, 4: 0.50, 5: 0.35 }
     };
-
     //Iterate over the characters
     for (let id in personajes) {
         //Check if the character is already selected (don't recommend it)

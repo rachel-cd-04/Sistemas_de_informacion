@@ -74,9 +74,9 @@ def start_team():
 
     champs_dict = [champ.to_dict() for champ in champs]
     emblems_dict = [emblem.to_dict() for emblem in emblems]
-    synergies_dict = [synergies.to_dict() for synergie in synergies]
+    synergies_dict = [synergie.to_dict() for synergie in synergies]
 
-    return render_template('start_team.html', champs=champs_dict, emblems=emblems_dict, show_login_button=True)
+    return render_template('start_team.html', champs=champs_dict, emblems=emblems_dict, synergies=synergies_dict, show_login_button=True)
 
 #-------------------------------------------------------------
 @app.route('/my_team_comps')
