@@ -89,4 +89,45 @@
             });
         </script>
 
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const deleteButtons = document.querySelectorAll(".delete-btn");
+
+                deleteButtons.forEach(button => {
+                    button.addEventListener("click", function() {
+                        const usuario = button.closest('.team-comp').querySelector('.publish-btn').getAttribute('data-usuario');
+                        const nombre = button.closest('.team-comp').querySelector('h2').textContent;
+
+                        if (confirm(`¿Estás seguro de que deseas eliminar la composición "${nombre}"?`)) {
+                            fetch("/delete_composition", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify({
+                                    usuario: usuario,
+                                    nombre: nombre
+                                })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    alert("Composición eliminada exitosamente.");
+                                    // Eliminar el elemento del DOM
+                                    button.closest('.team-comp').remove();
+                                } else {
+                                    alert("Error al eliminar la composición.");
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Error:", error);
+                                alert("Error al eliminar la composición.");
+                            });
+                        }
+                    });
+                });
+            });
+        </script>
+
+
 {% endblock %}
