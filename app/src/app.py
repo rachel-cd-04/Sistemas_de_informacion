@@ -70,14 +70,11 @@ def settings():
 def start_team():
     champs = CampeonDAO().get_all_champions()
     emblems = EmblemaDAO().get_all_emblems()
-
-    if emblems:
-        for emblem in emblems:
-            synergies = PoseeDAO().get_sinergias_by_champion_id(emblem.nombre)
-            emblem.synergies = synergies
+    synergies = SinergiaDAO().get_all_sinergias()
 
     champs_dict = [champ.to_dict() for champ in champs]
     emblems_dict = [emblem.to_dict() for emblem in emblems]
+    synergies_dict = [synergies.to_dict() for synergie in synergies]
 
     return render_template('start_team.html', champs=champs_dict, emblems=emblems_dict, show_login_button=True)
 
@@ -104,6 +101,19 @@ def set_publicado():
 
     try:
         ComposicionDAO().set_publicado(usuario, nombre, publicado)
+        return jsonify({"success": True})
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return jsonify({"success": False}), 500
+    
+@app.route('/delete_composition', methods=['POST'])
+def delete_composition():
+    data = request.get_json()
+    usuario = data.get('usuario')
+    nombre = data.get('nombre')
+
+    try:
+        ComposicionDAO().delete_composicion(usuario, nombre)
         return jsonify({"success": True})
     except Exception as e:
         print(f"An error occurred: {e}")
