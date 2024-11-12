@@ -37,7 +37,7 @@
                 </div>
     
                 <!-- Botón de prohibición -->
-                <button class="ban-btn" data-nombre="{{ user.nombre }}">
+                <button class="ban-btn" data-nombre="{{ user.nombre }}" data-mail="{{ user.mail }}">
                     <img src="{{ url_for('static', filename='images/misc/ban.png') }}" alt="Ban">
                 </button>
             </div>
@@ -100,21 +100,22 @@
 
         if (button) {
             const nombre = button.getAttribute('data-nombre');
+            const mail = button.getAttribute('data-mail');
 
             // Confirmar la eliminación
             if (confirm(`¿Estás seguro de que quieres eliminar el usuario '${nombre}'?`)) {
                 // Hacer la solicitud AJAX para eliminar el usuario
-                fetch('/delete_usuario', {
+                fetch('/delete_user', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ nombre: nombre }),
+                    body: JSON.stringify({ mail: mail }),
                 })
                 .then(response => {
                     if (response.ok) {
                         // Recargar la lista de usuarios después de la eliminación
-                        loadUsuarios();
+                        button.closest('.user').remove();
                     } else {
                         // Imprimir la respuesta del servidor para depuración
                         return response.json().then(err => {
@@ -131,8 +132,6 @@
         }
     });
 
-    // Cargar composiciones al inicio
-    loadUsuarios();
 });
 
 </script>
