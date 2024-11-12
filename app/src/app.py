@@ -163,8 +163,15 @@ def comComps():
     team_comps = ComposicionDAO().get_all_public_composiciones()
     if team_comps:
         for comp in team_comps:
+            votosPositivos = VotaDAO().find_good_votes_to_comp(comp.usuario, comp.nombre) 
+            votosNegativos = VotaDAO().find_bad_votes_to_comp(comp.usuario, comp.nombre)
+            comp.votos = votosPositivos - votosNegativos
+
+            comp.votoUser = VotaDAO().find_vota_by_id(session['mail'], comp.usuario, comp.nombre)
+
             personajes = FormadoPorDAO().get_champions_by_composicion_id(comp.usuario, comp.nombre)
             comp.champions = personajes
+            
 
     return render_template('community_comps.html', team_comps=team_comps, show_login_button=True)
 
@@ -172,9 +179,38 @@ def comComps():
 def save_composition():
     data = request.get_json()
     try:
-        ComposicionDAO.save_composicion(ComposicionVO(session['mail'], data.get('nombre'), data.get('dificultad'), "N", data.get('descr')))
-        #for champ in data.get('champions'):
-            #FormadoPorDAO.add_campeon_to_composicion(FormadoPorVO(session['mail'], data.get('nombre'), champ.nombre))
+        ComposicionDAO().save_composicion(ComposicionVO(session['mail'], data.get('nombre'), data.get('dificultad'), "N", data.get('descr')))
+        for champ in data.get('champions'):
+            FormadoPorDAO().add_campeon_to_composicion(FormadoPorVO(session['mail'], data.get('nombre'), champ.nombre))
+
+        return jsonify({"success": True})
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return jsonify({"success": False}), 500
+    
+
+@app.route('/delete_vote', methods=['POST'])
+def delete_vote():
+    data = request.get_json()
+    mailVotante = session['mail']
+    mail = data.get('mail')
+    nombre = data.get('nombre')
+    try:
+        VotaDAO().delete_vota(mailVotante, mail, nombre)
+        
+        return jsonify({"success": True})
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return jsonify({"success": False}), 500
+    
+
+    
+    
+@app.route('/save_vote', methods=['POST'])
+def save_vote():
+    data = request.get_json()
+    try:
+        VotaDAO().save_vota(VotaVO(session['mail'], data.get('mail'), data.get('nombre'), data.get('voto')))
 
         return jsonify({"success": True})
     except Exception as e:
