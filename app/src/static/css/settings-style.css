@@ -15,6 +15,30 @@ body {
     margin: 0px;
     margin-left: 15px;
     color: white;
+    z-index: 2; /* Añadir z-index alto */
+}
+
+.footer-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 3vw;
+    background-color: rgb(46, 147, 154);
+    font-family: "Helvetica Bold", sans-serif;
+    display: flex;
+    z-index: 1; /* Añadir z-index bajo */
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1vw;
+}
+
+.footer-container p{
+    margin: 0;
+} 
+.footer-container a{
+    margin: 0;
+    color: #FFD700;
 }
 
 /*********************************************************************************************/
@@ -63,10 +87,11 @@ body {
     display: flex; 
     flex-direction: column; 
     align-items: center; 
-    margin-top: 5vw; 
+    margin-top: 8vw; 
     color: #FFD700; 
 } 
 .profile-info { 
+    margin-top: 1vw;
     display: flex; 
     flex-direction: row; 
     background-color: #479d9e; 
@@ -88,11 +113,15 @@ body {
 } 
 
 .edit-photo-button { 
-    margin-top: 1vw; /* Ajusta el margen según sea necesario */
+    background-color: #f5b03e; 
+    color: white; 
+    padding: 0.5vw; 
+    border: none; 
+    border-radius: 0.5vw; 
+    cursor: pointer;
 }
 
 .profile-picture img {
-    margin-top: 49px;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -127,7 +156,7 @@ body {
     border: none; 
 } 
 .save-button { 
-    background-color: #d4a017; 
+    background-color: #f5b03e; 
     color: white; 
     padding: 1vw; 
     border: none; 
@@ -136,15 +165,16 @@ body {
 }
 
 .avatar-menu {
-    display: flex;
+    display: none;
+    
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    background-color: red;
+    background-color: rgb(46, 147, 154);
     padding: 10px;
-    border: 1px solid blue; /* Borde temporal para depuración */
+    margin-right: 2vw;
 }
 
   
@@ -152,12 +182,12 @@ body {
     flex-direction: row;
     width: 50px; /* Ancho de las imágenes */
     height: 50px; /* Altura de las imágenes */
-    border: 2px solid #000; /* Borde alrededor de las imágenes */
+    border: 2px solid rgb(46, 147, 154); /* Borde alrededor de las imágenes */
     box-sizing: border-box;
   }
 
 .avatar-option:hover {
-    border-color: #007bff;
+    border: 6px solid #f5b03e;
 }
 
 .avatar-container {

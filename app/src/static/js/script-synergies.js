@@ -8,9 +8,14 @@
 //GLOBAL VARIABLES//
 //################//
 
-let personajes = JSON.parse(champDataScript.textContent);
-let emblemas = JSON.parse(champDataScript.textContent);
-let sinergias = JSON.parse(champDataScript.textContent);
+let personajesElement = document.getElementById('champ-data');
+let personajes = JSON.parse(personajesElement.textContent);
+
+let emblemasElement = document.getElementById('emblem-data');
+let emblemas = JSON.parse(emblemasElement.textContent);
+
+let sinergiasElement = document.getElementById('synergie-data'); 
+let sinergias = JSON.parse(sinergiasElement.textContent);
 
 let sinergiasContainer = {}; //Container for active synergies
 
@@ -44,11 +49,11 @@ function handleClickChamp(id, posicion) {
 
     //Add the sinergies to the container
     sinergias.forEach(sinergia => {
-        if (sinergiasContainer[sinergia]) {
-            sinergiasContainer[sinergia]++;
+        if (sinergiasContainer[sinergia.nombre]) {
+            sinergiasContainer[sinergia.nombre]++;
         } 
         else {
-            sinergiasContainer[sinergia] = 1;
+            sinergiasContainer[sinergia.nombre] = 1;
         }
     });
 
@@ -131,6 +136,15 @@ function removeEmblem(posicion) {
     updateSynergiesContainer();
 }
 
+function obtenerAtributosSinergia(nombre) {
+    for (let i = 0; i < sinergias.length; i++) {
+        if (sinergias[i].nombre === nombre) {
+            return sinergias[i];
+        }
+    }
+    return null; // Si no se encuentra la sinergia
+}
+
 //Function to update the sinergies container
 function updateSynergiesContainer() {
     let container = document.querySelector('.sinergias-container');
@@ -139,46 +153,47 @@ function updateSynergiesContainer() {
     let emblDivs = [];
 
     //Create the divs for each sinergie
-    for (let sinergia in sinergiasContainer) {
-        //Create main div
-        let emblDiv = document.createElement('div');
-        emblDiv.className = 'embl';
+    for (let nombre in sinergiasContainer) {
+        let sinergia = obtenerAtributosSinergia(nombre);
+        if (sinergia) {
+            //Create main div
+            let emblDiv = document.createElement('div');
+            emblDiv.className = 'embl';
 
-        //Create number of times the sinergie is active
-        let numDiv = document.createElement('div');
-        numDiv.className = 'num';
-        numDiv.textContent = `${sinergiasContainer[sinergia]}`;
+            //Create number of times the sinergie is active
+            let numDiv = document.createElement('div');
+            numDiv.className = 'num';
+            numDiv.textContent = `${sinergiasContainer[sinergia.nombre]}`;
 
-        //Create the sinergie name
-        let synerDiv = document.createElement('div');
-        synerDiv.className = 'syner';
-        synerDiv.textContent = `${sinergia}`;
+            //Create the sinergie name
+            let synerDiv = document.createElement('div');
+            synerDiv.className = 'syner';
+            synerDiv.textContent = `${sinergia.nombre}`;
 
-        //Create the levels of the sinergie
-        let cantidadDiv = document.createElement('div');
-        cantidadDiv.className = 'cantPosible';
-        cantidadDiv.textContent = `${sinergias[sinergia].cantidadPosible.join(' / ')}`;
+            //Create the levels of the sinergie
+            let cantidadDiv = document.createElement('div');
+            cantidadDiv.className = 'cantPosible';
+            cantidadDiv.textContent = `${sinergia.unidades_mejora}`;
 
-        //Create the image of the sinergie
-        let imgDiv = document.createElement('img');
-        imgDiv.className = 'imag';
-        //Check if the sinergie is Mage or Shapeshifter to change the image format (excepcional cases)
-        if (sinergia == "Mage" || sinergia == "Shapeshifter") {
-            imgDiv.src = `base_datos/imagenes/synergies/${sinergia}_TFT_icon.svg`;
+            //Create the image of the sinergie
+            let imgDiv = document.createElement('img');
+            imgDiv.className = 'imag';
+
+            imgDiv.src = `${sinergia.url_}`;
+            imgDiv.alt = sinergia.nombre;
+
+            //Add the elements to the main div
+            emblDiv.appendChild(imgDiv);
+            emblDiv.appendChild(numDiv);
+            emblDiv.appendChild(synerDiv);
+            emblDiv.appendChild(cantidadDiv);
+
+            //Add the div to the array
+            emblDivs.push({ element: emblDiv, count: sinergiasContainer[sinergia.nombre] });
         }
         else {
-            imgDiv.src = `base_datos/imagenes/synergies/${sinergia}_TFT_icon.webp`;
+            alert('Error al obtener los atributos de la sinergia, sinergia no encontrada');
         }
-        imgDiv.alt = sinergia;
-
-        //Add the elements to the main div
-        emblDiv.appendChild(imgDiv);
-        emblDiv.appendChild(numDiv);
-        emblDiv.appendChild(synerDiv);
-        emblDiv.appendChild(cantidadDiv);
-
-        //Add the div to the array
-        emblDivs.push({ element: emblDiv, count: sinergiasContainer[sinergia] });
     }
 
     //Sort the divs by the number of times the sinergie is active
@@ -192,9 +207,8 @@ function updateSynergiesContainer() {
 //Add the event listeners to the characters and emblems
 document.querySelectorAll('.champ-2 img').forEach((img, index) => {
     img.addEventListener('click', () => {
-        alert("hallo");
         let posicion = obtainPositionInContainerChamp();
-        handleClickChamp(index + 1, posicion);
+        handleClickChamp(index, posicion);
     });
 });
 

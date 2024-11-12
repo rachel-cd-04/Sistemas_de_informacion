@@ -194,7 +194,7 @@ body {
     margin-top: 0.5%;
     margin-bottom: 1.1vw;
     right: 15%;
-    background-color: rgb(100, 144, 145);
+    background-color: rgb(180, 76, 214);/*rgb(100, 144, 145);*/
     display: flex;
     position: relative; 
     color: white;
@@ -206,9 +206,12 @@ body {
 .emblem_menu .embl .cantPosible{
     width: 20vw;
     position: absolute;
-    font-size: 0.7vw;
+    background-color: rgb(214, 104, 76);
+    font-size: 1.5vw;
     left: 50%;
     top: 50%;
+    z-index: 200;
+    color: white;
 
 }
 
