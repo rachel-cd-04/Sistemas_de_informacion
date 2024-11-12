@@ -45,6 +45,21 @@ def admin_comps_list():
 
     return render_template('admin_comps_list.html', team_comps=team_comps, show_login_button=True)
 
+
+@app.route('/delete_composition', methods=['POST'])
+def delete_composition():
+    data = request.get_json()
+    usuario = data.get('usuario')
+    nombre = data.get('nombre')
+
+    try:
+        ComposicionDAO().delete_composicion(usuario, nombre)
+        return jsonify({"success": True})
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return jsonify({"success": False}), 500
+    
+
 #-------------------------------------------------------------
 @app.route('/admin_users_list')
 def admin_users_list():
@@ -73,6 +88,19 @@ def admin_users_list():
             users_list_with_url.append(enriched_user)
             # Pasar la lista de usuarios enriquecida al template
         return render_template('admin_users_list.html', users_list=users_list_with_url, show_login_button=True)
+
+@app.route('/delete_user', methods=['POST'])
+def delete_usuario():
+    data = request.get_json()
+    mail = data.get('mail')
+    
+    try:
+        # Llama a la función del DAO que borra el usuario por su mail
+        UsuarioDAO().delete_usuario(mail)
+        return jsonify({"success": True})
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return jsonify({"success": False}), 500
 
 #-------------------------------------------------------------
 @app.route('/help')
@@ -127,33 +155,6 @@ def set_publicado():
     except Exception as e:
         print(f"An error occurred: {e}")
         return jsonify({"success": False}), 500
-    
-@app.route('/delete_composition', methods=['POST'])
-def delete_composition():
-    data = request.get_json()
-    usuario = data.get('usuario')
-    nombre = data.get('nombre')
-
-    try:
-        ComposicionDAO().delete_composicion(usuario, nombre)
-        return jsonify({"success": True})
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        return jsonify({"success": False}), 500
-    
-
-@app.route('/delete_user', methods=['POST'])
-def delete_usuario():
-    data = request.get_json()
-    mail = data.get('mail')
-    
-    try:
-        # Llama a la función del DAO que borra el usuario por su mail
-        UsuarioDAO().delete_usuario(mail)
-        return jsonify({"success": True})
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        return jsonify({"success": False}), 500
 
 #------------------------------------------------------------- 
 @app.route('/community_comps')
@@ -172,8 +173,8 @@ def save_composition():
     data = request.get_json()
     try:
         ComposicionDAO.save_composicion(ComposicionVO(session['mail'], data.get('nombre'), data.get('dificultad'), "N", data.get('descr')))
-        for champ in data.get('champions'):
-            FormadoPorDAO.add_campeon_to_composicion(FormadoPorVO(session['mail'], data.get('nombre'), champ.nombre))
+        #for champ in data.get('champions'):
+            #FormadoPorDAO.add_campeon_to_composicion(FormadoPorVO(session['mail'], data.get('nombre'), champ.nombre))
 
         return jsonify({"success": True})
     except Exception as e:
