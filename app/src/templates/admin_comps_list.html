@@ -101,17 +101,21 @@
             // Confirmar la eliminación
             if (confirm(`¿Estás seguro de que quieres eliminar la composición '${nombre}' de '${usuario}'?`)) {
                 // Hacer la solicitud AJAX para eliminar la composición
-                fetch('/delete_composicion', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ usuario: usuario, nombre: nombre }),
-                })
+                fetch("/delete_composition", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify({
+                                    usuario: usuario,
+                                    nombre: nombre
+                                })
+                            })
                 .then(response => {
                     if (response.ok) {
                         // Recargar la lista de composiciones después de la eliminación
-                        loadComposiciones();
+                        //loadComposiciones();
+                        button.closest('.comp').remove();
                     } else {
                         // Imprimir la respuesta del servidor para depuración
                         return response.json().then(err => {
@@ -129,7 +133,7 @@
     });
 
     // Cargar composiciones al inicio
-    loadComposiciones();
+    //loadComposiciones();
 });
 
 </script>
