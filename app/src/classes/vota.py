@@ -33,7 +33,7 @@ class VotaDAO:
             conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''DELETE FROM Vota_TAB WHERE usuarioVotante = ? AND usuarioVotado = ? AND composicion = ?''', 
-                           (usuarioVotante, usuarioVotado, composicion))
+                           (usuarioVotante, usuarioVotado, composicion,))
             conn.commit()
         except sqlite3.Error as e:
             print(f"An error occurred: {e}")
@@ -45,12 +45,10 @@ class VotaDAO:
         try:
             conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
-            cursor.execute('''SELECT usuarioVotante, usuarioVotado, composicion FROM Vota_TAB WHERE usuarioVotante = ? AND usuarioVotado = ? AND composicion = ?''', 
+            cursor.execute('''SELECT voto FROM Vota_TAB WHERE usuarioVotante = ? AND usuarioVotado = ? AND composicion = ?''', 
                            (usuarioVotante, usuarioVotado, composicion))
-            row = cursor.fetchone()
-            if row:
-                return VotaVO(row[0], row[1], row[2], row[3])
-            return None
+            result = cursor.fetchone()
+            return result[0] if result else None
         except sqlite3.Error as e:
             print(f"An error occurred: {e}")
             return None
@@ -58,20 +56,36 @@ class VotaDAO:
             conn.close()
 
 
-    # Encontrar un voto por su id
-    def find_votes_to_comp(self, usuarioVotado, composicion):
+    # Encontrar votos positivos a una composición
+    def find_good_votes_to_comp(self, usuarioVotado, composicion):
         try:
             conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
-            #cursor.execute('''SELECT COUNT(*) FROM Vota_TAB WHERE usuarioVotado = ? AND composicion = ?''', 
+            cursor.execute('''SELECT COUNT(*) FROM Vota_TAB WHERE usuarioVotado = ? AND composicion = ? AND voto = ?''', 
+                           (usuarioVotado, composicion, 1))
+            return cursor.fetchone()[0]
+            #cursor.execute('''SELECT usuarioVotante, usuarioVotado, composicion FROM Vota_TAB WHERE WHERE usuarioVotado = ? AND composicion = ?''', 
             #               (usuarioVotado, composicion))
-            #return cursor.fetchone()[0]
-            cursor.execute('''SELECT usuarioVotante, usuarioVotado, composicion FROM Vota_TAB WHERE WHERE usuarioVotado = ? AND composicion = ?''', 
-                           (usuarioVotado, composicion))
-            row = cursor.fetchone()
-            if row:
-                return VotaVO(row[0], row[1], row[2])
-            return None
+            #rows = cursor.fetchall()
+            #return [VotaVO(row[0], row[1], row[2], row[3], row[4]) for row in rows]
+        except sqlite3.Error as e:
+            print(f"An error occurred: {e}")
+            return 0
+        finally:
+            conn.close()
+
+    # Encontrar votos negativos a una composición
+    def find_bad_votes_to_comp(self, usuarioVotado, composicion):
+        try:
+            conn = sqlite3.connect(DB_PATH)
+            cursor = conn.cursor()
+            cursor.execute('''SELECT COUNT(*) FROM Vota_TAB WHERE usuarioVotado = ? AND composicion = ? AND voto = ?''', 
+                           (usuarioVotado, composicion, -1))
+            return cursor.fetchone()[0]
+            #cursor.execute('''SELECT usuarioVotante, usuarioVotado, composicion FROM Vota_TAB WHERE WHERE usuarioVotado = ? AND composicion = ?''', 
+            #               (usuarioVotado, composicion))
+            #rows = cursor.fetchall()
+            #return [VotaVO(row[0], row[1], row[2], row[3], row[4]) for row in rows]
         except sqlite3.Error as e:
             print(f"An error occurred: {e}")
             return 0
