@@ -23,9 +23,15 @@
                     <div class="team-comp-buttons">
                         <button class="save-btn" data-nombre="{{ team_comp.nombre }}" data-dificultad="{{ team_comp.dificultad }}" data-descr="{{ team_comp.descr }}" data-champ="{{ team_comp.champions }}" onclick="saveComposition(this)">Save</button>
                     </div>
+                    
                     <div class="team-comp-description">
                         <p>{{ team_comp.descr }}</p>
                     </div>
+                </div>
+                <div class="counter">
+                    <button class="arrow up {% if team_comp.votoUser == 1 %}green{% elif team_comp.votoUser == -1 %}gray{% endif %}" data-nombre="{{ team_comp.nombre }}" data-mail="{{ team_comp.usuario }}" onclick="toggleArrowColors('up', this)">▲</button>
+                    <span class="count">{{ team_comp.votos }}</span>
+                    <button class="arrow down {% if team_comp.votoUser == -1 %}red{% elif team_comp.votoUser == 1 %}gray{% endif %}" data-nombre="{{ team_comp.nombre }}" data-mail="{{ team_comp.usuario }}" onclick="toggleArrowColors('down', this)">▼</button>
                 </div>
                 <div class="team-comp-champions">
                     {% for champion in team_comp.champions %}
@@ -37,14 +43,108 @@
                 </div>
             </div>
         {% endfor %}
+
         <script>
+
+function borrarVoto(nombre, mail) {
+                alert(`Nombre: ${nombre}, Dificultad: ${mail}`);
+                fetch('/delete_vote', {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        nombre: nombre,
+                        mail: mail,
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Voto guardado exitosamente.');
+                    } else {
+                        alert('Error al guardar voto.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al guardar voto.');
+                });
+            }
+
+            function añadirVoto(nombre, mail, voto) {
+                alert(`Nombre: ${nombre}, Dificultad: ${mail}, Descripción: ${voto}`);
+                fetch('/save_vote', {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        nombre: nombre,
+                        mail: mail,
+                        voto: voto,
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Voto guardado exitosamente.');
+                    } else {
+                        alert('Error al guardar voto.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al guardar voto.');
+                });
+            }
+
+
+            function toggleArrowColors(direction, button) {
+                const nombre = button.getAttribute('data-nombre');
+                const mail = button.getAttribute('data-mail');
+                const upArrow = button.parentElement.querySelector('.up');
+                const downArrow = button.parentElement.querySelector('.down');
+
+                if (direction === 'up') {
+                    // Si ya está activada en verde, la desactiva (vuelve a gris)
+                    if (upArrow.classList.contains('green')) {
+                        upArrow.classList.remove('green');
+                        downArrow.classList.remove('gray');
+                        borrarVoto(nombre, mail)
+                    } else {
+                        // Si no, la activa en verde y pone la flecha abajo en gris
+                        upArrow.classList.add('green');
+                        upArrow.classList.remove('gray');
+                        downArrow.classList.add('gray');
+                        downArrow.classList.remove('red');
+                        añadirVoto(nombre, mail, 1)
+                    }
+                } else if (direction === 'down') {
+                    // Si ya está activada en rojo, la desactiva (vuelve a gris)
+                    if (downArrow.classList.contains('red')) {
+                        downArrow.classList.remove('red');
+                        upArrow.classList.remove('gray');
+                        borrarVoto(nombre, mail)
+                    } else {
+                        // Si no, la activa en rojo y pone la flecha arriba en gris
+                        downArrow.classList.add('red');
+                        downArrow.classList.remove('gray');
+                        upArrow.classList.add('gray');
+                        upArrow.classList.remove('green');
+                        añadirVoto(nombre, mail, -1)
+                    }
+                }
+            }         
+
+
             function saveComposition(button) {
                 const nombre = button.getAttribute('data-nombre');
                 const dificultad = button.getAttribute('data-dificultad');
                 const descr = button.getAttribute('data-descr');
-                const champions = button.getAttribute('data-champ');
+                //const champions = button.getAttribute('data-champ');
                 //const championNames = champions.map(champion => champion.nombre);
-                alert(`Nombre: ${nombre}, Dificultad: ${dificultad}, Descripción: ${descr}, Campeones: ${champions}`);
+                alert(`Nombre: ${nombre}, Dificultad: ${dificultad}, Descripción: ${descr},`);//Campeones: ${champions}
 
                 fetch('/save_composition', {
                     method: 'POST',
@@ -55,7 +155,7 @@
                         nombre: nombre,
                         dificultad: dificultad,
                         descr: descr,
-                        champions: championNames
+                        //champions: championNames
                     })
                 })
                 .then(response => response.json())
