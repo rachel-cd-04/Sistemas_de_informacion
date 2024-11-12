@@ -15,11 +15,19 @@ body {
     margin: 0px;
     margin-left: 15px;
     color: white;
+    z-index: 2; /* Añadir z-index alto */
 }
 
 /*********************************************************************************************/
 /*features of the LEVEL container */
 /*********************************************************************************************/
+.container {
+    margin-top: 5vw;
+    margin-left: 0vw;
+    margin-right: 0vw;
+    display: flex;
+}
+
 .exp_menu {
     width: 16vw;
     height: 8vw;
@@ -288,10 +296,9 @@ body {
 /*********************************************************************************************/
 /*main container*/
 .browser {
-    width: 60vw;
+    width: 65vw;
     height: 19vw;
-    margin-left: 20%;
-    margin-right: 10vw;
+    margin-left: 14vw;
     margin-top: -43vw;
     padding: 0;
     border-radius: 10px;
@@ -318,11 +325,14 @@ body {
 }
 
 .emblem-title-container {
+    margin-left: 5vw;
     width: 30%;
 }
 
 .champ-title-container {
-    width: 60%;
+    margin-left: 3vw;
+    margin-right: 1vw;
+    width: 52%;
 }
 
 /*********************************************************************************************/
@@ -609,17 +619,20 @@ body {
 .recommendation {
     width: 16vw;
     height: 39vw;
-    margin-top: -39%;
-    margin-left: 83%;
+    top: 0;
+    margin-top: 9vw;
+    right: 0; /* Pega el elemento a la derecha */
+    margin-right: 0vw;
+    /*margin-left: 83%;*/
     background-color: rgba(25, 105, 107, 0.7);
     border-radius: 10px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    position: relative;
     color: white;
     font-weight: bold;
     font-size: 2vw;
+    position: fixed;
 }
 
 /*main container title */

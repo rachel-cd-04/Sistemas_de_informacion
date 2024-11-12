@@ -20,7 +20,7 @@ let sinergias = JSON.parse(sinergiasElement.textContent);
 let sinergiasContainer = {}; //Container for active synergies
 
 let personajesSeleccionadosID = new Array(12).fill(0); //Arrays to store the id of selected characters on theirs positions
-let personajesSeleccionados = new Array(246).fill(0); //Array to store the number of times a character has been selected
+let personajesSeleccionados = {};  //Array to store the number of times a character has been selected
 
 let tope = 0; //Count of selected emblems
 let emblemasSeleccionadosID = new Array(5).fill(0); //Arrays to store the id of selected emblems on theirs positions
@@ -32,23 +32,34 @@ let emblemasSeleccionados = new Array(12).fill(0); //Array to store the number o
 //##################//
 //SYNERGIE FUNCTIONS//
 //##################//
-//Function to handle the click on a character (add theirs sinergies to the container)
-function handleClickChamp(id, posicion) {
 
+//Aux Function to get the id of a character by its name
+function getIdByName(name) {
+    for (let id in personajes) {
+        if (personajes[id].nombre === name) {
+            return id;
+        }
+    }
+    return null; // Si no se encuentra el nombre
+}
+
+//Function to handle the click on a character (add theirs sinergies to the container)
+function handleClickChamp(name, posicion) {
     //If the character is already selected, increase the count and return
-    if (personajesSeleccionados[id] > 0) {
-        personajesSeleccionados[id]++;
-        personajesSeleccionadosID[posicion] = id;
+    if (personajesSeleccionados[name]) {
+        personajesSeleccionados[name]++;
+        personajesSeleccionadosID[posicion] = name;
         return;
     }
 
-    personajesSeleccionados[id]++; //Increase the count of the character
-    personajesSeleccionadosID[posicion] = id; //Store the character id in the position
+    personajesSeleccionados[name] = 1; //Increase the count of the character
+    personajesSeleccionadosID[posicion] = name; //Store the character id in the position
 
-    let sinergias = personajes[id].sinergias;
+    let id = getIdByName(name);
+    let champSinergias = personajes[id].sinergias;
 
     //Add the sinergies to the container
-    sinergias.forEach(sinergia => {
+    champSinergias.forEach(sinergia => {
         if (sinergiasContainer[sinergia.nombre]) {
             sinergiasContainer[sinergia.nombre]++;
         } 
@@ -62,18 +73,19 @@ function handleClickChamp(id, posicion) {
 
 //Function to remove the sinergies of a character from the container
 function removeChamp(posicion) {
-    let id = personajesSeleccionadosID[posicion];
+    let name = personajesSeleccionadosID[posicion];
+    personajesSeleccionadosID[posicion] = "";
 
-    personajesSeleccionadosID[posicion] = 0;
     //If the character is duplicated, return
-    if (personajesSeleccionadosID.includes(id)) {
+    if (personajesSeleccionadosID.includes(name)) {
         return;
     }
-
-    let sinergias = personajes[id].sinergias;
+ 
+    let id = getIdByName(name);
+    let champSinergias = personajes[id].sinergias;
 
     //Remove the sinergies from the container
-    sinergias.forEach(sinergia => {
+    champSinergias.forEach(sinergia => {
         if (sinergiasContainer[sinergia.nombre]) {
             sinergiasContainer[sinergia.nombre]--;
             if (sinergiasContainer[sinergia.nombre] === 0) {
@@ -82,8 +94,8 @@ function removeChamp(posicion) {
         }
     });
 
-    personajesSeleccionados[id] = 0; //Reset the character position
-    personajesSeleccionadosID[posicion] = 0; //Reset the character id in the position
+    personajesSeleccionados[name] = 0; //Reset the character position
+    personajesSeleccionadosID[posicion] = ""; //Reset the character id in the position
 
     updateSynergiesContainer();
 }
@@ -208,7 +220,8 @@ function updateSynergiesContainer() {
 document.querySelectorAll('.champ-2 img').forEach((img, index) => {
     img.addEventListener('click', () => {
         let posicion = obtainPositionInContainerChamp();
-        handleClickChamp(index, posicion);
+        let name = obtainNameInContainerChamp(event);
+        handleClickChamp(name, posicion);
     });
 });
 
@@ -237,6 +250,18 @@ function obtainPositionInContainerChamp() {
         }
     }
     return -1; //If the position is not found
+}
+
+//Aux Function to get the name of the first empty div in the character container
+function obtainNameInContainerChamp(event) {
+    let champ = event.currentTarget.closest('.champ-2');
+    if (champ) {
+        let nameElement = champ.querySelector('.name');
+        if (nameElement) {
+            return nameElement.textContent.trim();
+        }
+    }
+    return null;
 }
 
 //Aux Function to get the position of the first empty div in the emblem container

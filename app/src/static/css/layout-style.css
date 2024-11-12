@@ -111,7 +111,9 @@ html {
     width: 4px;
     height: 12.5%;
     background-color: #f5b03e;
-    margin: 0 120px;
+    margin-top: 0;
+    margin-left: 5.5vw;
+    margin-bottom: 0;
     z-index: 999;
 }
 /*********************************************************************************************/
@@ -133,25 +135,35 @@ html {
 }
 
 .custom-help-button {
+    display: flex;
     margin-right: 20px;
     font-weight: bold;
     background-color: #f5b03e;
     border: 2px solid #f5b03e;
     color: white;
+    justify-content: center;
+    align-items: center;
     padding: 10px 20px;
     border-radius: 50px;
     text-decoration: none;
+    width: 4vw;
+    text-align: center;
+    font-size: 1.5vw;
+    margin-right: 2vw;
 }
 
 .custom-help-button:hover {
     background-color: darkblue;
     color: white;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .custom-greetings-text {
-    font-size: 1.5em;
+    font-size: 1.5vw;
     color: white;
-    margin-right: 10vw;
+    margin-right: 1vw;
     margin-top: 6px;
 }
 
@@ -159,16 +171,14 @@ html {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    margin-left: 50px;
+    margin-left: 0vw;
     margin-right: 5px;
 }
 
 
 .dropdown {
-    width: 30vw;
+    width: 20vw;
     position: relative;
-    margin-left: auto;
-    margin-right: 5vw;
 }	    
 
 .dropdown-menu {
@@ -180,19 +190,29 @@ html {
 }
 
 .dropdown-toggle {
-    background-color: #f5b03e;
-    border-radius: 50px;
+    background-color: transparent;
+    border: none;
+    /*background-color: #f5b03e;*/
+    
     text-decoration: none;
-    margin-right: 5vw;
-    width: 30vw;
+    margin-right: 2vw;
+    width: 20vw;
+    justify-content: center;
+    align-items: center;
 }
 
-.triangle {
-    width: 0;
-    height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid #934d0c;
-    margin-left: 10px;
-    cursor: pointer;
+.dropdown-toggle:hover,
+.dropdown-toggle:focus {
+    background-color: transparent; /* Mantén el color de fondo transparente en hover y focus */
+    color: white; /* Mantén el color del texto en hover y focus */
+    border: none; /* Elimina el borde en hover y focus */
+    outline: none; /* Elimina el borde de enfoque en hover y focus */
+}
+
+.dropdown-toggle:hover,
+.dropdown-toggle:focus {
+    background-color: transparent; /* Mantén el color de fondo transparente en hover y focus */
+    color: white; /* Mantén el color del texto en hover y focus */
+    border: none; /* Elimina el borde en hover y focus */
+    outline: none; /* Elimina el borde de enfoque en hover y focus */
 }
