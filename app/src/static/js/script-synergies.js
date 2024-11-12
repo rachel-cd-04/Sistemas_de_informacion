@@ -74,10 +74,10 @@ function removeChamp(posicion) {
 
     //Remove the sinergies from the container
     sinergias.forEach(sinergia => {
-        if (sinergiasContainer[sinergia]) {
-            sinergiasContainer[sinergia]--;
-            if (sinergiasContainer[sinergia] === 0) {
-                delete sinergiasContainer[sinergia];
+        if (sinergiasContainer[sinergia.nombre]) {
+            sinergiasContainer[sinergia.nombre]--;
+            if (sinergiasContainer[sinergia.nombre] === 0) {
+                delete sinergiasContainer[sinergia.nombre];
             }
         }
     });
