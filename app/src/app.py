@@ -65,8 +65,6 @@ def delete_composition():
 def admin_users_list():
         users_list = UsuarioDAO().get_all_users()
     
-        # Instanciar `AvatarDAO` para obtener los URLs de los avatares
-        avatar_dao = AvatarDAO()
 
         # Crear una lista enriquecida con los URLs de los avatares
         users_list_with_url = []
@@ -74,14 +72,14 @@ def admin_users_list():
         # Iterar sobre cada usuario y buscar la URL del avatar
         for user in users_list:
             # Usar `find_avatar_by_id` para obtener el objeto AvatarVO del avatar
-            avatar = avatar_dao.find_avatar_by_id(user.avatar)  # Acceso a `user.avatar` como propiedad
+            avatar = AvatarDAO().find_avatar_by_id(user.avatar)  # Acceso a `user.avatar` como propiedad
             
             # Crear un diccionario para almacenar los datos de usuario y la URL del avatar
             enriched_user = {
                 'mail': user.mail,
                 'nombre': user.nombre,
                 'contra': user.contra,
-                'avatar': avatar.URL_  # Asignar el URL si existe
+                'avatar': avatar.URL_ if avatar else None  # Asignar el URL si existe
             }
             
             # Agregar el usuario enriquecido a la lista final
