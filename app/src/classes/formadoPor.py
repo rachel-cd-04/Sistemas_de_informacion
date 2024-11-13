@@ -16,12 +16,12 @@ class FormadoPorVO:
 #####
 class FormadoPorDAO:
     # Añadir un campeon a una composicion
-    def add_campeon_to_composicion(self, usuario, composicion, campeon):
+    def add_campeon_to_composicion(self, formadoPor):
         try:
             conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
             cursor.execute('''INSERT INTO Formada_por_TAB (usuario, composicion, campeon) VALUES (?, ?, ?)''', 
-                           (usuario, composicion, campeon))
+                           (formadoPor.usuario, formadoPor.composicion, formadoPor.campeon))
             conn.commit()
         except sqlite3.Error as e:
             print(f"An error occurred: {e}")
