@@ -60,7 +60,6 @@ def delete_composition():
         return jsonify({"success": False}), 500
     
 
-#-------------------------------------------------------------
 @app.route('/admin_users_list')
 def admin_users_list():
         users_list = UsuarioDAO().get_all_users()
@@ -73,12 +72,14 @@ def admin_users_list():
         for user in users_list:
             # Usar `find_avatar_by_id` para obtener el objeto AvatarVO del avatar
             avatar = AvatarDAO().find_avatar_by_id(user.avatar)  # Acceso a `user.avatar` como propiedad
+            reports = ReportaDAO().find_reports_to(user.mail) 
             
             # Crear un diccionario para almacenar los datos de usuario y la URL del avatar
             enriched_user = {
                 'mail': user.mail,
                 'nombre': user.nombre,
                 'contra': user.contra,
+                'reports': reports,
                 'avatar': avatar.URL_ if avatar else None  # Asignar el URL si existe
             }
             
@@ -86,6 +87,7 @@ def admin_users_list():
             users_list_with_url.append(enriched_user)
             # Pasar la lista de usuarios enriquecida al template
         return render_template('admin_users_list.html', users_list=users_list_with_url, show_login_button=True)
+
 
 @app.route('/delete_user', methods=['POST'])
 def delete_usuario():
@@ -213,6 +215,17 @@ def save_composition():
         print(f"An error occurred: {e}")
         return jsonify({"success": False}), 500
     
+@app.route('/report_composition', methods=['POST'])
+def report_composition():
+    data = request.get_json()
+    user = data.get('user')
+    try:
+        ReportaDAO().save_reporta(ReportaVO(session['mail'], user))
+        return jsonify({"success": True})
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return jsonify({"success": False}), 500
+    
 
 @app.route('/delete_vote', methods=['POST'])
 def delete_vote():
@@ -241,6 +254,7 @@ def save_vote():
     except Exception as e:
         print(f"An error occurred: {e}")
         return jsonify({"success": False}), 500
+
 
 
 #------------------------------------------------------------- 
