@@ -72,6 +72,14 @@ h1 {
     text-align: left;
     color: #FFFFFF;
     font-size: 30px;
+    margin: 10px 0 5px 0;
+}
+
+.user h3 {
+    text-align: left;
+    color: #c9c9c9;
+    font-size: 15px;
+    margin: 15px 0 0 0;
 }
 
 .user-champions {
