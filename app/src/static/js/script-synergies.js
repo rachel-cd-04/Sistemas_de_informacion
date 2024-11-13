@@ -34,9 +34,19 @@ let emblemasSeleccionados = new Array(12).fill(0); //Array to store the number o
 //##################//
 
 //Aux Function to get the id of a character by its name
-function getIdByName(name) {
+function getIdByNameChamps(name) {
     for (let id in personajes) {
         if (personajes[id].nombre === name) {
+            return id;
+        }
+    }
+    return null; // Si no se encuentra el nombre
+}
+
+//Aux Function to get the id of a emblem by its name
+function getIdByNameEmblems(name) {
+    for (let id in emblemas) {
+        if (emblemas[id].nombre === name) {
             return id;
         }
     }
@@ -55,7 +65,7 @@ function handleClickChamp(name, posicion) {
     personajesSeleccionados[name] = 1; //Increase the count of the character
     personajesSeleccionadosID[posicion] = name; //Store the character id in the position
 
-    let id = getIdByName(name);
+    let id = getIdByNameChamps(name);
     let champSinergias = personajes[id].sinergias;
 
     //Add the sinergies to the container
@@ -74,14 +84,15 @@ function handleClickChamp(name, posicion) {
 //Function to remove the sinergies of a character from the container
 function removeChamp(posicion) {
     let name = personajesSeleccionadosID[posicion];
-    personajesSeleccionadosID[posicion] = "";
+    personajesSeleccionadosID[posicion] = 0;
 
     //If the character is duplicated, return
     if (personajesSeleccionadosID.includes(name)) {
+        personajesSeleccionados[name] = 0; //Reset the character position
         return;
     }
  
-    let id = getIdByName(name);
+    let id = getIdByNameChamps(name);
     let champSinergias = personajes[id].sinergias;
 
     //Remove the sinergies from the container
@@ -95,32 +106,31 @@ function removeChamp(posicion) {
     });
 
     personajesSeleccionados[name] = 0; //Reset the character position
-    personajesSeleccionadosID[posicion] = ""; //Reset the character id in the position
+    personajesSeleccionadosID[posicion] = 0; //Reset the character id in the position
 
     updateSynergiesContainer();
 }
 
 //Function to handle the click on a emblem (add theirs sinergies to the container)
-function handleClickEmblem(id, posicion) {
+function handleClickEmblem(name, posicion) {
     //Check if the limit of emblems is reached
     if(tope == 5){
         return;
     }
 
     tope++;
-    emblemasSeleccionados[id]++; //Increase the count of the emblem
-    emblemasSeleccionadosID[posicion] = id; //Store the emblem id in the position
+    emblemasSeleccionados[name]++; //Increase the count of the emblem
+    emblemasSeleccionadosID[posicion] = name; //Store the emblem id in the position
 
-    let sinergias = emblemas[id].sinergias;
+    let id = getIdByNameEmblems(name);
+    let sinergia = emblemas[id].sinergia;
 
     //Add the sinergies to the container
-    sinergias.forEach(sinergia => {
-        if (sinergiasContainer[sinergia]) {
-            sinergiasContainer[sinergia]++;
-        } else {
-            sinergiasContainer[sinergia] = 1;
-        }
-    });
+    if (sinergiasContainer[sinergia]) {
+        sinergiasContainer[sinergia]++;
+    } else {
+        sinergiasContainer[sinergia] = 1;
+    }
 
     updateSynergiesContainer();
 }
@@ -129,20 +139,19 @@ function handleClickEmblem(id, posicion) {
 function removeEmblem(posicion) {
     tope--;
 
-    let id = emblemasSeleccionadosID[posicion];
-    let sinergias = emblemas[emblemasSeleccionadosID[posicion]].sinergias;
+    let name = emblemasSeleccionadosID[posicion];
+    let id = getIdByNameEmblems(name);
+    let sinergia = emblemas[id].sinergia;
 
     //Remove the sinergies from the container
-    sinergias.forEach(sinergia => {
-        if (sinergiasContainer[sinergia]) {
-            sinergiasContainer[sinergia]--;
-            if (sinergiasContainer[sinergia] === 0) {
-                delete sinergiasContainer[sinergia];
-            }
+    if (sinergiasContainer[sinergia]) {
+        sinergiasContainer[sinergia]--;
+        if (sinergiasContainer[sinergia] === 0) {
+            delete sinergiasContainer[sinergia];
         }
-    });
+    }
 
-    emblemasSeleccionados[id] = 0; //Reset the emblem position
+    emblemasSeleccionados[name] = 0; //Reset the emblem position
     emblemasSeleccionadosID[posicion] = 0; //Reset the emblem id in the position
 
     updateSynergiesContainer();
@@ -232,7 +241,8 @@ document.querySelectorAll('.champ_menu .champ').forEach((div, index) => {
 document.querySelectorAll('.embl-2 img').forEach((img, index) => {
     img.addEventListener('click', () => {
         let posicion = obtainPositionInContainerEmblem();
-        handleClickEmblem(index + 1, posicion);
+        let name = obtainEmblemInContainerEmblem(event);
+        handleClickEmblem(name, posicion);
     });
 });
 
@@ -257,6 +267,18 @@ function obtainNameInContainerChamp(event) {
     let champ = event.currentTarget.closest('.champ-2');
     if (champ) {
         let nameElement = champ.querySelector('.name');
+        if (nameElement) {
+            return nameElement.textContent.trim();
+        }
+    }
+    return null;
+}
+
+//Aux Function to get the name of the first empty div in the emblem container
+function obtainEmblemInContainerEmblem(event) {
+    let emblem = event.currentTarget.closest('.embl-2');
+    if (emblem) {
+        let nameElement = emblem.querySelector('.name');
         if (nameElement) {
             return nameElement.textContent.trim();
         }
@@ -338,15 +360,19 @@ function findBestChamps(nivel) {
     //Iterate over the characters
     for (let id in personajes) {
         //Check if the character is already selected (don't recommend it)
-        if (!personajesSeleccionadosID.includes(parseInt(id))) {
+        if (!personajesSeleccionadosID.includes(personajes[id].nombre)) {
             let personaje = personajes[id];
             let sinergias = personaje.sinergias;
             let sinergiasActivas = 0;
 
             //Count the ammount of synergies that it activates
             sinergias.forEach(sinergia => {
+                alert("aquí");
+                alert(sinergia.nombre);
                 if (sinergiasContainer[sinergia]) {
+                    alert(sinergia.nombre + "Ya está en el contenedor");
                     sinergiasActivas++;
+                    alert(sinergiasActivas);
                 }
             });
 
@@ -354,6 +380,9 @@ function findBestChamps(nivel) {
             if (probabilidades[nivel][personaje.coste] > 0) {
                 //Check if the character has more synergies than the previous best
                 if (sinergiasActivas > maxSinergiasActivas) {
+                    alert("entra");
+                    alert(sinergiasActivas);
+                    alert(maxSinergiasActivas);
                     maxSinergiasActivas = sinergiasActivas;
                     mejoresChamps = [id];
                 } 
@@ -397,8 +426,8 @@ function updateRecChamps() {
         let champ = personajes[id];
         let img = document.createElement('img');
 
-        img.src = `base_datos/imagenes/champs/${champ.name}.png`; //Set the image source
-        img.alt = champ.name;
+        img.src = champ.url_recom; //Set the image source
+        img.alt = champ.nombre;
 
         //Create the div for the border of the character and add the image
         let recchamp = document.createElement('div');

@@ -26,6 +26,7 @@ body {
     margin-left: 0vw;
     margin-right: 0vw;
     display: flex;
+    width: 150vw;
 }
 
 .exp_menu {
@@ -235,12 +236,12 @@ body {
 /*********************************************************************************************/
 /*main synergies container */
 .champ_menu{
-    width: 60vw;
+    width: 53vw;
     height: 22.8vw; /*18*/
     bottom: 41vw;
     left: 18vw;
-    margin-left: 1%;
-    margin-right: 1%;;
+    margin-left: 0;
+    margin-right: 0;
     margin-top: 0.5%;
     margin-bottom: 0.80%;
     background-color: #155354;
@@ -254,6 +255,7 @@ body {
     font-weight: bold;
     font-size: 2vw;
     overflow: hidden;
+    padding: 0;
 }
 
 /*hollow for a champion */
@@ -618,11 +620,12 @@ body {
 /*main container*/
 .recommendation {
     width: 16vw;
-    height: 39vw;
+    height: 40vw;
     top: 0;
-    margin-top: 9vw;
+    margin-top: -40vw;
     right: 0; /* Pega el elemento a la derecha */
     margin-right: 0vw;
+    margin-left: 80vw;
     /*margin-left: 83%;*/
     background-color: rgba(25, 105, 107, 0.7);
     border-radius: 10px;
@@ -632,7 +635,7 @@ body {
     color: white;
     font-weight: bold;
     font-size: 2vw;
-    position: fixed;
+    position: relative;
 }
 
 /*main container title */
@@ -700,3 +703,7 @@ body {
     border-image: linear-gradient(to right, #eebe30, #f09605) 1;
 }
 /*********************************************************************************************/
+
+.save-button {
+    background-color: #155354;
+}
