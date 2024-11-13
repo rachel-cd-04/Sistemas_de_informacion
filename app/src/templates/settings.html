@@ -14,14 +14,16 @@
     <div class="profile-info">
         <div class="izquierda">    
             <div class="profile-picture">
-                <img src="../static/images/avatars/contacto.png" alt="Profile Picture">
+                <img src="{{session['avatar']}}" id="avatar-pic"alt="Profile Picture">
                 
             </div>
             <button class="edit-photo-button">EDIT PHOTO</button>
                 <div class="avatar-menu" id="avatar-menu">  
                     <div class="avatar-container">
                         {% for avatar in avatars %}
+                        <button class="avatar-button" onclick="selectAvatar('{{ avatar.URL_ }}')">
                             <img src="../{{ avatar.URL_ }}" class="avatar-option" alt="Avatar">
+                        </button>
                         {% endfor %}
                     </div>
                 </div> 
@@ -29,7 +31,7 @@
         <div class="profile-fields">
             <div class="field">
                 <label for="email">Mail</label>
-                <div type="email" id="email" placeholder="{{session['mail']}}">
+                <input type="email" id="email" placeholder="{{session['mail']}}" readonly>
             </div>
             <div class="field">
                 <label for="username">User name</label>
@@ -39,7 +41,7 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" value="{{session['contra']}}">
             </div>
-            <button class="save-button">SAVE CHANGES</button>
+            <button class="save-button" id="save-changes">SAVE CHANGES</button>
         </div>
     </div>
 </div>
@@ -55,15 +57,18 @@
                 avatarMenu.style.display = 'none';
             }
         });
-
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('save-changes').addEventListener('click', function(event) {
             event.preventDefault();
 
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            const avatar = document.querySelector('.avatar-selected').src;
+            const avatar = document.getElementById('avatar-pic').value;
 
-            fetch('/update_avatar', {
+            fetch('/update_all', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -76,15 +81,16 @@
             })
             .then(response => response.json())
             .then(data => {
-                if (data.success) {
-                    alert('Changes saved successfully!');
-                } else {
+                if (!data.success) {
                     alert('Failed to save changes.');
+                }
+                else {
+                    document.querySelector('.profile-picture img').src = '../' + avatarUrl;
+                    alert('Changes saved successfully.');
                 }
             })
             .catch(error => console.error('Error:', error));
         });
     });
 </script>
-
 {% endblock %}

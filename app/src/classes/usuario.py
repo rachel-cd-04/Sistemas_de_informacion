@@ -20,9 +20,23 @@ class UsuarioDAO:
         try:
             conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
-            #hashed_password = bcrypt.hashpw(usuario.contra.encode('utf-8'), bcrypt.gensalt())
             sql_query = '''INSERT INTO Usuario_TAB (mail, nombre, contra, avatar) VALUES (?, ?, ?, ?)'''
             cursor.execute(sql_query, (usuario.mail, usuario.nombre, usuario.contra, usuario.avatar))
+            conn.commit()
+            return usuario
+        except sqlite3.Error as e:
+            print(f"An error occurred: {e}")
+            return None
+        finally:
+            conn.close()
+
+    # Actualizar un usuario en la base de datos
+    def update_usuario(self, usuario):
+        try:
+            conn = sqlite3.connect(DB_PATH)
+            cursor = conn.cursor()
+            cursor.execute('''UPDATE Usuario_TAB SET nombre = ?, contra = ?, avatar =? WHERE mail = ?''', 
+                           (usuario.nombre, usuario.contra, usuario.avatar, usuario.mail))
             conn.commit()
             return usuario
         except sqlite3.Error as e:

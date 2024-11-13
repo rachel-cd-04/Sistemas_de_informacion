@@ -238,7 +238,7 @@ body {
 .champ_menu{
     width: 53vw;
     height: 22.8vw; /*18*/
-    bottom: 41vw;
+    bottom: 41vw; /*41*/
     left: 18vw;
     margin-left: 0;
     margin-right: 0;
@@ -318,6 +318,7 @@ body {
 
 /*container titles*/
 .emblem-title-container, .champ-title-container {
+    margin-top: -4vw;
     display: flex;
     height: 19vw;
     flex-direction: column;
@@ -622,7 +623,7 @@ body {
     width: 16vw;
     height: 40vw;
     top: 0;
-    margin-top: -40vw;
+    margin-top: -45vw;
     right: 0; /* Pega el elemento a la derecha */
     margin-right: 0vw;
     margin-left: 80vw;
@@ -706,9 +707,63 @@ body {
 
 .save-button {
     background-color: #155354;
+    padding: 0;
+    z-index: 999;
+    position: relative;
+    bottom: 56vw;
+    left: 27vw;
+    width: 6vw;
+    height: 4vw;
+    background-color: #f5b03e; 
+    color: white; 
+    padding: 1vw; 
+    border: none; 
+    border-radius: 0.5vw; 
+    cursor: pointer;
 }
 
 .champ-save {
+    display: flex; /* Usar flexbox para alinear los elementos horizontalmente */
+    align-items: center; /* Alinear verticalmente los elementos */
+    justify-content: flex-start; /* Alinear los elementos al inicio */
     width: 100vw;
-    margin-bottom: 30vw;
+ 
+}
+
+.overlay {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #15535498; /* Fondo blanco semitransparente */
+    z-index: 999; /* Debe estar por debajo del pop-up */
+}
+
+.popup {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 20vw;
+    height: 35vw;
+    background-color: #155354;
+    border: 4px solid #f5b03e;
+    border-radius: 10px;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    padding: 1vw;
+    text-align: center;
+}
+
+.popup .close-button {
+    position: absolute;
+    top: 0.5vw;
+    right: 0.5vw;
+    background: none;
+    border: none;
+    font-size: 1vw;
+    cursor: pointer;
 }

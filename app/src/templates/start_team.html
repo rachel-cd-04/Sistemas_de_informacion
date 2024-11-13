@@ -40,7 +40,7 @@
                         <div class="champ" data-id="11"></div>
                         <div class="champ" data-id="12"></div>
                     </div>
-                    <button class="save-button">Save</button>
+                    <button class="save-button" id="saveButton">Save</button>
                 </div>
                 
 
@@ -110,5 +110,62 @@
             <script src="../static/js/script-synergies.js"></script>
             <script src="../static/js/script-champions.js"></script>
             <script src="../static/js/script-emblems.js"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const saveButton = document.getElementById('saveButton');
+                    const overlay = document.createElement('div');
+                    overlay.classList.add('overlay');
+                    document.body.appendChild(overlay);
+            
+                    const popup = document.createElement('div');
+                    popup.classList.add('popup');
+                    popup.innerHTML = `
+                        <button class="close-button">&times;</button>
+                        <p>Save Successful!</p>
+                        <div class="popup">
+                        <button class="close-button">&times;</button>
+                        <div class="popup-content">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" placeholder="Enter name">
+                            <span id="name-error" class="error-message">Name already in use</span>
+                            
+                            <label for="description">Description</label>
+                            <textarea id="description" placeholder="Enter description" maxlength="500"></textarea>
+                            
+                            <div class="difficulty">
+                                <label>Difficulty</label>
+                                <button class="difficulty-button" id="easy">Easy</button>
+                                <button class="difficulty-button" id="medium">Medium</button>
+                                <button class="difficulty-button" id="hard">Hard</button>
+                            </div>
+                            
+                            <div class="publish">
+                                <label for="publish">Publish</label>
+                                <input type="checkbox" id="publish">
+                            </div>
+                            
+                            <button class="save-button">Save</button>
+                        </div>
+                    </div>
+
+                    `;
+                    document.body.appendChild(popup);
+            
+                    saveButton.addEventListener('click', function() {
+                        overlay.style.display = 'block';
+                        popup.style.display = 'block';
+                    });
+            
+                    popup.querySelector('.close-button').addEventListener('click', function() {
+                        overlay.style.display = 'none';
+                        popup.style.display = 'none';
+                    });
+            
+                    overlay.addEventListener('click', function() {
+                        overlay.style.display = 'none';
+                        popup.style.display = 'none';
+                    });
+                });
+            </script>
 
             {% endblock %}

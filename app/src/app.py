@@ -113,17 +113,24 @@ def settings():
     return render_template('settings.html', avatars=avatars, show_login_button=True)
 
 
-@app.route('/update_avatar', methods=['POST'])
+@app.route('/update_all', methods=['POST'])
 def update_avatar():
+    avatar_dao = AvatarDAO()
+    avatars = avatar_dao.get_all_avatars()
     data = request.get_json()
     mail = session['mail']
+    username = data.get('username')
+    password = data.get('password')
     avatar = data.get('avatar')
     try:
-        UsuarioDAO().update_avatar(mail, avatar)
+        UsuarioDAO().update_usuario(UsuarioVO(mail, username, password, 6))
+        session['username'] = username
+        session['contra'] = password
         return jsonify({"success": True})
     except Exception as e:
         print(f"An error occurred: {e}")
         return jsonify({"success": False}),
+   
 
 #-------------------------------------------------------------
 @app.route('/start_team')

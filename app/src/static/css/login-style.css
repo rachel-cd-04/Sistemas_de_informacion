@@ -163,3 +163,7 @@ form input {
     background-color: #341ab3; /* Cambiar el color de fondo al pasar el ratón por encima */
 }
 
+.button-login {
+    position: relative;
+    z-index: 999;
+}
