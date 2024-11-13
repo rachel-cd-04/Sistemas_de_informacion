@@ -130,6 +130,23 @@ class UsuarioDAO:
             return []
         finally:
             conn.close()
+
+    # Encontrar un usuario por su mail y verificar la contraseña
+    def check_priviledge(self, mail, password):
+        conn = None
+        try:
+            conn = sqlite3.connect(DB_PATH)
+            cursor = conn.cursor()
+            cursor.execute('''SELECT privilegios FROM Usuario_TAB WHERE mail = ? AND contra = ?''',
+                           (mail, password))
+            return cursor.fetchone()[0]
+        except sqlite3.Error as e:
+            print(f"An error occurred: {e}")
+            return None
+        finally:
+            if conn:
+                conn.close()
+
     """
     def check_password_hash(self, mail, contra):
         try:
