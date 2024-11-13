@@ -106,6 +106,7 @@
 
 
             function toggleArrowColors(direction, button) {
+                check_logged()
                 const nombre = button.getAttribute('data-nombre');
                 const mail = button.getAttribute('data-mail');
                 const upArrow = button.parentElement.querySelector('.up');
@@ -161,6 +162,7 @@
 
 
             function saveComposition(button) {
+                check_logged()
                 const nombre = button.getAttribute('data-nombre');
                 const dificultad = button.getAttribute('data-dificultad');
                 const descr = button.getAttribute('data-descr');
@@ -201,6 +203,7 @@
 
 
             function reportComposition(button) {
+                check_logged()
                 const user = button.getAttribute('data-user');
 
                 fetch('/report_composition', {
