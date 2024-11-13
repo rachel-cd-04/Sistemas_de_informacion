@@ -21,7 +21,7 @@
                         <span data-difficulty="{{ team_comp.dificultad }}">{{ team_comp.dificultad }}</span>
                     </div>
                     <div class="team-comp-buttons">
-                        <button class="save-btn" data-nombre="{{ team_comp.nombre }}" data-dificultad="{{ team_comp.dificultad }}" data-descr="{{ team_comp.descr }}" data-champ="{{ team_comp.champions }}" onclick="saveComposition(this)">Save</button>
+                        <button class="save-btn" data-nombre="{{ team_comp.nombre }}" data-dificultad="{{ team_comp.dificultad }}" data-descr="{{ team_comp.descr }}" data-user="{{ team_comp.usuario }}" onclick="saveComposition(this)">Save</button>
                     </div>
                     
                     <div class="team-comp-description">
@@ -142,9 +142,10 @@ function borrarVoto(nombre, mail) {
                 const nombre = button.getAttribute('data-nombre');
                 const dificultad = button.getAttribute('data-dificultad');
                 const descr = button.getAttribute('data-descr');
-                //const champions = button.getAttribute('data-champ');
+                //const champions = JSON.parse(button.getAttribute('data-champ'));
+                const user = button.getAttribute('data-user');
                 //const championNames = champions.map(champion => champion.nombre);
-                alert(`Nombre: ${nombre}, Dificultad: ${dificultad}, Descripción: ${descr},`);//Campeones: ${champions}
+                alert(`Nombre: ${nombre}, Dificultad: ${dificultad}, Descripción: ${descr}, Usuario: ${user}`);//Campeones: ${champions}`);
 
                 fetch('/save_composition', {
                     method: 'POST',
@@ -155,7 +156,8 @@ function borrarVoto(nombre, mail) {
                         nombre: nombre,
                         dificultad: dificultad,
                         descr: descr,
-                        //champions: championNames
+                        //champions: champions
+                        user : user
                     })
                 })
                 .then(response => response.json())
