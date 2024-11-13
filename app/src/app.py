@@ -59,7 +59,7 @@ def delete_composition():
         print(f"An error occurred: {e}")
         return jsonify({"success": False}), 500
     
-
+#-------------------------------------------------------------
 @app.route('/admin_users_list')
 def admin_users_list():
         users_list = UsuarioDAO().get_all_users()
