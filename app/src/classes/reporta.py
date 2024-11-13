@@ -54,3 +54,17 @@ class ReportaDAO:
             return None
         finally:
             conn.close()
+
+    # Encontrar nº de reportes a un usuario
+    def find_reports_to(self, usuarioReportado):
+        try:
+            conn = sqlite3.connect(DB_PATH)
+            cursor = conn.cursor()
+            cursor.execute('''SELECT COUNT(*) FROM Reporta_TAB WHERE usuarioReportado = ?''', 
+                           (usuarioReportado,))
+            return cursor.fetchone()[0]
+        except sqlite3.Error as e:
+            print(f"An error occurred: {e}")
+            return 0
+        finally:
+            conn.close()

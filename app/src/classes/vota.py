@@ -19,7 +19,7 @@ class VotaDAO:
         try:
             conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
-            cursor.execute('''INSERT INTO Vota_TAB (usuarioVotante, usuarioVotado, composicion) VALUES (?, ?, ?, ?)''', 
+            cursor.execute('''INSERT INTO Vota_TAB (usuarioVotante, usuarioVotado, composicion, voto) VALUES (?, ?, ?, ?)''', 
                            (vota.usuarioVotante, vota.usuarioVotado, vota.composicion, vota.voto))
             conn.commit()
         except sqlite3.Error as e:
