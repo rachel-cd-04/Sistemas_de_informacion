@@ -37,6 +37,8 @@ def index():
 #-------------------------------------------------------------
 @app.route('/admin_comps_list')
 def admin_comps_list():
+    if not session.get("mail"):
+        return redirect("/login")
     if 0 == UsuarioDAO().check_priviledge(session["mail"], session["contra"]):
             return redirect("/")
     
@@ -65,6 +67,8 @@ def delete_composition():
 #-------------------------------------------------------------
 @app.route('/admin_users_list')
 def admin_users_list():
+        if not session.get("mail"):
+            return redirect("/login")
         if 0 == UsuarioDAO().check_priviledge(session["mail"], session["contra"]):
             return redirect("/")
         
