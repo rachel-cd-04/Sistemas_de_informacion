@@ -249,6 +249,7 @@ def save_composition():
         print(f"An error occurred: {e}")
         return jsonify({"success": False}), 500
     
+    
 @app.route('/report_composition', methods=['POST'])
 def report_composition():
     data = request.get_json()

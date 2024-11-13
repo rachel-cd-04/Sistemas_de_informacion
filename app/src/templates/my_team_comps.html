@@ -29,10 +29,10 @@
                         <p>{{ team_comp.descr }}</p>
                     </div>
                 </div>
-                <div class="team-comp-champions">
+                <div class="team-comp-container">
                     {% for champion in team_comp.champions %}
                         <div class="team-comp-champion">
-                            <img src="{{ champion.url_recom }}" alt="{{ champion.nombre }}">
+                            <img src="{{ champion.url_buscador}}" alt="{{ champion.nombre }}">
                             <p>{{ champion.nombre }}</p>
                         </div>
                     {% endfor %}
