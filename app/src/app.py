@@ -260,8 +260,6 @@ def save_vote():
 #------------------------------------------------------------- 
 @app.route("/login", methods=["GET", "POST"])
 def login_user():
-    CORREO_ADMIN = "admin@gmail.com"
-    CONTRASENA_ADMIN = "admin"
     session.clear()
     if request.method == "POST":
         mail = request.form.get("mail")
@@ -269,8 +267,6 @@ def login_user():
         if not mail or not password:
             return redirect("/login")
         
-        if mail == CORREO_ADMIN and password == CONTRASENA_ADMIN:
-            return redirect("admin_comps_list")
 
         user = UsuarioDAO().find_usuario_by_id_pssw(mail, password)
         if not user:
@@ -281,6 +277,9 @@ def login_user():
         avatar = AvatarDAO().find_avatar_by_id(user.avatar)
         session["avatar"] = avatar.URL_
         session["contra"] = user.contra
+
+        if user.privilegios != 0:
+            return redirect("admin_comps_list")
         return redirect("/")
 
     return render_template("login.html", session=session, show_login_button=False)
@@ -301,7 +300,7 @@ def register_user():
         if password != confirmpssw:
             return redirect("/register")
 
-        user = UsuarioDAO().save_usuario(UsuarioVO(mail, username, password, 6))
+        user = UsuarioDAO().save_usuario(UsuarioVO(mail, username, password, 6, 0))
         if not user:
             return redirect("/help")
 
