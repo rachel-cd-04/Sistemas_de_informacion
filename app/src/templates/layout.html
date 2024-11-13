@@ -87,6 +87,23 @@
                         }
                     });
                 }
-        </script>
+            </script>
+            <script>
+                function check_logged() {
+                        $.ajax({
+                        url: '/check_logged',
+                        type: 'POST',
+                        success: function() {
+                            window.location.href = '/login';
+                            return false;
+                        }
+                        
+                        
+                    });
+
+                    return true;
+
+                }
+            </script>
     </body>
 </html>
