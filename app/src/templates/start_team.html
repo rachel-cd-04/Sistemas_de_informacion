@@ -133,9 +133,9 @@
                                     
                                     <div class="difficulty">
                                         <label>Difficulty</label>
-                                        <button class="difficulty-button" id="easy">Easy</button>
-                                        <button class="difficulty-button" id="medium">Medium</button>
-                                        <button class="difficulty-button" id="hard">Hard</button>
+                                        <button class="difficulty-button" id="Easy">Easy</button>
+                                        <button class="difficulty-button" id="Medium">Medium</button>
+                                        <button class="difficulty-button" id="Hard">Hard</button>
                                     </div>
                                     
                                     <div class="publish">
@@ -181,6 +181,53 @@
                     descriptionField.addEventListener('input', function() { 
                         const remaining = 2500 - descriptionField.value.length; 
                         charCount.textContent = `${remaining} characters remaining`;
+                    });
+
+                    popup.querySelector('.saveconf-button').addEventListener('click', function() {
+                        const name = document.getElementById('name').value;
+                        const description = document.getElementById('description').value;
+                        const difficulty = document.querySelector('.difficulty-button[style*="border"]').id;
+                        const publish = document.getElementById('publish').checked;
+
+                        const selectedChampions = [];
+                        document.querySelectorAll('.champ_menu .champ').forEach(champ => {
+                        const img = champ.querySelector('img');
+                        if (img && img.src && img.alt) {
+                            const champName = img.alt;
+                            alert(champName);
+                            selectedChampions.push(champName);
+                        }
+                        });
+
+                        const data = {
+                            nombre: name,
+                            dificultad: difficulty,
+                            published: publish ? 'Y' : 'N',
+                            descr: description,
+                            champions: selectedChampions
+                        };
+
+                        fetch('/save_comp', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(data)
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert('Composición guardada exitosamente.');
+                                overlay.style.display = 'none';
+                                popup.style.display = 'none';
+                            } else {
+                                alert('Error al guardar la composición.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Error al guardar la composición.');
+                        });
                     });
                 });
             </script>

@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (champ) {
                         const campoImg = document.createElement('img');
                         campoImg.setAttribute('src', champ.url_campo); // Usa la URL del atributo url_campo
-                        campoImg.setAttribute('alt', champName);
+                        campoImg.setAttribute('alt', champ.nombre);
                         campoImg.classList.add('img-champ');
                         champMenu[i].appendChild(campoImg); // Añade la imagen al contenedor
                     }

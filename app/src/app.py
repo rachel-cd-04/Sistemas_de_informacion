@@ -148,6 +148,25 @@ def start_team():
 
     return render_template('start_team.html', champs=champs_dict, emblems=emblems_dict, synergies=synergies_dict, show_login_button=True)
 
+@app.route('/save_comp', methods=['POST'])
+def save_comp():
+    data = request.get_json()
+    mail = session['mail']
+    nombre = data.get('nombre')
+    dificultad = data.get('dificultad')
+    published = data.get('published')
+    descr = data.get('descr')
+    champions = data.get('champions')
+
+    try:
+        ComposicionDAO().save_composicion(ComposicionVO(mail, nombre, dificultad, published, descr))
+        for champ in champions:
+            FormadoPorDAO().add_campeon_to_composicion(FormadoPorVO(mail, nombre, champ))
+        return jsonify({"success": True})
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return jsonify({"success": False}), 500
+
 #-------------------------------------------------------------
 @app.route('/my_team_comps')
 #@login_required(login_url="/login")
