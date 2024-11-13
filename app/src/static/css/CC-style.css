@@ -199,3 +199,19 @@ h1 {
     font-size: 25px;
     padding: 5px;
 }
+
+
+
+.save-btn, .report-btn {
+    background-color: #f5b03e;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    width: 65px;
+    height: 65px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
