@@ -120,33 +120,32 @@
                     const popup = document.createElement('div');
                     popup.classList.add('popup');
                     popup.innerHTML = `
-                        <button class="close-button">&times;</button>
-                        <p>Save Successful!</p>
-                        <div class="popup">
-                        <button class="close-button">&times;</button>
-                        <div class="popup-content">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" placeholder="Enter name">
-                            <span id="name-error" class="error-message">Name already in use</span>
-                            
-                            <label for="description">Description</label>
-                            <textarea id="description" placeholder="Enter description" maxlength="500"></textarea>
-                            
-                            <div class="difficulty">
-                                <label>Difficulty</label>
-                                <button class="difficulty-button" id="easy">Easy</button>
-                                <button class="difficulty-button" id="medium">Medium</button>
-                                <button class="difficulty-button" id="hard">Hard</button>
-                            </div>
-                            
-                            <div class="publish">
-                                <label for="publish">Publish</label>
-                                <input type="checkbox" id="publish">
-                            </div>
-                            
-                            <button class="save-button">Save</button>
-                        </div>
-                    </div>
+                            <button class="close-button">&times;</button>
+                                <div class="popup-content">
+                                    <label for="name">Name</label>
+                                    <input type="text" id="name" placeholder="Enter name">
+                                    <span id="name-error" class="error-message">Name already in use</span>
+                                    
+                                    <label for="description">Description</label> 
+                                    <textarea id="description" placeholder="Enter description" maxlength="2500"></textarea> 
+                                    <div id="charCount">2500 characters remaining</div>
+
+                                    
+                                    <div class="difficulty">
+                                        <label>Difficulty</label>
+                                        <button class="difficulty-button" id="easy">Easy</button>
+                                        <button class="difficulty-button" id="medium">Medium</button>
+                                        <button class="difficulty-button" id="hard">Hard</button>
+                                    </div>
+                                    
+                                    <div class="publish">
+                                        <label for="publish">Publish</label>
+                                        <input type="checkbox" id="publish">
+                                    </div>
+                                    
+                                    <button class="saveconf-button">Save</button>
+                                </div>
+                      
 
                     `;
                     document.body.appendChild(popup);
@@ -164,6 +163,24 @@
                     overlay.addEventListener('click', function() {
                         overlay.style.display = 'none';
                         popup.style.display = 'none';
+                    });
+
+                    const difficultyButtons = document.querySelectorAll('.difficulty-button'); 
+                    difficultyButtons.forEach(button => { 
+                        button.addEventListener('click', function() { 
+                            // Elimina el borde de los otros botones 
+                            difficultyButtons.forEach(btn => btn.style.border = 'none'); 
+                            // Añade el borde verde al botón seleccionado 
+                            button.style.border = '3px solid #479d9e'; 
+                        });
+                    });
+
+                    // Contador de caracteres para el campo de descripción 
+                    const descriptionField = document.getElementById('description'); 
+                    const charCount = document.getElementById('charCount'); 
+                    descriptionField.addEventListener('input', function() { 
+                        const remaining = 2500 - descriptionField.value.length; 
+                        charCount.textContent = `${remaining} characters remaining`;
                     });
                 });
             </script>

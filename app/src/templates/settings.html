@@ -21,7 +21,7 @@
                 <div class="avatar-menu" id="avatar-menu">  
                     <div class="avatar-container">
                         {% for avatar in avatars %}
-                        <button class="avatar-button" onclick="selectAvatar('{{ avatar.URL_ }}')">
+                        <button class="avatar-button" onclick="selectAvatar('{{ avatar.id }}', '{{ avatar.URL_ }}')">
                             <img src="../{{ avatar.URL_ }}" class="avatar-option" alt="Avatar">
                         </button>
                         {% endfor %}
@@ -64,9 +64,9 @@
         document.getElementById('save-changes').addEventListener('click', function(event) {
             event.preventDefault();
 
-            const username = document.getElementById('username').value;
+            const username = document.getElementById('username').value || document.getElementById('username').placeholder;
             const password = document.getElementById('password').value;
-            const avatar = document.getElementById('avatar-pic').value;
+            const avatar = selectedAvatarId || document.getElementById('avatar-pic').dataset.avatarId;
 
             fetch('/update_all', {
                 method: 'POST',
@@ -85,12 +85,24 @@
                     alert('Failed to save changes.');
                 }
                 else {
-                    document.querySelector('.profile-picture img').src = '../' + avatarUrl;
+                    document.querySelector('.custom-greetings-text').textContent = 'Hi, ' + username;
+                    document.getElementById('custom-avatar').src = '../' + selectedAvatarUrl;
+                    alert(selectedAvatarUrl)
                     alert('Changes saved successfully.');
                 }
             })
             .catch(error => console.error('Error:', error));
         });
     });
+</script>
+<script>
+    let selectedAvatarId = '';
+    let selectedAvatarUrl = '';
+
+    function selectAvatar(avatarId, avatarUrl) {
+        selectedAvatarId = avatarId;
+        selectedAvatarUrl = avatarUrl;
+        document.querySelector('.profile-picture img').src = '../' + avatarUrl;
+    }
 </script>
 {% endblock %}

@@ -108,24 +108,24 @@ def help():
 #-------------------------------------------------------------
 @app.route('/settings')
 def settings():
-    avatar_dao = AvatarDAO()
-    avatars = avatar_dao.get_all_avatars()
+    avatars = AvatarDAO().get_all_avatars()
     return render_template('settings.html', avatars=avatars, show_login_button=True)
 
 
 @app.route('/update_all', methods=['POST'])
 def update_avatar():
-    avatar_dao = AvatarDAO()
-    avatars = avatar_dao.get_all_avatars()
     data = request.get_json()
     mail = session['mail']
     username = data.get('username')
     password = data.get('password')
-    avatar = data.get('avatar')
+    avatar_id = data.get('avatar')
+    avatar_url = (AvatarDAO().find_avatar_by_id(avatar_id)).URL_
+
     try:
-        UsuarioDAO().update_usuario(UsuarioVO(mail, username, password, 6))
+        UsuarioDAO().update_usuario(UsuarioVO(mail, username, password, avatar_id))
         session['username'] = username
         session['contra'] = password
+        session['avatar'] = avatar_url
         return jsonify({"success": True})
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -264,7 +264,8 @@ def login_user():
 
         session["mail"] = user.mail
         session["username"] = user.nombre
-        session["avatar"] = user.avatar
+        avatar = AvatarDAO().find_avatar_by_id(user.avatar)
+        session["avatar"] = avatar.URL_
         session["contra"] = user.contra
         return redirect("/")
 
@@ -286,13 +287,15 @@ def register_user():
         if password != confirmpssw:
             return redirect("/register")
 
-        user = UsuarioDAO().save_usuario(UsuarioVO(mail, username, password, '../static/images/avatars/contacto.png'))
+        user = UsuarioDAO().save_usuario(UsuarioVO(mail, username, password, 6))
         if not user:
             return redirect("/help")
 
         session["mail"] = user.mail
         session["username"] = user.nombre
-        session["avatar"] = user.avatar
+        avatar = AvatarDAO().find_avatar_by_id(user.avatar)
+        session["avatar"] = avatar.URL_
+        session["contra"] = user.contra
         return redirect("/")
 
     return render_template("register.html", show_login_button=False)
