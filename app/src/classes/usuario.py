@@ -6,11 +6,12 @@ DB_PATH = '/app/src/db/database.db'
 # VO
 ####
 class UsuarioVO:
-    def __init__(self, mail, nombre, contra, avatar):
+    def __init__(self, mail, nombre, contra, avatar, privilegios):
         self.mail = mail
         self.nombre = nombre
         self.contra = contra
         self.avatar = avatar
+        self.privilegios = privilegios
 
 # DAO
 #####
@@ -20,8 +21,8 @@ class UsuarioDAO:
         try:
             conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
-            sql_query = '''INSERT INTO Usuario_TAB (mail, nombre, contra, avatar) VALUES (?, ?, ?, ?)'''
-            cursor.execute(sql_query, (usuario.mail, usuario.nombre, usuario.contra, usuario.avatar))
+            sql_query = '''INSERT INTO Usuario_TAB (mail, nombre, contra, avatar, privilegios) VALUES (?, ?, ?, ?, ?)'''
+            cursor.execute(sql_query, (usuario.mail, usuario.nombre, usuario.contra, usuario.avatar, usuario.privilegios))
             conn.commit()
             return usuario
         except sqlite3.Error as e:
@@ -65,11 +66,11 @@ class UsuarioDAO:
             mail = mail.strip()
             conn = sqlite3.connect(DB_PATH)
             cursor = conn.cursor()
-            sql_query = '''SELECT mail, nombre, contra, avatar FROM Usuario_TAB WHERE mail = ? AND contra = ?'''
+            sql_query = '''SELECT mail, nombre, contra, avatar, privilegios FROM Usuario_TAB WHERE mail = ? AND contra = ?'''
             cursor.execute(sql_query, (mail, password))
             row = cursor.fetchone()
             if row:
-                return UsuarioVO(row[0], row[1], row[2], row[3])
+                return UsuarioVO(row[0], row[1], row[2], row[3], row[4])
             return None
         except sqlite3.Error as e:
             print(f"An error occurred: {e}")
@@ -123,7 +124,7 @@ class UsuarioDAO:
             cursor = conn.cursor()
             cursor.execute('''SELECT * FROM Usuario_TAB ''')
             rows = cursor.fetchall()
-            return [UsuarioVO(row[0], row[1], row[2], row[3]) for row in rows]
+            return [UsuarioVO(row[0], row[1], row[2], row[3], row[4]) for row in rows]
         except sqlite3.Error as e:
             print(f"An error occurred: {e}")
             return []
