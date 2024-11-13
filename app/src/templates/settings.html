@@ -86,7 +86,8 @@
                 }
                 else {
                     document.querySelector('.custom-greetings-text').textContent = 'Hi, ' + username;
-                    document.getElementById('custom-avatar').src = '../' + selectedAvatarUrl;
+                    alert(selectedAvatarUrl)
+                    document.getElementById('.custom-avatar').src = '../' + selectedAvatarUrl;
                     alert(selectedAvatarUrl)
                     alert('Changes saved successfully.');
                 }
