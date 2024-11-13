@@ -114,6 +114,19 @@ def settings():
     avatars = avatar_dao.get_all_avatars()
     return render_template('settings.html', avatars=avatars, show_login_button=True)
 
+
+@app.route('/update_avatar', methods=['POST'])
+def update_avatar():
+    data = request.get_json()
+    mail = session['mail']
+    avatar = data.get('avatar')
+    try:
+        UsuarioDAO().update_avatar(mail, avatar)
+        return jsonify({"success": True})
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return jsonify({"success": False}),
+
 #-------------------------------------------------------------
 @app.route('/start_team')
 #@login_required(login_url="/login")
@@ -261,7 +274,7 @@ def register_user():
         if password != confirmpssw:
             return redirect("/register")
 
-        user = UsuarioDAO().save_usuario(UsuarioVO(mail, username, password, '../static/images/avatars/avatar1.png'))
+        user = UsuarioDAO().save_usuario(UsuarioVO(mail, username, password, '../static/images/avatars/contacto.png'))
         if not user:
             return redirect("/help")
 

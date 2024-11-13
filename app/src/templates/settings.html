@@ -29,7 +29,7 @@
         <div class="profile-fields">
             <div class="field">
                 <label for="email">Mail</label>
-                <input type="email" id="email" placeholder="{{session['mail']}}">
+                <div type="email" id="email" placeholder="{{session['mail']}}">
             </div>
             <div class="field">
                 <label for="username">User name</label>
@@ -55,6 +55,36 @@
                 avatarMenu.style.display = 'none';
             }
         });
+
+        document.getElementById('save-changes').addEventListener('click', function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const avatar = document.querySelector('.avatar-selected').src;
+
+            fetch('/update_avatar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password,
+                    avatar: avatar
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Changes saved successfully!');
+                } else {
+                    alert('Failed to save changes.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
     });
 </script>
+
 {% endblock %}

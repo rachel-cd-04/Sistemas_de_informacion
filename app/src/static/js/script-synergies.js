@@ -367,12 +367,8 @@ function findBestChamps(nivel) {
 
             //Count the ammount of synergies that it activates
             sinergias.forEach(sinergia => {
-                alert("aquí");
-                alert(sinergia.nombre);
-                if (sinergiasContainer[sinergia]) {
-                    alert(sinergia.nombre + "Ya está en el contenedor");
+                if (sinergiasContainer[sinergia.nombre]) {
                     sinergiasActivas++;
-                    alert(sinergiasActivas);
                 }
             });
 
@@ -380,9 +376,6 @@ function findBestChamps(nivel) {
             if (probabilidades[nivel][personaje.coste] > 0) {
                 //Check if the character has more synergies than the previous best
                 if (sinergiasActivas > maxSinergiasActivas) {
-                    alert("entra");
-                    alert(sinergiasActivas);
-                    alert(maxSinergiasActivas);
                     maxSinergiasActivas = sinergiasActivas;
                     mejoresChamps = [id];
                 } 

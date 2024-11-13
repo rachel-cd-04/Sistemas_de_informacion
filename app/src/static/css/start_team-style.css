@@ -707,3 +707,8 @@ body {
 .save-button {
     background-color: #155354;
 }
+
+.champ-save {
+    width: 100vw;
+    margin-bottom: 30vw;
+}
