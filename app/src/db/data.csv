@@ -1,8 +1,9 @@
 Usuario_TAB
-mail,nombre,contra,avatar
-user1@example.com,JohnDoe,password1,1
-user2@example.com,JaneSmith,password2,2
-user3@example.com,BobJohnson,password3,3
+mail,nombre,contra,avatar,privilegios
+user1@example.com,JohnDoe,password1,1,0
+user2@example.com,JaneSmith,password2,2,0
+user3@example.com,BobJohnson,password3,3,0
+admin@gmail.com,Admin,admin,6,1
 
 Avatar_TAB
 id,URL_
@@ -11,6 +12,7 @@ id,URL_
 3,static/images/avatars/Fuwa5e8d31dc1a6a6.jpg
 4,static/images/avatars/Hauntling5e8d31c8a286f.jpg
 5,static/images/avatars/avatar1.png
+6,static/images/avatars/contacto.png
 
 Composicion_TAB
 usuario,nombre,dificultad,publicado,descr
@@ -112,10 +114,10 @@ static/images/synergies/BestFriends_TFT_icon.webp,BestFriends,1
 static/images/synergies/Druid_TFT_icon.webp,Druid,1
 
 Vota_TAB
-usuarioVotante,usuarioVotado,composicion
-user1@example.com,user2@example.com,Comp2
-user2@example.com,user3@example.com,Comp3
-user3@example.com,user1@example.com,Comp1
+usuarioVotante,usuarioVotado,composicion,voto
+user1@example.com,user2@example.com,Comp2,1
+user2@example.com,user3@example.com,Comp3,-1
+user3@example.com,user1@example.com,Comp1,1
 
 Formada_por_TAB
 usuario,composicion,campeon

@@ -59,7 +59,6 @@ def delete_composition():
         print(f"An error occurred: {e}")
         return jsonify({"success": False}), 500
     
-
 #-------------------------------------------------------------
 @app.route('/admin_users_list')
 def admin_users_list():
@@ -73,12 +72,14 @@ def admin_users_list():
         for user in users_list:
             # Usar `find_avatar_by_id` para obtener el objeto AvatarVO del avatar
             avatar = AvatarDAO().find_avatar_by_id(user.avatar)  # Acceso a `user.avatar` como propiedad
+            reports = ReportaDAO().find_reports_to(user.mail) 
             
             # Crear un diccionario para almacenar los datos de usuario y la URL del avatar
             enriched_user = {
                 'mail': user.mail,
                 'nombre': user.nombre,
                 'contra': user.contra,
+                'reports': reports,
                 'avatar': avatar.URL_ if avatar else None  # Asignar el URL si existe
             }
             
@@ -86,6 +87,7 @@ def admin_users_list():
             users_list_with_url.append(enriched_user)
             # Pasar la lista de usuarios enriquecida al template
         return render_template('admin_users_list.html', users_list=users_list_with_url, show_login_button=True)
+
 
 @app.route('/delete_user', methods=['POST'])
 def delete_usuario():
@@ -213,6 +215,17 @@ def save_composition():
         print(f"An error occurred: {e}")
         return jsonify({"success": False}), 500
     
+@app.route('/report_composition', methods=['POST'])
+def report_composition():
+    data = request.get_json()
+    user = data.get('user')
+    try:
+        ReportaDAO().save_reporta(ReportaVO(session['mail'], user))
+        return jsonify({"success": True})
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return jsonify({"success": False}), 500
+    
 
 @app.route('/delete_vote', methods=['POST'])
 def delete_vote():
@@ -243,11 +256,10 @@ def save_vote():
         return jsonify({"success": False}), 500
 
 
+
 #------------------------------------------------------------- 
 @app.route("/login", methods=["GET", "POST"])
 def login_user():
-    CORREO_ADMIN = "admin@gmail.com"
-    CONTRASENA_ADMIN = "admin"
     session.clear()
     if request.method == "POST":
         mail = request.form.get("mail")
@@ -255,8 +267,6 @@ def login_user():
         if not mail or not password:
             return redirect("/login")
         
-        if mail == CORREO_ADMIN and password == CONTRASENA_ADMIN:
-            return redirect("admin_comps_list")
 
         user = UsuarioDAO().find_usuario_by_id_pssw(mail, password)
         if not user:
@@ -267,6 +277,9 @@ def login_user():
         avatar = AvatarDAO().find_avatar_by_id(user.avatar)
         session["avatar"] = avatar.URL_
         session["contra"] = user.contra
+
+        if user.privilegios != 0:
+            return redirect("admin_comps_list")
         return redirect("/")
 
     return render_template("login.html", session=session, show_login_button=False)
@@ -287,7 +300,7 @@ def register_user():
         if password != confirmpssw:
             return redirect("/register")
 
-        user = UsuarioDAO().save_usuario(UsuarioVO(mail, username, password, 6))
+        user = UsuarioDAO().save_usuario(UsuarioVO(mail, username, password, 6, 0))
         if not user:
             return redirect("/help")
 

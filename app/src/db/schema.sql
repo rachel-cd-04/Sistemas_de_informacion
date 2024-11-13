@@ -3,11 +3,12 @@ CREATE TABLE Usuario_TAB (
     nombre VARCHAR(200) NOT NULL,
     contra VARCHAR(200) NOT NULL,
     avatar INTEGER,
+    privilegios INTEGER,
     FOREIGN KEY(avatar) REFERENCES Avatar_TAB(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Avatar_TAB (
-    id INTEGER PRIMARY KEY, -- Clave primaria 
+    id INTEGER PRIMARY KEY, 
     URL_ VARCHAR(200) NOT NULL
 );
 
@@ -39,6 +40,7 @@ CREATE TABLE Vota_TAB (
     usuarioVotante VARCHAR(200),
     usuarioVotado VARCHAR(200),
     composicion VARCHAR(200),
+    voto INTEGER,
     FOREIGN KEY(usuarioVotante) REFERENCES Usuario_TAB(mail) ON DELETE CASCADE,
     FOREIGN KEY(usuarioVotado, composicion) REFERENCES Composicion_TAB(usuario, nombre) ON DELETE CASCADE,
     CONSTRAINT vota_PK PRIMARY KEY (usuarioVotante, usuarioVotado, composicion)
