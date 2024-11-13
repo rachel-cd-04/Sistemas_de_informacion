@@ -37,6 +37,9 @@ def index():
 #-------------------------------------------------------------
 @app.route('/admin_comps_list')
 def admin_comps_list():
+    if 0 == UsuarioDAO().check_priviledge(session["mail"], session["contra"]):
+            return redirect("/")
+    
     team_comps = ComposicionDAO().get_all_composiciones()
     if team_comps:
         for comp in team_comps:
@@ -62,9 +65,11 @@ def delete_composition():
 #-------------------------------------------------------------
 @app.route('/admin_users_list')
 def admin_users_list():
+        if 0 == UsuarioDAO().check_priviledge(session["mail"], session["contra"]):
+            return redirect("/")
+        
         users_list = UsuarioDAO().get_all_users()
     
-
         # Crear una lista enriquecida con los URLs de los avatares
         users_list_with_url = []
         
@@ -138,6 +143,7 @@ def update_avatar():
 @app.route('/start_team')
 #@login_required(login_url="/login")
 def start_team():
+    
     champs = CampeonDAO().get_all_champions()
     emblems = EmblemaDAO().get_all_emblems()
     synergies = SinergiaDAO().get_all_sinergias()
@@ -152,6 +158,9 @@ def start_team():
 @app.route('/my_team_comps')
 #@login_required(login_url="/login")
 def my_TC():
+    if not session.get("mail"):
+        return redirect("/login")
+    
     mail = session['mail']
     team_comps = ComposicionDAO().get_composiciones_by_usuario_id(mail)
     if team_comps:
@@ -180,14 +189,18 @@ def set_publicado():
 @app.route('/community_comps')
 #@login_required(login_url="/login")
 def comComps():
+
+    
     team_comps = ComposicionDAO().get_all_public_composiciones()
     if team_comps:
         for comp in team_comps:
             votosPositivos = VotaDAO().find_good_votes_to_comp(comp.usuario, comp.nombre) 
             votosNegativos = VotaDAO().find_bad_votes_to_comp(comp.usuario, comp.nombre)
             comp.votos = votosPositivos - votosNegativos
-
-            comp.votoUser = VotaDAO().find_vota_by_id(session['mail'], comp.usuario, comp.nombre)
+            if not session.get("mail"):
+                comp.votoUser = 0
+            else:
+                comp.votoUser = VotaDAO().find_vota_by_id(session['mail'], comp.usuario, comp.nombre)
 
             personajes = FormadoPorDAO().get_champions_by_composicion_id(comp.usuario, comp.nombre)
             comp.champions = personajes
@@ -202,11 +215,9 @@ def save_composition():
     user = data.get('user')
     dificultad = data.get('dificultad')
     descr = data.get('descr')
-    #champions = data.get('champions')
+
     try:
         ComposicionDAO().save_composicion(ComposicionVO(session['mail'], nombre, dificultad, "N", descr))
-        #for champ in champions:
-        #    FormadoPorDAO().add_campeon_to_composicion(FormadoPorVO(session['mail'], data.get('nombre'), champ))
         champions = FormadoPorDAO().get_champions_by_composicion_id(user, data.get('nombre'))
         for champ in champions:
             FormadoPorDAO().add_campeon_to_composicion(FormadoPorVO(session['mail'], nombre, champ.nombre))
@@ -319,6 +330,13 @@ def logout():
     # Clear the session
     session.clear()
     return redirect("/")
+
+#-------------------------------------------------------------
+@app.route('/check_logged', methods=['POST'])
+def not_logged():
+    if not session.get("mail"):
+        return jsonify({"success": False})
+    return jsonify({"success": True})
 
 #-------------------------------------------------------------
 
