@@ -34,7 +34,9 @@
                 <div class="user-content">
                     <img src="{{ user.avatar }}" alt="Avatar" class="user-avatar">
                     <h2>{{ user.nombre }}</h2>
+                    <h3>Reports: {{ user.reports }}</h3>
                 </div>
+                
     
                 <!-- Botón de prohibición -->
                 <button class="ban-btn" data-nombre="{{ user.nombre }}" data-mail="{{ user.mail }}">

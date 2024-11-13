@@ -22,6 +22,7 @@
                     </div>
                     <div class="team-comp-buttons">
                         <button class="save-btn" data-nombre="{{ team_comp.nombre }}" data-dificultad="{{ team_comp.dificultad }}" data-descr="{{ team_comp.descr }}" data-user="{{ team_comp.usuario }}" onclick="saveComposition(this)">Save</button>
+                        <button class="report-btn" data-user="{{ team_comp.usuario }}" onclick="reportComposition(this)">Report</button>
                     </div>
                     
                     <div class="team-comp-description">
@@ -46,8 +47,12 @@
 
         <script>
 
-function borrarVoto(nombre, mail) {
-                alert(`Nombre: ${nombre}, Dificultad: ${mail}`);
+            function toggleDescription(element) {
+                element.classList.toggle('expanded');
+            }
+
+            function borrarVoto(nombre, mail) {
+                //alert(`Nombre: ${nombre}, Dificultad: ${mail}`);
                 fetch('/delete_vote', {
                     method: 'POST',
                     headers: {
@@ -61,7 +66,7 @@ function borrarVoto(nombre, mail) {
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        alert('Voto guardado exitosamente.');
+                        //alert('Voto guardado exitosamente.');
                     } else {
                         alert('Error al guardar voto.');
                     }
@@ -73,7 +78,7 @@ function borrarVoto(nombre, mail) {
             }
 
             function añadirVoto(nombre, mail, voto) {
-                alert(`Nombre: ${nombre}, Dificultad: ${mail}, Descripción: ${voto}`);
+                //alert(`Nombre: ${nombre}, Dificultad: ${mail}, Descripción: ${voto}`);
                 fetch('/save_vote', {
                     method: 'POST',
                     headers: {
@@ -88,7 +93,7 @@ function borrarVoto(nombre, mail) {
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        alert('Voto guardado exitosamente.');
+                        //alert('Voto guardado exitosamente.');
                     } else {
                         alert('Error al guardar voto.');
                     }
@@ -105,6 +110,10 @@ function borrarVoto(nombre, mail) {
                 const mail = button.getAttribute('data-mail');
                 const upArrow = button.parentElement.querySelector('.up');
                 const downArrow = button.parentElement.querySelector('.down');
+                const votosElement = button.parentElement.querySelector('.count'); // El elemento que muestra los votos
+
+                // Obtener el voto actual
+                let votos = parseInt(votosElement.textContent);
 
                 if (direction === 'up') {
                     // Si ya está activada en verde, la desactiva (vuelve a gris)
@@ -112,13 +121,19 @@ function borrarVoto(nombre, mail) {
                         upArrow.classList.remove('green');
                         downArrow.classList.remove('gray');
                         borrarVoto(nombre, mail)
+                        votos -= 1;
                     } else {
                         // Si no, la activa en verde y pone la flecha abajo en gris
+                        if (downArrow.classList.contains('red')) {
+                            borrarVoto(nombre, mail)
+                            votos += 1;
+                        }
                         upArrow.classList.add('green');
                         upArrow.classList.remove('gray');
                         downArrow.classList.add('gray');
                         downArrow.classList.remove('red');
-                        añadirVoto(nombre, mail, 1)
+                        añadirVoto(nombre, mail, 1);
+                        votos += 1;
                     }
                 } else if (direction === 'down') {
                     // Si ya está activada en rojo, la desactiva (vuelve a gris)
@@ -126,15 +141,22 @@ function borrarVoto(nombre, mail) {
                         downArrow.classList.remove('red');
                         upArrow.classList.remove('gray');
                         borrarVoto(nombre, mail)
+                        votos += 1;
                     } else {
                         // Si no, la activa en rojo y pone la flecha arriba en gris
+                        if (upArrow.classList.contains('green')) {
+                            borrarVoto(nombre, mail)
+                            votos -= 1;
+                        }
                         downArrow.classList.add('red');
                         downArrow.classList.remove('gray');
                         upArrow.classList.add('gray');
                         upArrow.classList.remove('green');
                         añadirVoto(nombre, mail, -1)
+                        votos -= 1;
                     }
                 }
+                votosElement.textContent = votos;
             }         
 
 
@@ -145,7 +167,7 @@ function borrarVoto(nombre, mail) {
                 //const champions = JSON.parse(button.getAttribute('data-champ'));
                 const user = button.getAttribute('data-user');
                 //const championNames = champions.map(champion => champion.nombre);
-                alert(`Nombre: ${nombre}, Dificultad: ${dificultad}, Descripción: ${descr}, Usuario: ${user}`);//Campeones: ${champions}`);
+                //alert(`Nombre: ${nombre}, Dificultad: ${dificultad}, Descripción: ${descr}, Usuario: ${user}`);//Campeones: ${champions}`);
 
                 fetch('/save_composition', {
                     method: 'POST',
@@ -171,6 +193,36 @@ function borrarVoto(nombre, mail) {
                 .catch(error => {
                     console.error('Error:', error);
                     alert('Error al guardar la composición.');
+                });
+            }
+
+
+
+
+
+            function reportComposition(button) {
+                const user = button.getAttribute('data-user');
+
+                fetch('/report_composition', {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        user : user
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Composición reportada exitosamente.');
+                    } else {
+                        alert('Error al reportar la composición.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al reportar la composición.');
                 });
             }
         </script>
