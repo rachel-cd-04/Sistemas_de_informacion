@@ -189,11 +189,18 @@ def comComps():
 @app.route('/save_composition', methods=['POST'])
 def save_composition():
     data = request.get_json()
+    nombre = data.get('nombre')
+    user = data.get('user')
+    dificultad = data.get('dificultad')
+    descr = data.get('descr')
+    #champions = data.get('champions')
     try:
-        ComposicionDAO().save_composicion(ComposicionVO(session['mail'], data.get('nombre'), data.get('dificultad'), "N", data.get('descr')))
-        for champ in data.get('champions'):
-            FormadoPorDAO().add_campeon_to_composicion(FormadoPorVO(session['mail'], data.get('nombre'), champ.nombre))
-
+        ComposicionDAO().save_composicion(ComposicionVO(session['mail'], nombre, dificultad, "N", descr))
+        #for champ in champions:
+        #    FormadoPorDAO().add_campeon_to_composicion(FormadoPorVO(session['mail'], data.get('nombre'), champ))
+        champions = FormadoPorDAO().get_champions_by_composicion_id(user, data.get('nombre'))
+        for champ in champions:
+            FormadoPorDAO().add_campeon_to_composicion(FormadoPorVO(session['mail'], nombre, champ.nombre))
         return jsonify({"success": True})
     except Exception as e:
         print(f"An error occurred: {e}")
