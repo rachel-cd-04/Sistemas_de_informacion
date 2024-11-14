@@ -67,7 +67,7 @@
             const username = document.getElementById('username').value || document.getElementById('username').placeholder;
             const password = document.getElementById('password').value || "";
             alert("1");
-            const avatar = selectedAvatarId || document.getElementById('avatar-pic').dataset.id;
+            const avatar = selectedAvatarId || -1;
             alert("2");
             alert(avatar);
             fetch('/update_all', {
