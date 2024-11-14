@@ -100,7 +100,6 @@
 
             // Confirmar la eliminación
             if (confirm(`¿Estás seguro de que quieres eliminar la composición '${nombre}' de '${usuario}'?`)) {
-                // Hacer la solicitud AJAX para eliminar la composición
                 fetch("/delete_composition", {
                                 method: "POST",
                                 headers: {

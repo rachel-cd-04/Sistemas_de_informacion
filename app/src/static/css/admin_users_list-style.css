@@ -126,7 +126,7 @@ h1 {
 .search-bar {
     display: flex;
     align-items: center;
-    background-color: #239ca4; /* Color de fondo de la barra de búsqueda, más oscuro */
+    background-color: #239ca4;
     border-radius: 10px;
     padding: 8px;
     margin-bottom: 20px;
@@ -136,8 +136,8 @@ h1 {
     width: 90%;
     padding: 8px;
     border: none;
-    background-color: #239ca4; /* Mismo color que la barra para que se vea uniforme */
-    color: #FFFFFF; /* Texto blanco para contraste */
+    background-color: #239ca4;
+    color: #FFFFFF;
     border-radius: 5px;
     outline: none;
     font-size: 14px;
@@ -148,8 +148,8 @@ h1 {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    margin-left: auto; /* Mueve el botón al borde derecho */
-    padding: 0; /* Elimina el espacio adicional */
+    margin-left: auto; 
+    padding: 0; 
 }
 
 .search-bar .search-btn img {
@@ -171,20 +171,20 @@ h1 {
 
 .user-content {
     display: flex;
-    align-items: center; /* Alinea el nombre y el avatar en el centro vertical */
-    gap: 10px; /* Espacio entre el nombre y el avatar */
+    align-items: center;
+    gap: 10px;
 }
 
 .user h2 {
     color: #FFFFFF;
-    margin: 0; /* Elimina el margen para una alineación más ajustada */
+    margin: 0;
 }
 
 /* Estilos para el avatar */
 .user-avatar {
-    width: 40px; /* Ajusta el tamaño del avatar */
+    width: 40px;
     height: 40px;
-    border-radius: 50%; /* Hace que el avatar sea circular */
+    border-radius: 50%;
 }
 
 /* Ajustes del botón de prohibición */

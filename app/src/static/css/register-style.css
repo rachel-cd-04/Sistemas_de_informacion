@@ -14,9 +14,9 @@ body {
 /*container with information about us and contact links */
 /*********************************************************************************************/
 .containerlog {
-    background-color: #19696b; /* Añadir un fondo blanco para visibilidad */
-    border-radius: 10px; /* Añadir bordes redondeados */
-    width: 30%; /* Ajustar el ancho del contenedor */
+    background-color: #19696b; 
+    border-radius: 10px; 
+    width: 30%; 
     margin-left: 5vw;
     margin-top: 3vw;
     height: 21.5vw;
@@ -28,11 +28,11 @@ body {
 /*********************************************************************************************/
 
 form input::placeholder {
-    color: #007bff; /* Color azul */
+    color: #007bff; 
 }
 
 form input {
-    color: #007bff; /* Color del texto ingresado */
+    color: #007bff; 
 }
 /*********************************************************************************************/
 /* Estilos para los botones de Login y Register */
@@ -79,15 +79,15 @@ form input {
 }
 
 .imagen-izquierda {
-    margin-right: 20px; /* Espacio entre la imagen y el formulario */
-    width: 18vw; /* Adjust the width as needed */
+    margin-right: 20px; 
+    width: 18vw; 
     border: 5px solid #9013a0;
     box-shadow: 0 15px 20px rgba(206, 81, 238, 0.5);
 }
 
 .text-title {
-    margin-top: 8vw; /* Espacio entre el texto y el formulario */
-    margin-left: 0vw; /* Espacio entre el texto y el borde izquierdo */
+    margin-top: 8vw; 
+    margin-left: 0vw;
     color: #f5b03e;
 }
 
@@ -122,91 +122,91 @@ form input {
 }
 
 .toggle-button1 {
-    background-color: #d8c377; /* Cambiar el color de fondo */
-    color: white; /* Cambiar el color del texto */
-    border: none; /* Eliminar el borde */
-    text-align: center; /* Centrar el texto */
-    text-decoration: none; /* Eliminar subrayado */
-    display: inline-block; /* Mostrar en línea */
-    font-size: 16px; /* Cambiar el tamaño de la fuente */
-    cursor: pointer; /* Cambiar el cursor al pasar por encima */
-    border-radius: 5px; /* Añadir bordes redondeados */
+    background-color: #d8c377; 
+    color: white; 
+    border: none; 
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block; 
+    font-size: 16px; 
+    cursor: pointer; 
+    border-radius: 5px; 
     margin-bottom: 1vw;
     margin-left: 0.5vw;
 }
 
 .toggle-button1:disabled {
-    background-color: #155354; /* Asegurarse de que el color de fondo se aplique cuando está deshabilitado */
-    color: white; /* Asegurarse de que el color del texto se aplique cuando está deshabilitado */
+    background-color: #155354; 
+    color: white; /
 }
 
 .toggle-button2 {
-    background-color: #f5b03e; /* Cambiar el color de fondo */
-    color: white; /* Cambiar el color del texto */
-    border: none; /* Eliminar el borde */
-    text-align: center; /* Centrar el texto */
-    text-decoration: none; /* Eliminar subrayado */
-    display: inline-block; /* Mostrar en línea */
-    font-size: 16px; /* Cambiar el tamaño de la fuente */
-    cursor: pointer; /* Cambiar el cursor al pasar por encima */
-    border-radius: 5px; /* Añadir bordes redondeados */
+    background-color: #f5b03e; 
+    color: white; 
+    border: none; 
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block; 
+    font-size: 16px; 
+    cursor: pointer; 
+    border-radius: 5px; 
     margin-bottom: 1vw;
     margin-right: 0.5vw;
 }
 
 .regent {
     background-color: #f5b03e;
-    border: none; /* Eliminar el borde */
+    border: none; 
 
 }
 
 .regent:hover {
-    background-color: #341ab3; /* Cambiar el color de fondo al pasar el ratón por encima */
+    background-color: #341ab3; 
 }
 
 .toggle-button2:hover {
-    background-color: #341ab3; /* Cambiar el color de fondo al pasar el ratón por encima */
+    background-color: #341ab3; 
 }
 
 /* Estilos para el contenedor de botones */
 .button-container {
     display: flex;
     justify-content: center;
-    margin-bottom: 0vw; /* Margen inferior relativo al ancho de la pantalla */
+    margin-bottom: 0vw; 
     
 }
 
 /* Estilos para los botones de registro, log in y register */
 .container2log .btn {
-    width: 40%; /* Ancho del botón relativo al contenedor */
-    padding: 1vw; /* Padding relativo al ancho de la pantalla */
-    display: flex; /* Usar flexbox para centrar el contenido */
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: center; /* Centrar verticalmente */
+    width: 40%; 
+    padding: 1vw; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
     height: 2vw;
-    font-size: 0.8vw; /* Tamaño de la fuente relativo al ancho de la pantalla */
+    font-size: 0.8vw; 
 }
 
 /* Estilos para los inputs del formulario */
 .container2log .form-control {
-    width: 100%; /* Ancho del input relativo al contenedor */
+    width: 100%; 
     height: 1vw;
-    padding: 1vw; /* Padding relativo al ancho de la pantalla */
-    margin-bottom: vw; /* Margen inferior relativo al ancho de la pantalla */
+    padding: 1vw; 
+    margin-bottom: vw; 
 }
 
 /* Estilos para el formulario */
 .form-container {
-    width: 100%; /* Ancho del formulario relativo al contenedor */
-    display: flex; /* Usar flexbox para centrar el contenido */
-    justify-content: center; /* Centrar horizontalmente */
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
     align-items: center; 
     
 }
 
 .form-container .btn {
-    display: flex; /* Usar flexbox para centrar el contenido */
-    justify-content: center; /* Centrar horizontalmente */
+    display: flex; 
+    justify-content: center; 
     align-items: center; 
     margin-left: 4vw;
     
@@ -217,10 +217,10 @@ form input {
 }
 
 .mb-3 .form-control{
-    font-size: 1vw; /* Cambiar el tamaño de la fuente */
+    font-size: 1vw; /
 }
 .mb-3 {
-    margin-bottom: 0.5vw; /* Ajusta este valor según sea necesario */
+    margin-bottom: 0.5vw; /
 }
 
 

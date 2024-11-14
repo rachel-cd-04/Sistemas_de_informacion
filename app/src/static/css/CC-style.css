@@ -164,15 +164,11 @@ h1 {
     display: block;
 }
 
-
-
 .counter {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-right: auto;
-    
-    
+    margin-right: auto; 
 }
 
 .arrow {
@@ -199,8 +195,6 @@ h1 {
     font-size: 25px;
     padding: 5px;
 }
-
-
 
 .save-btn, .report-btn {
     background-color: #f5b03e;

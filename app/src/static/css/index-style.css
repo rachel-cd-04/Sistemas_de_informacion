@@ -109,16 +109,16 @@ body {
 .extra-content {
     margin-top: 200px;
     display: flex;
-    justify-content: center; /* Centra horizontalmente los elementos */
-    align-items: center; /* Centra verticalmente los elementos */
+    justify-content: center;
+    align-items: center; 
     padding: 20px;
     margin-bottom: -100px;
    
 }
 
 .extra-content div {
-    text-align: center; /* Centra el contenido dentro de cada div */
-    margin: 0 60px; /* Espacio entre los divs */
+    text-align: center; 
+    margin: 0 60px; 
 }
 
 .extra-content img {

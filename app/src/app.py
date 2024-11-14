@@ -1,5 +1,4 @@
 from flask import Flask, redirect, render_template, request, session, jsonify
-#from django.contrib.auth.decorators import login_required
 from classes.usuario import UsuarioDAO, UsuarioVO
 from classes.campeon import CampeonDAO, CampeonVO
 from classes.composicion import ComposicionDAO, ComposicionVO
