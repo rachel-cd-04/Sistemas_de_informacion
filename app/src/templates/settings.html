@@ -39,7 +39,7 @@
             </div>
             <div class="field">
                 <label for="password">Password</label>
-                <input type="password" id="password" placeholder="********">
+                <input type="password" id="password" placeholder="********" pss="{{session['password']}}">
             </div>
             <button class="save-button" id="save-changes">SAVE CHANGES</button>
         </div>
@@ -65,11 +65,11 @@
             event.preventDefault();
 
             const username = document.getElementById('username').value || document.getElementById('username').placeholder;
-            alert("ok1");
-            const password = document.getElementById('password').value || session['password'];
-            alert("ok2");
-            const avatar = selectedAvatarId || document.getElementById('avatar-pic').dataset.avatarId;
-            alert("ok3");
+            const password = document.getElementById('password').value || "";
+            alert("1");
+            const avatar = selectedAvatarId || document.getElementById('avatar-pic').dataset.id;
+            alert("2");
+            alert(avatar);
             fetch('/update_all', {
                 method: 'POST',
                 headers: {
@@ -87,6 +87,7 @@
                     alert('Failed to save changes.');
                 }
                 else {
+                    window.location.href = '/index';
                     document.querySelector('.custom-greetings-text').textContent = 'Hi, ' + username;
                     document.getElementById('.custom-avatar').src = '../' + selectedAvatarUrl;
                     alert('Changes saved successfully.');

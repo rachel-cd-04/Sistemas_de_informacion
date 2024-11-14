@@ -133,9 +133,15 @@ def update_avatar():
     avatar_url = (AvatarDAO().find_avatar_by_id(avatar_id)).URL_
 
     try:
-        UsuarioDAO().update_usuario(UsuarioVO(mail, username, password, avatar_id))
+        if(password == ""):
+            UsuarioDAO().update_usuario(UsuarioVO(mail, username, session['contra'], avatar_id, 0))
+
+        else:
+            hashed_pass = hashlib.sha256(password.encode('utf-8')).hexdigest()
+            UsuarioDAO().update_usuario(UsuarioVO(mail, username, hashed_pass, avatar_id, 0))
+            session['contra'] = hashed_pass
+
         session['username'] = username
-        session['contra'] = password
         session['avatar'] = avatar_url
         return jsonify({"success": True})
     except Exception as e:
