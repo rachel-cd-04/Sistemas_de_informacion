@@ -1,4 +1,4 @@
-<!--Authors: Mateo Peña Costa and Raquel Cámara Domene-->
+<!--Authors: Mateo Peña Costa, Raquel Cámara Domene and Marcos Ibáñez Sánchez-->
 {% extends "layout.html" %}
 
 {% block css %}
@@ -103,7 +103,7 @@
                 const mail = button.getAttribute('data-mail');
                 const upArrow = button.parentElement.querySelector('.up');
                 const downArrow = button.parentElement.querySelector('.down');
-                const votosElement = button.parentElement.querySelector('.count'); // El elemento que muestra los votos
+                const votosElement = button.parentElement.querySelector('.count'); 
 
                 // Obtener el voto actual
                 let votos = parseInt(votosElement.textContent);
@@ -152,16 +152,13 @@
                 votosElement.textContent = votos;
             }         
 
-
+            
             function saveComposition(button) {
                 check_logged()
                 const nombre = button.getAttribute('data-nombre');
                 const dificultad = button.getAttribute('data-dificultad');
                 const descr = button.getAttribute('data-descr');
-                //const champions = JSON.parse(button.getAttribute('data-champ'));
                 const user = button.getAttribute('data-user');
-                //const championNames = champions.map(champion => champion.nombre);
-                //alert(`Nombre: ${nombre}, Dificultad: ${dificultad}, Descripción: ${descr}, Usuario: ${user}`);//Campeones: ${champions}`);
 
                 fetch('/save_composition', {
                     method: 'POST',
@@ -172,7 +169,6 @@
                         nombre: nombre,
                         dificultad: dificultad,
                         descr: descr,
-                        //champions: champions
                         user : user
                     })
                 })
