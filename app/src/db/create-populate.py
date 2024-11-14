@@ -1,13 +1,16 @@
 import sqlite3
 import csv
 
-DATABASE = '/app/src/db/database.db'  # Fichero de la base de datos
-SCHEMA = '/app/src/db/schema.sql'     # Fichero con los CREATE TABLE
-DATA_FILE = '/app/src/db/data.csv'    # Fichero con los datos a cargar en la base de datos
+DATABASE = 'database.db'  # Fichero de la base de datos
+SCHEMA = 'schema.sql'     # Fichero con los CREATE TABLE
+TRIGGERS = 'triggers.sql'     # Fichero con los CREATE TABLE
+DATA_FILE = 'data.csv'    # Fichero con los datos a cargar en la base de datos
 
 def init_db():
     conn = sqlite3.connect(DATABASE)
     with open(SCHEMA, 'r') as f:
+        conn.executescript(f.read())
+    with open(TRIGGERS, 'r') as f:
         conn.executescript(f.read())
     conn.close()
 
