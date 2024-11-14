@@ -14,7 +14,7 @@
     <h1>COMMUNITY COMPS</h1>
     <div class="team-comps-container">
         {% for team_comp in team_comps %}
-            <div class="team-comp" onclick="toggleDescription(this)">
+            <div class="team-comp">
                 <div class="team-comp-content">
                     <h2>{{ team_comp.nombre }}</h2>
                     <div class="team-comp-difficulty">
@@ -23,10 +23,6 @@
                     <div class="team-comp-buttons">
                         <button class="save-btn" data-nombre="{{ team_comp.nombre }}" data-dificultad="{{ team_comp.dificultad }}" data-descr="{{ team_comp.descr }}" data-user="{{ team_comp.usuario }}" onclick="saveComposition(this)">Save</button>
                         <button class="report-btn" data-user="{{ team_comp.usuario }}" onclick="reportComposition(this)">Report</button>
-                    </div>
-                    
-                    <div class="team-comp-description">
-                        <p>{{ team_comp.descr }}</p>
                     </div>
                 </div>
                 <div class="counter">
@@ -46,10 +42,6 @@
         {% endfor %}
 
         <script>
-
-            function toggleDescription(element) {
-                element.classList.toggle('expanded');
-            }
 
             function borrarVoto(nombre, mail) {
                 //alert(`Nombre: ${nombre}, Dificultad: ${mail}`);
