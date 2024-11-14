@@ -131,25 +131,29 @@ h1 {
 
 .team-comp-container {
     display: flex;
+    height: 10vw;
+    width: 50vw;
+    position: relative;
     justify-content: flex-end; /* Alinea los elementos a la derecha */
     gap: 1vw; /* Espacio entre los elementos */
-    flex-wrap: wrap; /* Permite que los elementos se envuelvan si es necesario */
+    overflow-x: auto; 
+    white-space: nowrap; 
 }
 
 .team-comp-champions {
-    display: inline;
+    display: flex;
     gap: 0vw;
     height: 6vw;
     width: 6vw;
-    margin-bottom: 2vw;
+    margin-bottom: 3vw;
     justify-content: flex-end;
     background-color: #239ca4;
     border-radius: 0.2vw;
 }
 
 .team-comp-champion img {
-    width: 1.8vw;
-    height: 1.8vw;
+    width: 6vw;
+    height: 6vw;
     border-radius: 0.2vw;
 }
 
