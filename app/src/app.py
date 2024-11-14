@@ -136,7 +136,7 @@ def update_avatar():
 
     avatar_id = data.get('avatar')
     if avatar_id == -1:
-        avatar_id = session['avatar'] 
+        avatar_id = UsuarioDAO().find_usuario_by_id_pssw(mail, session['contra']).avatar
     avatar_url = (AvatarDAO().find_avatar_by_id(avatar_id)).URL_
 
     try:

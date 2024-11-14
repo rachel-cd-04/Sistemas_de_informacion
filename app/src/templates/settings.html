@@ -66,10 +66,7 @@
 
             const username = document.getElementById('username').value || document.getElementById('username').placeholder;
             const password = document.getElementById('password').value || "";
-            alert("1");
             const avatar = selectedAvatarId || -1;
-            alert("2");
-            alert(avatar);
             fetch('/update_all', {
                 method: 'POST',
                 headers: {
