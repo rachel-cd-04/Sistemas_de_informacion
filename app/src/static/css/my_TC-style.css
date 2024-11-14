@@ -133,7 +133,7 @@ h1 {
     display: flex;
     justify-content: flex-start;
     gap: 1vw; 
-    max-width: 45vw;
+    max-width: 40vw;
     overflow-x: auto;
     white-space: nowrap;
 }

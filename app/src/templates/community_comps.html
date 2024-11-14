@@ -30,7 +30,7 @@
                     <span class="count">{{ team_comp.votos }}</span>
                     <button class="arrow down {% if team_comp.votoUser == -1 %}red{% elif team_comp.votoUser == 1 %}gray{% endif %}" data-nombre="{{ team_comp.nombre }}" data-mail="{{ team_comp.usuario }}" onclick="toggleArrowColors('down', this)">▼</button>
                 </div>
-                <div class="team-comp-champions">
+                <div class="team-comp-container">
                     {% for champion in team_comp.champions %}
                         <div class="team-comp-champion">
                             <img src="{{ champion.url_buscador }}" alt="{{ champion.nombre }}">
