@@ -193,6 +193,23 @@ def my_TC():
 
     return render_template('my_team_comps.html', team_comps=team_comps, show_login_button=True)
 
+@app.route('/edit_comp', methods=['POST'])
+def edit_comp():
+    data = request.get_json()
+    mail = session['mail']
+    nombre = data.get('nombre')
+    dificultad = data.get('dificultad')
+    descr = data.get('descr')
+
+    old_comp = ComposicionDAO().find_composicion_by_id(mail, nombre)
+
+    try:
+        ComposicionDAO().update_composicion(ComposicionVO(mail, nombre, dificultad, old_comp.publicado, descr))
+
+        return jsonify({"success": True})
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return jsonify({"success": False}), 500
 
 @app.route('/set_publicado', methods=['POST'])
 def set_publicado():
@@ -357,10 +374,9 @@ def logout():
 
 #-------------------------------------------------------------
 @app.route('/check_logged', methods=['POST'])
-def not_logged():
+def check_logged():
     if not session.get("mail"):
-        return jsonify({"success": False})
-    return jsonify({"success": True})
+        return jsonify({"success": True})
 
 #-------------------------------------------------------------
 
