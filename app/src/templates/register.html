@@ -26,16 +26,16 @@
             <div id="register-form" class="form-container">
                 <form id="registerForm" action="/register" method="post" class="form-container2" data-parsley-validate>
                     <div class="mb-3">
-                        <input autocomplete="off" class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text" required data-parsley-required-message="Please enter a username.">
+                        <input autocomplete="off" class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text" required data-parsley-required-message="Please enter a username." title="Write username here">
                     </div>
                     <div class="mb-3">
-                        <input class="form-control mx-auto w-auto" name="mail" placeholder="Email" type="email" required data-parsley-type="email" data-parsley-required-message="Please enter a valid email address.">
+                        <input class="form-control mx-auto w-auto" name="mail" placeholder="Email" type="email" required data-parsley-type="email" data-parsley-required-message="Please enter a valid email address." title="Write mail here">
                     </div>
                     <div class="mb-3">
-                        <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password" required data-parsley-required-message="Please enter a password.">
+                        <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password" required data-parsley-required-message="Please enter a password." title="Write password here">
                     </div>
                     <div class="mb-3">
-                        <input class="form-control mx-auto w-auto" name="confirm_password" placeholder="Confirm Password" type="password" required data-parsley-equalto="#registerForm input[name='password']" data-parsley-required-message="Please confirm your password." data-parsley-equalto-message="Passwords do not match.">
+                        <input class="form-control mx-auto w-auto" name="confirm_password" placeholder="Confirm Password" type="password" required data-parsley-equalto="#registerForm input[name='password']" data-parsley-required-message="Please confirm your password." data-parsley-equalto-message="Passwords do not match." title="Write password here">
                     </div>
                     <button class="btn btn-primary button-register regent" type="submit">REGISTER</button>
                 </form>
