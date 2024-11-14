@@ -1,4 +1,4 @@
-/* Authors: Mateo Peña Costa and Raquel Cámara Domene */
+/* Authors: Mateo Peña Costa, Raquel Cámara Domene and Marcos Ibáñez Sánchez*/
 
 /*********************************************************************************************/
 /*styles for scrollbar*/  /* provided by AI */
@@ -118,6 +118,9 @@ html {
 }
 /*********************************************************************************************/
 .custom-login-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-weight: bold;
     background-color: #f5b03e;
     border: 2px solid #f5b03e;
@@ -192,8 +195,8 @@ html {
 .dropdown-toggle {
     background-color: transparent;
     border: none;
-    /*background-color: #f5b03e;*/
-    
+
+
     text-decoration: none;
     margin-right: 2vw;
     width: 20vw;
@@ -203,16 +206,16 @@ html {
 
 .dropdown-toggle:hover,
 .dropdown-toggle:focus {
-    background-color: transparent; /* Mantén el color de fondo transparente en hover y focus */
-    color: white; /* Mantén el color del texto en hover y focus */
-    border: none; /* Elimina el borde en hover y focus */
-    outline: none; /* Elimina el borde de enfoque en hover y focus */
+    background-color: transparent;
+    color: white;
+    border: none;
+    outline: none;
 }
 
 .dropdown-toggle:hover,
 .dropdown-toggle:focus {
-    background-color: transparent; /* Mantén el color de fondo transparente en hover y focus */
-    color: white; /* Mantén el color del texto en hover y focus */
-    border: none; /* Elimina el borde en hover y focus */
-    outline: none; /* Elimina el borde de enfoque en hover y focus */
+    background-color: transparent;
+    color: white;
+    border: none;
+    outline: none;
 }

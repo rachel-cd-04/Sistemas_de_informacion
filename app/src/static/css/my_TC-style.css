@@ -1,4 +1,4 @@
-/* Authors: Mateo Peña Costa and Raquel Cámara Domene */
+/* Authors: Mateo Peña Costa, Raquel Cámara Domene and Marcos Ibáñez Sánchez*/
 
 /*********************************************************************************************/
 /* home page wallpaper and space for our registered trademark*/
@@ -131,13 +131,15 @@ h1 {
 
 .team-comp-container {
     display: flex;
-    justify-content: flex-end; /* Alinea los elementos a la derecha */
-    gap: 1vw; /* Espacio entre los elementos */
-    flex-wrap: wrap; /* Permite que los elementos se envuelvan si es necesario */
+    justify-content: flex-start;
+    gap: 1vw; 
+    max-width: 45vw;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 .team-comp-champions {
-    display: inline;
+    display: inline-block;
     gap: 0vw;
     height: 6vw;
     width: 6vw;
@@ -148,14 +150,14 @@ h1 {
 }
 
 .team-comp-champion img {
-    width: 1.8vw;
-    height: 1.8vw;
+    width: 5vw;
+    height: 5vw;
     border-radius: 0.2vw;
 }
 
 .team-comp-champion p {
     color: #f5b03e;
-    font-size: 0.8vw;
+    font-size: 1vw;
     margin: 0;
 }
 
@@ -176,7 +178,7 @@ h1 {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 20vw;
+    width: 21vw;
     height: 26vw;
     background-color: #155354;
     border: 4px solid #f5b03e;
@@ -213,11 +215,18 @@ h1 {
 
 .difficulty { display: flex; justify-content: space-between; margin-top: 10px; } 
 
-.difficulty-button { padding: 10px; border: none; border-radius: 5px; cursor: pointer; } 
 
-#easy { background-color: green; color: white; } #medium { background-color: orange; color: white; } 
+.difficulty-button { padding: 10px; border: none; border-radius: 5px; cursor: pointer; height: 2vw; display: flex; 
+    justify-content: center;
+    align-items: center;
+    right: 10px;
+    margin-top: 10px;} 
 
-#hard { background-color: red; color: white; } 
+#Easy { background-color: green; color: white; margin-left: 5px; margin-right: 5px;} 
+
+#Medium { background-color: orange; color: white; margin-right: 5px;} 
+
+#Hard { background-color: red; color: white; margin-right: 10px;}  
 
 .publish { display: flex; align-items: center; margin-top: 10px; } 
 

@@ -25,27 +25,22 @@
                     <div class="sinergias-container">
                     </div>
                 </div>
-                <div class champ-save>
-                    <div class="champ_menu">
-                        <div class="champ" data-id="1"></div>
-                        <div class="champ" data-id="2"></div>
-                        <div class="champ" data-id="3"></div>
-                        <div class="champ" data-id="4"></div>
-                        <div class="champ" data-id="5"></div>
-                        <div class="champ" data-id="6"></div>
-                        <div class="champ" data-id="7"></div>
-                        <div class="champ" data-id="8"></div>
-                        <div class="champ" data-id="9"></div>
-                        <div class="champ" data-id="10"></div>
-                        <div class="champ" data-id="11"></div>
-                        <div class="champ" data-id="12"></div>
-                    </div>
-                    <button class="save-button" id="saveButton">Save</button>
-                </div>
-                
-
-                
-                
+                <div class="champ_menu">
+                    <div class="champ" data-id="1"></div>
+                    <div class="champ" data-id="2"></div>
+                    <div class="champ" data-id="3"></div>
+                    <div class="champ" data-id="4"></div>
+                    <div class="champ" data-id="5"></div>
+                    <div class="champ" data-id="6"></div>
+                    <div class="champ" data-id="7"></div>
+                    <div class="champ" data-id="8"></div>
+                    <div class="champ" data-id="9"></div>
+                    <div class="champ" data-id="10"></div>
+                    <div class="champ" data-id="11"></div>
+                    <div class="champ" data-id="12"></div>
+                 </div>
+                <button class="save-button" id="saveButton">Save</button>
+            
                 <div class="browser">
                     <div class="emblem-title-container">
                         <h2 class="title">EMBLEMS</h2>
@@ -73,10 +68,21 @@
                     </div>
                     <div class="champ-title-container">
                         <h2 class="title" style="margin-left: 6%;">CHAMPIONS</h2>
+
                         <form class="d-flex" role="search" style="width: 95%; margin-left: 7%;" onsubmit="return false;">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="width: 100%;" id="searchInput">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="width: 80%;" id="searchInput">
+                            <div class="toggle-switch">
+                                <span class="toggle-text">A-Z</span>
+                                <input type="checkbox" id="toggle" class="toggle-checkbox">
+                                <label for="toggle" class="toggle-label">
+                                    <span class="toggle-inner"></span>
+                                    <span class="toggle-switch"></span>
+                                </label>
+                                <span class="toggle-coins"><img src="../static/images/misc/TFT_Gold_Icon.webp" alt="Coins"></span>
+                            </div>
                             <button class="btn btn-custom-search" type="button" onclick="searchImages()">Search</button>
                         </form>
+                        
                         <div class="champions">
                             <div class="champs-container" id="recuadroMorado">
                                 {% for champ in champs %}
@@ -171,7 +177,7 @@
                             // Elimina el borde de los otros botones 
                             difficultyButtons.forEach(btn => btn.style.border = 'none'); 
                             // Añade el borde verde al botón seleccionado 
-                            button.style.border = '3px solid #479d9e'; 
+                            button.style.border = '4px solid #479d9e'; 
                         });
                     });
 
@@ -186,7 +192,7 @@
                     popup.querySelector('.saveconf-button').addEventListener('click', function() {
                         const name = document.getElementById('name').value;
                         const description = document.getElementById('description').value;
-                        const chosenDifficulty = Array.from(difficultyButtons).find(btn => btn.style.border.includes('3px solid'));
+                        const chosenDifficulty = Array.from(difficultyButtons).find(btn => btn.style.border.includes('4px solid'));
                         const difficulty = chosenDifficulty.id;
                         const publish = document.getElementById('publish').checked;
 
@@ -231,5 +237,53 @@
                     });
                 });
             </script>
+            <script>
+                function searchImages() {
+                    var input, filter, recuadro, champs, name, i;
+                    input = document.getElementById('searchInput');
+                    filter = input.value.toUpperCase();
+                    recuadro = document.getElementById('recuadroMorado');
+                    champs = recuadro.getElementsByClassName('champ-2');
+
+                    for (i = 0; i < champs.length; i++) {
+                        name = champs[i].getElementsByClassName('name')[0].innerText.toUpperCase();
+                        if (name.startsWith(filter)) {
+                            champs[i].style.display = "";
+                        } else {
+                            champs[i].style.display = "none";
+                        }
+                    }
+                }
+
+                document.getElementById('searchInput').addEventListener('keydown', function(event) {
+                    if (event.key === 'Enter') {
+                        searchImages();
+                    }
+                });
+            </script>
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const toggle = document.getElementById('toggle');
+                    const champContainer = document.querySelector('.champs-container');
+                
+                    toggle.addEventListener('change', () => {
+                        const champs = Array.from(champContainer.children);
+                        const isAlphabetical = !(toggle.checked);
+                        champs.sort((a, b) => {
+                            if (isAlphabetical) {
+                                // Sort alphabetically
+                                return a.querySelector('.name').textContent.localeCompare(b.querySelector('.name').textContent);
+                            } else {
+                                // Sort by cost
+                                return parseInt(a.getAttribute('cost')) - parseInt(b.getAttribute('cost'));
+                            }
+                        });
+                
+                        // Re-arrange the champions in the container
+                        champs.forEach(champ => champContainer.appendChild(champ));
+                    });
+                });
+            </script>
+            
             
             {% endblock %}

@@ -1,9 +1,9 @@
 Usuario_TAB
 mail,nombre,contra,avatar,privilegios
-user1@example.com,JohnDoe,password1,1,0
-user2@example.com,JaneSmith,password2,2,0
-user3@example.com,BobJohnson,password3,3,0
-admin@gmail.com,Admin,admin,6,1
+user1@example.com,JohnDoe,0b14d501a594442a01c6859541bcb3e8164d183d32937b851835442f69d5c94e,1,0
+user2@example.com,JaneSmith,6cf615d5bcaac778352a8f1f3360d23f02f34ec182e259897fd6ce485d7870d4,2,0
+user3@example.com,BobJohnson,5906ac361a137e2d286465cd6588ebb5ac3f5ae955001100bc41577c3d751764,3,0
+admin@gmail.com,Admin,8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918,6,1
 
 Avatar_TAB
 id,URL_
@@ -121,9 +121,9 @@ user3@example.com,user1@example.com,Comp1,1
 
 Formada_por_TAB
 usuario,composicion,campeon
-user1@example.com,Comp1,Garen
+user1@example.com,Comp1,Ahri
 user2@example.com,Comp2,Ashe
-user3@example.com,Comp3,Lux
+user3@example.com,Comp3,Akali
 
 Posee_TAB
 campeon,sinergia

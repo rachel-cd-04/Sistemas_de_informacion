@@ -15,6 +15,7 @@ import sqlite3
 import time
 import os
 import csv
+import hashlib
 
 app = Flask(__name__)
 app.secret_key = 'secretita'  # Necesario para usar sesiones
@@ -316,11 +317,12 @@ def login_user():
     if request.method == "POST":
         mail = request.form.get("mail")
         password = request.form.get("password")
+        hashed_pass = hashlib.sha256(password.encode('utf-8')).hexdigest()
         if not mail or not password:
             return redirect("/login")
         
 
-        user = UsuarioDAO().find_usuario_by_id_pssw(mail, password)
+        user = UsuarioDAO().find_usuario_by_id_pssw(mail, hashed_pass)
         if not user:
             return redirect("/login")
 
@@ -346,13 +348,15 @@ def register_user():
         password = request.form.get("password")
         confirmpssw = request.form.get("confirm_password")
 
+        hashed_pass = hashlib.sha256(password.encode('utf-8')).hexdigest()
+
         if not username or not mail or not password or not confirmpssw:
             return redirect("/register")
 
         if password != confirmpssw:
             return redirect("/register")
 
-        user = UsuarioDAO().save_usuario(UsuarioVO(mail, username, password, 6, 0))
+        user = UsuarioDAO().save_usuario(UsuarioVO(mail, username, hashed_pass, 6, 0))
         if not user:
             return redirect("/help")
 

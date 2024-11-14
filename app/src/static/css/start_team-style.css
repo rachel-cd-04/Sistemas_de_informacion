@@ -1,4 +1,4 @@
-/* Authors: Mateo Peña Costa and Raquel Cámara Domene */
+/* Authors: Mateo Peña Costa, Raquel Cámara Domene and Marcos Ibáñez Sánchez*/
 
 /*********************************************************************************************/
 /* home page wallpaper and space for our registered trademark*/
@@ -201,9 +201,8 @@ body {
     margin-left: 0.5vw;
     margin-right: 0.5%;
     margin-top: 0.5%;
-    margin-bottom: 1.1vw;
+    margin-bottom: 1vw;
     right: 15%;
-    background-color: rgb(180, 76, 214);/*rgb(100, 144, 145);*/
     display: flex;
     position: relative; 
     color: white;
@@ -213,15 +212,17 @@ body {
 
 /*possible amount of synergies */
 .emblem_menu .embl .cantPosible{
+    text-align: left; 
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     width: 20vw;
     position: absolute;
-    background-color: rgb(214, 104, 76);
-    font-size: 1.5vw;
+    font-size: 1vw;
     left: 50%;
     top: 50%;
     z-index: 200;
     color: white;
-
 }
 
 /*picture of the synergy */
@@ -621,7 +622,7 @@ body {
 /*main container*/
 .recommendation {
     width: 16vw;
-    height: 40vw;
+    height: 41vw;
     top: 0;
     margin-top: -45vw;
     right: 0; /* Pega el elemento a la derecha */
@@ -724,32 +725,32 @@ body {
 }
 
 .champ-save {
-    display: flex; /* Usar flexbox para alinear los elementos horizontalmente */
-    align-items: center; /* Alinear verticalmente los elementos */
-    justify-content: flex-start; /* Alinear los elementos al inicio */
+    display: flex;
+    align-items: center; 
+    justify-content: flex-start; 
     width: 100vw;
  
 }
 
 .overlay {
-    display: none; /* Oculto por defecto */
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #15535498; /* Fondo blanco semitransparente */
-    z-index: 999; /* Debe estar por debajo del pop-up */
+    background-color: #15535498;
+    z-index: 999;
 }
 
 .popup {
-    display: none; /* Oculto por defecto */
+    display: none;
     position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 20vw;
-    height: 26vw;
+    width: 21vw;
+    height: 30vw;
     background-color: #155354;
     border: 4px solid #f5b03e;
     border-radius: 10px;
@@ -785,11 +786,17 @@ body {
 
 .difficulty { display: flex; justify-content: space-between; margin-top: 10px; } 
 
-.difficulty-button { padding: 10px; border: none; border-radius: 5px; cursor: pointer; } 
+.difficulty-button { padding: 10px; border: none; border-radius: 5px; cursor: pointer; height: 2vw; display: flex; 
+    justify-content: center;
+    align-items: center;
+    right: 10px;
+    margin-top: 10px;} 
 
-#easy { background-color: green; color: white; } #medium { background-color: orange; color: white; } 
+#Easy { background-color: green; color: white; margin-left: 5px; margin-right: 5px;} 
 
-#hard { background-color: red; color: white; } 
+#Medium { background-color: orange; color: white; margin-right: 5px;} 
+
+#Hard { background-color: red; color: white; margin-right: 10px;} 
 
 .publish { display: flex; align-items: center; margin-top: 10px; } 
 
@@ -809,6 +816,73 @@ body {
     border-radius: 0.5vw; 
     cursor: pointer;
     font-size: 1vw;
+    display: flex;
     align-items: center;
     justify-content: center;
+}
+/*********************************************************************************************/
+/*TOGGLE BUTTON*/
+
+.toggle-switch {
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    margin-right: 8px;
+}
+
+.toggle-checkbox {
+    display: none;
+}
+
+.toggle-label {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    background-color: #f5b03e;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.toggle-label .toggle-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #19696B;
+    border-radius: 15px;
+    transition: background-color 0.3s;
+}
+
+.toggle-label .toggle-switch {
+    position: absolute;
+    top: 3px;
+    left: -2px;
+    width: 24px;
+    height: 24px;
+    background-color: #f5b03e;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.toggle-checkbox:checked + .toggle-label .toggle-inner {
+    background-color: #19696B;
+}
+
+.toggle-checkbox:checked + .toggle-label .toggle-switch {
+    transform: translateX(25px);
+}
+
+.toggle-text {
+    margin-right: 5px;
+    font-size: 10px;
+    color: #f5b03e;
+}
+
+.toggle-coins img {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 15px;
 }
