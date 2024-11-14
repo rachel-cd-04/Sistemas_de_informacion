@@ -157,6 +157,7 @@
                     document.body.appendChild(popup);
             
                     saveButton.addEventListener('click', function() {
+                        check_logged()
                         overlay.style.display = 'block';
                         popup.style.display = 'block';
                     });
