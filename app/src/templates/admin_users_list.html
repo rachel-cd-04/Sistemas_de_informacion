@@ -1,4 +1,4 @@
-<!--Authors: Mateo Peña Costa and Raquel Cámara Domene-->
+<!--Authors: Mateo Peña Costa, Raquel Cámara Domene and Marcos Ibáñez Sánchez-->
 {% extends "layout.html" %}
 
 {% block css %}
@@ -12,7 +12,7 @@
 {% block main %}
 <div class="main-container">
     <div class="tabs">
-        
+        <!-- Pantallas de administrador -->
         <button class="tab selected">USERS</button>
         <span class="barra_sep_logreg">/</span>
         <a href="admin_comps_list">
@@ -58,7 +58,7 @@
         const searchButton = document.getElementById('search-btn');
         const usersContainer = document.getElementById('users-container');
 
-        // Filtrar la búsqueda
+        // Filtro de la búsqueda
         const filterusers = () => {
             const query = searchInput.value.toLowerCase();
             const users = usersContainer.getElementsByClassName('user');
@@ -66,7 +66,6 @@
             Array.from(users).forEach(user => {
                 const title = user.querySelector('h2').textContent.toLowerCase();
                 
-                // userrobar si el título comienza con la búsqueda
                 if (title.startsWith(query)) {
                     user.style.display = ''; // Mostrar el elemento
                 } else {
@@ -75,14 +74,14 @@
             });
         };
 
-        // También puedes activar la búsqueda al hacer clic en el botón
+        // Activar la búsqueda al hacer clic en el botón
         searchButton.addEventListener('click', filterusers);
 
         // Activar la búsqueda al presionar Enter
         searchInput.addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
-                filterusers(); // Ejecutar la búsqueda
-                event.preventDefault(); // Evitar el comportamiento por defecto de Enter (si es necesario)
+                filterusers(); 
+                event.preventDefault(); // Evitar el comportamiento por defecto de Enter
             }
         });
     });
