@@ -22,7 +22,7 @@
                     </div>
                     <div class="team-comp-buttons">
                         <button class="publish-btn" data-publicado="{{ team_comp.publicado }}" data-usuario="{{ team_comp.usuario }}" data-nombre="{{ team_comp.nombre }}">Publish</button>
-                        <button class="edit-btn">Edit</button>
+                        <button class="edit-btn" data-dificultad="{{ team_comp.dificultad }}" data-usuario="{{ team_comp.usuario }}" data-nombre="{{ team_comp.nombre }}" data-descr="{{ team_comp.descr }}">Edit</button>
                         <button class="delete-btn">Delete</button>
                     </div>
                     <div class="team-comp-description">
@@ -32,7 +32,7 @@
                 <div class="team-comp-container">
                     {% for champion in team_comp.champions %}
                         <div class="team-comp-champion">
-                            <img src="{{ champion.url_buscador}}" alt="{{ champion.nombre }}">
+                            <img src="{{ champion.url_buscador }}" alt="{{ champion.nombre }}">
                             <p>{{ champion.nombre }}</p>
                         </div>
                     {% endfor %}
@@ -128,6 +128,133 @@
                 });
             });
         </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+                const editButtons = document.querySelectorAll('.edit-btn');
+                const overlay = document.createElement('div');
+                overlay.classList.add('overlay');
+                document.body.appendChild(overlay);
+
+                // Crear el popup una vez y añadirlo al DOM
+                const popup = document.createElement('div');
+                popup.classList.add('popup');
+                popup.innerHTML = `
+                    <button class="close-button">&times;</button>
+                    <div class="popup-content">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" readonly>
+                        <label for="description">Description</label> 
+                        <textarea id="description" placeholder="Enter description" maxlength="2500"></textarea> 
+                        <div id="charCount">2500 characters remaining</div>
+
+                        <div class="difficulty">
+                            <label>Difficulty</label>
+                            <button class="difficulty-button" id="Easy">Easy</button>
+                            <button class="difficulty-button" id="Medium">Medium</button>
+                            <button class="difficulty-button" id="Hard">Hard</button>
+                        </div>
+                        
+                        <button class="saveconf-button">Save</button>
+                    </div>
+                `;
+                document.body.appendChild(popup);
+
+                // Función para mostrar el popup con datos específicos de cada botón
+                function openEditPopup(button) {
+                    const nombre = button.getAttribute("data-nombre");
+                    const descripcion = button.getAttribute("data-descr");
+                    const dificultad = button.getAttribute("data-dificultad");
+
+                    document.getElementById('name').value = nombre;
+                    document.getElementById('description').value = descripcion;
+                    document.getElementById('charCount').textContent = `${2500 - descripcion.length} characters remaining`;
+
+                    const difficultyButtons = popup.querySelectorAll('.difficulty-button');
+                    difficultyButtons.forEach(btn => btn.style.border = 'none');
+                    const selectedDifficultyButton = document.getElementById(dificultad);
+                    if (selectedDifficultyButton) {
+                        selectedDifficultyButton.style.border = '3px solid #479d9e';
+                    }
+
+                    overlay.style.display = 'block';
+                    popup.style.display = 'block';
+                }
+
+                // Añadir eventos de click a los botones de edición
+                editButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        openEditPopup(button);
+                    });
+                });
+
+                // Eventos de cerrar el popup
+                popup.querySelector('.close-button').addEventListener('click', function() {
+                    overlay.style.display = 'none';
+                    popup.style.display = 'none';
+                });
+                overlay.addEventListener('click', function() {
+                    overlay.style.display = 'none';
+                    popup.style.display = 'none';
+                });
+
+                // Configurar el contador de caracteres para la descripción
+                const descriptionField = document.getElementById('description');
+                const charCount = document.getElementById('charCount');
+                descriptionField.addEventListener('input', function() {
+                    const remaining = 2500 - descriptionField.value.length;
+                    charCount.textContent = `${remaining} characters remaining`;
+                });
+
+                // Configurar el cambio de dificultad
+                const difficultyButtons = popup.querySelectorAll('.difficulty-button');
+                difficultyButtons.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        difficultyButtons.forEach(b => b.style.border = 'none');
+                        btn.style.border = '3px solid #479d9e';
+                    });
+                });
+
+                // Guardar cambios
+                popup.querySelector('.saveconf-button').addEventListener('click', function() {
+                    const nombre = document.getElementById('name').value;
+                    const descripcion = document.getElementById('description').value;
+                    const dificultadSeleccionada = Array.from(difficultyButtons).find(btn => btn.style.border.includes('3px solid'));
+                    const dificultad = dificultadSeleccionada.id;
+                    //alert(`Nombre: ${nombre}, Dificultad: ${dificultad}, Descripción: ${descripcion}`);
+                    const data = {
+                        nombre: nombre,
+                        dificultad: dificultad,
+                        descr: descripcion
+                    };
+
+                    fetch('/edit_comp', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Composición editada exitosamente.');
+                            window.location.href = '/my_team_comps';
+                            overlay.style.display = 'none';
+                            popup.style.display = 'none';
+                        } else {
+                            alert('Error al editar la composición.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error al editar la composición.');
+                    });
+                });
+            });
+</script>
+
+        
 
 
 {% endblock %}

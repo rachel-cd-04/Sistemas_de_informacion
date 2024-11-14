@@ -186,7 +186,8 @@
                     popup.querySelector('.saveconf-button').addEventListener('click', function() {
                         const name = document.getElementById('name').value;
                         const description = document.getElementById('description').value;
-                        const difficulty = document.querySelector('.difficulty-button[style*="border"]').id;
+                        const chosenDifficulty = Array.from(difficultyButtons).find(btn => btn.style.border.includes('3px solid'));
+                        const difficulty = chosenDifficulty.id;
                         const publish = document.getElementById('publish').checked;
 
                         const selectedChampions = [];
@@ -230,5 +231,5 @@
                     });
                 });
             </script>
-
+            
             {% endblock %}
