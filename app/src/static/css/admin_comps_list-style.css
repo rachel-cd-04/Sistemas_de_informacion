@@ -124,6 +124,11 @@ h1 {
     font-size: 14px;
 }
 
+.search-bar input[type="text"]::placeholder {
+    color: white;
+    opacity: 1;
+}
+
 /* Ajuste del botón de búsqueda */
 .search-bar .search-btn {
     background-color: transparent;

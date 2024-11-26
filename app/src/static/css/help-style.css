@@ -17,6 +17,7 @@ body {
     margin: 0px;
     margin-left: 15px;
     color: white;
+    z-index: 1;
 }
 
 /*********************************************************************************************/
@@ -26,9 +27,12 @@ body {
     margin-top: 5vw;
     margin-left: 0vw;
     margin-right: 0vw;
-    display: flex;
-    width: 150vw;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
+
 .info-container{
     display: flex;
     flex-direction: column;
@@ -41,12 +45,13 @@ body {
 }
 
 .moreinfo-container {
+    margin-top: 2vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;;
     background-color: rgba(25, 105, 107, 0.7);
-    width: 70vw;
+    width: 45vw;
     border-radius: 1.5vw;
 }
 
@@ -67,6 +72,12 @@ body {
 /*********************************************************************************************/
 /*footer with contact and ‘about us’*/
 /*********************************************************************************************/
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
 .footer-container {
     margin-top: 70px;
     bottom: 0;
@@ -89,3 +100,8 @@ body {
     margin: 0;
     color: #FFD700;
 }  
+
+.moreinfo-container video {
+    margin: 20px;
+    width: 40vw;
+}
