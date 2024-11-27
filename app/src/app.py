@@ -74,27 +74,30 @@ def admin_users_list():
         
         users_list = UsuarioDAO().get_all_users()
     
-        # Crear una lista enriquecida con los URLs de los avatares
+        # Crear una lista a la que añadiremos los URLs de los avatares
         users_list_with_url = []
+
         
-        # Iterar sobre cada usuario y buscar la URL del avatar
         for user in users_list:
-            # Usar `find_avatar_by_id` para obtener el objeto AvatarVO del avatar
-            avatar = AvatarDAO().find_avatar_by_id(user.avatar)  # Acceso a `user.avatar` como propiedad
-            reports = ReportaDAO().find_reports_to(user.mail) 
+            # Comprobamos si el privilegio del usuario es 0
+            if user.privilegios == 0:
+                
+                avatar = AvatarDAO().find_avatar_by_id(user.avatar)  
+                reports = ReportaDAO().find_reports_to(user.mail)  
             
-            # Crear un diccionario para almacenar los datos de usuario y la URL del avatar
-            enriched_user = {
-                'mail': user.mail,
-                'nombre': user.nombre,
-                'contra': user.contra,
-                'reports': reports,
-                'avatar': avatar.URL_ if avatar else None  # Asignar el URL si existe
-            }
-            
-            # Agregar el usuario enriquecido a la lista final
-            users_list_with_url.append(enriched_user)
-            # Pasar la lista de usuarios enriquecida al template
+                # Almacenamos los datos de usuario y la URL del avatar
+                user_with_url = {
+                    'mail': user.mail,
+                    'nombre': user.nombre,
+                    'contra': user.contra,
+                    'reports': reports,
+                    'avatar': avatar.URL_ if avatar else None  # Asignar el URL si existe
+                }
+                
+                # Agregar el usuario con URL a la lista final
+                users_list_with_url.append(user_with_url)
+                
+                # Pasar la lista de usuarios con URL al template
         return render_template('admin_users_list.html', users_list=users_list_with_url, show_login_button=True)
 
 
@@ -104,7 +107,6 @@ def delete_usuario():
     mail = data.get('mail')
     
     try:
-        # Llama a la función del DAO que borra el usuario por su mail
         UsuarioDAO().delete_usuario(mail)
         return jsonify({"success": True})
     except Exception as e:
@@ -124,18 +126,18 @@ def settings():
 
 
 @app.route('/update_all', methods=['POST'])
-def update_avatar():
+def update_all():
     data = request.get_json()
     mail = session['mail']
     username = data.get('username')
     password = data.get('password')
-    if password == "":
+    if password == "": # En caso de no modificar la memoria mantiene la previa
         password = session['contra']
     else:
-        password = hashlib.sha256(password.encode('utf-8')).hexdigest()
+        password = hashlib.sha256(password.encode('utf-8')).hexdigest() # Hashea la nueva contraseña
 
     avatar_id = data.get('avatar')
-    if avatar_id == -1:
+    if avatar_id == -1: #Obtenemos el id del avatar previo si no lo ha modificado
         avatar_id = UsuarioDAO().find_usuario_by_id_pssw(mail, session['contra']).avatar
     avatar_url = (AvatarDAO().find_avatar_by_id(avatar_id)).URL_
 
@@ -153,13 +155,13 @@ def update_avatar():
 
 #-------------------------------------------------------------
 @app.route('/start_team')
-#@login_required(login_url="/login")
 def start_team():
     
     champs = CampeonDAO().get_all_champions()
     emblems = EmblemaDAO().get_all_emblems()
     synergies = SinergiaDAO().get_all_sinergias()
 
+    # Creamos diccionarios con campeones, emblemas y sinergias
     champs_dict = [champ.to_dict() for champ in champs]
     emblems_dict = [emblem.to_dict() for emblem in emblems]
     synergies_dict = [synergie.to_dict() for synergie in synergies]
@@ -187,12 +189,14 @@ def save_comp():
 
 #-------------------------------------------------------------
 @app.route('/my_team_comps')
-#@login_required(login_url="/login")
+
 def my_TC():
     if not session.get("mail"):
         return redirect("/login")
     
     mail = session['mail']
+
+    # Obtenemos las composiciones del usuario logeado y sus campeones
     team_comps = ComposicionDAO().get_composiciones_by_usuario_id(mail)
     if team_comps:
         for comp in team_comps:
@@ -209,9 +213,11 @@ def edit_comp():
     dificultad = data.get('dificultad')
     descr = data.get('descr')
 
+    # Obtiene la composición a editar
     old_comp = ComposicionDAO().find_composicion_by_id(mail, nombre)
 
     try:
+        # Sube editada la composición
         ComposicionDAO().update_composicion(ComposicionVO(mail, nombre, dificultad, old_comp.publicado, descr))
 
         return jsonify({"success": True})
@@ -220,7 +226,7 @@ def edit_comp():
         return jsonify({"success": False}), 500
 
 @app.route('/set_publicado', methods=['POST'])
-def set_publicado():
+def set_publicado(): # Publica o despublica la composición
     data = request.get_json()
     usuario = data.get('usuario')
     nombre = data.get('nombre')
@@ -235,26 +241,29 @@ def set_publicado():
 
 #------------------------------------------------------------- 
 @app.route('/community_comps')
-#@login_required(login_url="/login")
+
 def comComps():
 
-    
     team_comps = ComposicionDAO().get_all_public_composiciones()
     if team_comps:
         for comp in team_comps:
+            # Obtenemos los votos positivos y negativos y el contador total de votos
             votosPositivos = VotaDAO().find_good_votes_to_comp(comp.usuario, comp.nombre) 
             votosNegativos = VotaDAO().find_bad_votes_to_comp(comp.usuario, comp.nombre)
             comp.votos = votosPositivos - votosNegativos
+
+            # Obtenemos el voto específico del usuario actualmente logueado
             if not session.get("mail"):
                 comp.votoUser = 0
             else:
                 comp.votoUser = VotaDAO().find_vota_by_id(session['mail'], comp.usuario, comp.nombre)
 
+            # Obtenemos los campeones de cada composición
             personajes = FormadoPorDAO().get_champions_by_composicion_id(comp.usuario, comp.nombre)
             comp.champions = personajes
             
-
     return render_template('community_comps.html', team_comps=team_comps, show_login_button=True)
+
 
 @app.route('/save_composition', methods=['POST'])
 def save_composition():
@@ -266,8 +275,11 @@ def save_composition():
 
     try:
         ComposicionDAO().save_composicion(ComposicionVO(session['mail'], nombre, dificultad, "N", descr))
+
+        # Obtenemos los campeones de la composición que queremos copiar
         champions = FormadoPorDAO().get_champions_by_composicion_id(user, data.get('nombre'))
         for champ in champions:
+            # Añadimos los campeones a la nueva composición
             FormadoPorDAO().add_campeon_to_composicion(FormadoPorVO(session['mail'], nombre, champ.nombre))
         return jsonify({"success": True})
     except Exception as e:
@@ -324,18 +336,22 @@ def login_user():
     if request.method == "POST":
         mail = request.form.get("mail")
         password = request.form.get("password")
+
+        # Obtenemos la versión hasheada de la contraseña 
         hashed_pass = hashlib.sha256(password.encode('utf-8')).hexdigest()
+
+        # Comprobamos campos
         if not mail or not password:
             return redirect("/login")
         
-
+        # Obtenemos el usuario que coincida en mail y contraseña
         user = UsuarioDAO().find_usuario_by_id_pssw(mail, hashed_pass)
         if not user:
             return redirect("/login")
 
         session["mail"] = user.mail
         session["username"] = user.nombre
-        avatar = AvatarDAO().find_avatar_by_id(user.avatar)
+        avatar = AvatarDAO().find_avatar_by_id(user.avatar) # Guardamos la URL, no el id
         session["avatar"] = avatar.URL_
         session["contra"] = user.contra
 
@@ -355,21 +371,24 @@ def register_user():
         password = request.form.get("password")
         confirmpssw = request.form.get("confirm_password")
 
+        # Hashea la contraseña
         hashed_pass = hashlib.sha256(password.encode('utf-8')).hexdigest()
 
+
+        # Comprueba que los valores de los campos sean correctos (Comprobaciones extra en el html)
         if not username or not mail or not password or not confirmpssw:
             return redirect("/register")
 
         if password != confirmpssw:
             return redirect("/register")
 
-        user = UsuarioDAO().save_usuario(UsuarioVO(mail, username, hashed_pass, 6, 0))
+        user = UsuarioDAO().save_usuario(UsuarioVO(mail, username, hashed_pass, 6, 0)) # Privilegios siempre a 0
         if not user:
             return redirect("/help")
 
         session["mail"] = user.mail
         session["username"] = user.nombre
-        avatar = AvatarDAO().find_avatar_by_id(user.avatar)
+        avatar = AvatarDAO().find_avatar_by_id(user.avatar) # Guardamos la URL, no el id
         session["avatar"] = avatar.URL_
         session["contra"] = user.contra
         return redirect("/")
@@ -377,6 +396,7 @@ def register_user():
     return render_template("register.html", show_login_button=False)
 
 #-------------------------------------------------------------
+# Permite salir de la cuenta
 @app.route('/logout', methods=['POST'])
 def logout():
     # Clear the session
@@ -384,6 +404,7 @@ def logout():
     return redirect("/")
 
 #-------------------------------------------------------------
+# Comprueba si el usuario esta loggeado
 @app.route('/check_logged', methods=['POST'])
 def check_logged():
     if not session.get("mail"):
@@ -394,10 +415,6 @@ def check_logged():
 if __name__ == '__main__':
     print("Hello")
 
-    ## Crear Base de Datos (antiguo)
-    #init_db()
-    #populate_db()
-
     ## Test de DAO y VO
     #UsuarioDAO().save_usuario(UsuarioVO("mail@mail", "pepe", "contra", "avatar"))
     #user = UsuarioDAO().find_usuario_by_id("mail@mail")
@@ -405,5 +422,4 @@ if __name__ == '__main__':
 
     ## Lanzar Web
     app.run(host="0.0.0.0", port=4000, debug=True)
-    time.sleep(20)
     print("Bye")

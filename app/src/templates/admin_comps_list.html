@@ -100,7 +100,7 @@
             const nombre = button.getAttribute('data-nombre');
 
             // Confirmar la eliminación
-            if (confirm(`¿Estás seguro de que quieres eliminar la composición '${nombre}' de '${usuario}'?`)) {
+            if (confirm(`Are you sure you want to delete the composition '${nombre}' from '${usuario}'?`)) {
                 fetch("/delete_composition", {
                                 method: "POST",
                                 headers: {
@@ -113,8 +113,6 @@
                             })
                 .then(response => {
                     if (response.ok) {
-                        // Recargar la lista de composiciones después de la eliminación
-                        //loadComposiciones();
                         button.closest('.comp').remove();
                     } else {
                         // Imprimir la respuesta del servidor para depuración
@@ -126,14 +124,12 @@
                 })
                 .catch(error => {
                     console.error('Error en la solicitud:', error);
-                    alert('Hubo un problema al intentar eliminar la composición. Intenta de nuevo más tarde.');
+                    alert('There was a problem deleting the composition.');
                 });
             }
         }
     });
 
-    // Cargar composiciones al inicio
-    //loadComposiciones();
 });
 
 </script>

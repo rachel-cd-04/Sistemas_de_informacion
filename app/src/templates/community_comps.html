@@ -60,12 +60,12 @@
                     if (data.success) {
                         //alert('Voto guardado exitosamente.');
                     } else {
-                        alert('Error al guardar voto.');
+                        alert('There was an error saving the vote.');
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('Error al guardar voto.');
+                    alert('There was an error saving the vote.');
                 });
             }
 
@@ -87,12 +87,12 @@
                     if (data.success) {
                         //alert('Voto guardado exitosamente.');
                     } else {
-                        alert('Error al guardar voto.');
+                        alert('There was an error saving the vote.');
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('Error al guardar voto.');
+                    alert('There was an error saving the vote.');
                 });
             }
 
@@ -175,14 +175,14 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        alert('Composición guardada exitosamente.');
+                        alert('Composition successfully saved.');
                     } else {
-                        alert('Error al guardar la composición.');
+                        alert('There was an error saving the composition.');
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('Error al guardar la composición.');
+                    alert('There was an error saving the composition.');
                 });
             }
 
@@ -206,14 +206,14 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        alert('Composición reportada exitosamente.');
+                        alert('Composition successfully reported.');
                     } else {
-                        alert('Error al reportar la composición.');
+                        alert('There was an error reporting the composition.');
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('Error al reportar la composición.');
+                    alert('There was an error reporting the composition.');
                 });
             }
         </script>

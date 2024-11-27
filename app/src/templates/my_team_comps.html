@@ -75,7 +75,7 @@
                             if (data.success) {
                                 button.setAttribute("data-publicado", newPublicado);
                                 button.textContent = newPublicado === "Y" ? "Published" : "Publish";
-                                alert("Todo fue correctamente");
+                                alert("Success.");
                             } else {
                                 alert("Error updating publication status");
                             }
@@ -98,7 +98,7 @@
                         const usuario = button.closest('.team-comp').querySelector('.publish-btn').getAttribute('data-usuario');
                         const nombre = button.closest('.team-comp').querySelector('h2').textContent;
 
-                        if (confirm(`¿Estás seguro de que deseas eliminar la composición "${nombre}"?`)) {
+                        if (confirm(`Are you sure you want to remove the composition "${nombre}"?`)) {
                             fetch("/delete_composition", {
                                 method: "POST",
                                 headers: {
@@ -112,16 +112,16 @@
                             .then(response => response.json())
                             .then(data => {
                                 if (data.success) {
-                                    alert("Composición eliminada exitosamente.");
+                                    alert("Composition successfully deleted.");
                                     // Eliminar el elemento del DOM
                                     button.closest('.team-comp').remove();
                                 } else {
-                                    alert("Error al eliminar la composición.");
+                                    alert("There was an error deleting the composition.");
                                 }
                             })
                             .catch(error => {
                                 console.error("Error:", error);
-                                alert("Error al eliminar la composición.");
+                                alert("There was an error deleting the composition.");
                             });
                         }
                     });
@@ -221,7 +221,6 @@
                     const descripcion = document.getElementById('description').value;
                     const dificultadSeleccionada = Array.from(difficultyButtons).find(btn => btn.style.border.includes('3px solid'));
                     const dificultad = dificultadSeleccionada.id;
-                    //alert(`Nombre: ${nombre}, Dificultad: ${dificultad}, Descripción: ${descripcion}`);
                     const data = {
                         nombre: nombre,
                         dificultad: dificultad,
@@ -238,17 +237,17 @@
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            alert('Composición editada exitosamente.');
+                            alert('Composition successfully edited.');
                             window.location.href = '/my_team_comps';
                             overlay.style.display = 'none';
                             popup.style.display = 'none';
                         } else {
-                            alert('Error al editar la composición.');
+                            alert('There was an error editing the composition.');
                         }
                     })
                     .catch(error => {
                         console.error('Error:', error);
-                        alert('Error al editar la composición.');
+                        alert('There was an error editing the composition.');
                     });
                 });
             });

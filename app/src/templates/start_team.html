@@ -224,16 +224,16 @@
                         .then(response => response.json())
                         .then(data => {
                             if (data.success) {
-                                alert('Composición guardada exitosamente.');
+                                alert('Composition successfully saved');
                                 overlay.style.display = 'none';
                                 popup.style.display = 'none';
                             } else {
-                                alert('Error al guardar la composición.');
+                                alert('There was an error saving the composition.');
                             }
                         })
                         .catch(error => {
                             console.error('Error:', error);
-                            alert('Error al guardar la composición.');
+                            alert('There was an error saving the composition.');
                         });
                     });
                 });
@@ -272,15 +272,15 @@
                         const isAlphabetical = !(toggle.checked);
                         champs.sort((a, b) => {
                             if (isAlphabetical) {
-                                // Sort alphabetically
+                                // Ordena alfabeticamente
                                 return a.querySelector('.name').textContent.localeCompare(b.querySelector('.name').textContent);
                             } else {
-                                // Sort by cost
+                                // Ordena por coste
                                 return parseInt(a.getAttribute('cost')) - parseInt(b.getAttribute('cost'));
                             }
                         });
                 
-                        // Re-arrange the champions in the container
+                        // Añade de nuevo los campeones al contenedor
                         champs.forEach(champ => champContainer.appendChild(champ));
                     });
                 });

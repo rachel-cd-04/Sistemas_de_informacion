@@ -213,7 +213,7 @@ function updateSynergiesContainer() {
             emblDivs.push({ element: emblDiv, count: sinergiasContainer[sinergia.nombre] });
         }
         else {
-            alert('Error al obtener los atributos de la sinergia, sinergia no encontrada');
+            alert('Error obtaining the atributes of synergy, sinergia not founded');
         }
     }
 
