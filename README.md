@@ -1,6 +1,6 @@
 # TFT Web Info System 🚀
 
-🎥 [Watch the demo video on YouTube](https://www.youtube.com/watch?v=TU_VIDEO_ID)
+🎥 [Watch the demo video on YouTube](https://youtu.be/UZti7NQua_M)
 
 ## 📖 Description
 
