@@ -1,10 +1,5 @@
 # TFT Web Info System 🚀
 
-![Docker Ready](https://img.shields.io/badge/Docker-ready-blue)  
-![SQLite](https://img.shields.io/badge/DB-SQLite%20%F0%9F%92%BB-lightgrey)  
-![Python](https://img.shields.io/badge/Backend-Python%20%F0%9F%90%8D-yellow)  
-
----
 
 ## 📖 Description
 
